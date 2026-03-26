@@ -22,7 +22,9 @@ atoms → molecules → cells → aips
 
 ### atoms
 
-indivisible visual primitives
+the smallest visual units. an atom cannot be broken into smaller prysm components — it is a single rendered element with one responsibility. a glass pane, a line of text, a button, a toggle switch. atoms carry no domain logic. they accept data and emotion, render a visual, and emit events. they look the same on desktop and mobile. they know nothing about neurons, particles, or cyberlinks — that meaning comes from how molecules combine them
+
+11 atoms span all visual needs: surfaces (glass), typography (text), actions (button), state (toggle, slider, indicator, counter), identity (address), structure (ion, saber), and iconography (images)
 
 | atom | description | variants |
 |------|-------------|----------|
@@ -40,7 +42,16 @@ indivisible visual primitives
 
 ### molecules
 
-functional components assembled from atoms
+where atoms gain meaning. a molecule is two or more atoms composed into a functional unit with a clear interface: what data it takes, what actions it emits, what states it can be in. a neuron-card is a glass + address + counter + ion arranged to show identity. an input is a glass + text + button + saber wired for data entry. the molecule knows its domain — it understands what a neuron is, what a particle looks like, how to display a search result
+
+molecules are grouped by role:
+- navigation — hud, tabs: how you move through [[cyb]]
+- content — content, display, neuron-card, object, subject, adviser: how you see data
+- input — input, filter: how you enter and refine data
+- data — table, bar: how you read structured information
+- widgets — brain, sense, sigma, time: persistent sidebar tools
+
+each molecule adapts between desktop and mobile. atoms inside stay identical — the molecule rearranges their layout
 
 | molecule | description | assets |
 |----------|-------------|--------|
@@ -60,7 +71,7 @@ functional components assembled from atoms
 
 ### cells
 
-full page regions composed from molecules
+a cell owns a region of the screen. it composes molecules into a coherent experience: the oracle-cell arranges a search input, content feed, and aip selector into a discovery flow. a cell manages layout, scroll behavior, and data flow between its molecules. cells are the unit of screen real estate — an aip is one or more cells filling the viewport
 
 | cell | description |
 |------|-------------|
@@ -70,7 +81,7 @@ full page regions composed from molecules
 
 ### aips
 
-complete autonomous applications built from cells
+the top level. an aip (autonomous intelligent program) is a full-screen application built from cells. each aip is a complete experience: search (oracle), file management (brain), onboarding (portal), messaging (sense), wallet (sigma). aips own their routing, state management, and connection to the [[cybergraph]]. they are what the user sees and names
 
 [[cyb/oracle]] · [[cyb/brain]] · [[cyb/portal]] · [[cyberver]] · [[cyb/sense]] · [[cyb/sigma]] · [[teleport]] · [[sphere]] · [[warp]] · [[aos/hfr]]
 
