@@ -2,6 +2,129 @@
 
 the design system of [[cyb]] — a visual language for interfacing with [[Superintelligence]]
 
+every screen in [[cyb]] is a composition of prysm components. the system defines how humans perceive, navigate, and interact with the [[cybergraph]]
+
+## first principles
+
+- the interface is a lens — [[cyb]] refracts the [[cybergraph]] into something a human can perceive and act on
+- emotion as signal — components carry [[emotion]], a color-coded signal layer computed from [[cyberank]], [[karma]], and context
+- everything is a [[particle]] — text, image, video, audio, pdf, 3d model. the renderer adapts, the interface stays consistent
+- the [[neuron]] is the user — every action traces to a neuron, every view is from a neuron's perspective
+- glass as medium — translucent panes that layer and compose, defining spatial hierarchy
+
+## composition model
+
+four levels, each built from the previous:
+
+```
+atoms → molecules → cells → aips
+```
+
+### atoms
+
+indivisible visual primitives
+
+| atom | description | variants |
+|------|-------------|----------|
+| [glass](root/glass.md) | surface pane, foundational container | plane, side-button |
+| [text](root/text.md) | typography | left, center, right, paragraph |
+| [button](root/button.md) | call-to-action | default, double, triple, side |
+| [toggle](root/toggle.md) | binary state | on, off, star |
+| [slider](root/slider.md) | continuous value | range, progress bar |
+| [indicator](root/indicator.md) | progress display | partial, full |
+| [counter](root/counter.md) | numeric display with emotion color | integer, decimal, abbreviated |
+| [address](root/address.md) | neuron address | big, small |
+| [ion](root/ion.md) | icon-label pair | centric, horizontal, input, star, trapezoid |
+| [saber](root/saber.md) | accent line and divider | 1px, 2px, horizontal |
+| [images](root/images.md) | icon library | 16, 20, 32, 48, 96 px |
+
+### molecules
+
+functional components assembled from atoms
+
+| molecule | description | assets |
+|----------|-------------|--------|
+| [hud](root/hud.md) | heads-up display shell | — |
+| [tabs](root/tabs.md) | section navigation | [3](components/1-molecules/tabs/3-items.png) [4](components/1-molecules/tabs/4-items.png) [5](components/1-molecules/tabs/5-items.png) [m](components/1-molecules/tabs/m.3-items.png) |
+| [content](root/content.md) | particle renderers by format | [text+L](components/1-molecules/content/text+icon-L.png) [LR](components/1-molecules/content/text+icon-LR.png) [R](components/1-molecules/content/text+icon-R.png) [H3](components/1-molecules/content/H3+icon.png) [num](components/1-molecules/content/number+indicator.png) |
+| [display](root/display.md) | content container | [highlight](components/1-molecules/display/highlight.png) [2-line](components/1-molecules/display/highlight-2-lines.png) [empty](components/1-molecules/display/empty-0.62%25.png) |
+| [neuron-card](root/neuron-card.md) | neuron identity card | [big](components/1-molecules/neuron/big/default.png) [small](components/1-molecules/neuron/small/default.png) |
+| [object](root/object.md) | entity card | [2-line](components/1-molecules/aip/2-lines.png) [3-line](components/1-molecules/aip/3-lines.png) [+menu](components/1-molecules/aip/3-lines+menu.png) |
+| [subject](root/subject.md) | identity strip | [2-line](components/1-molecules/avatar/2-line.png) [chooser](components/1-molecules/avatar/chooser.png) |
+| [adviser](root/adviser.md) | contextual hint | [closed](components/1-molecules/adviser/closed.png) [positive](components/1-molecules/adviser/opened-positive.png) [negative](components/1-molecules/adviser/opened-negative.png) [neutral](components/1-molecules/adviser/opened-neutral.png) [particle](components/1-molecules/adviser/particle.png) |
+| [input](root/input.md) | data entry | [L](components/1-molecules/input/default/L.png) [R](components/1-molecules/input/default/R.png) [LR](components/1-molecules/input/default/LR.png) [dropdown](components/1-molecules/input/default/dropdown.png) |
+| [filter](root/filter.md) | result filtering | [3-items](components/1-molecules/filter/3-items.png) [wide](components/1-molecules/filter/wide.png) |
+| [table](root/table.md) | data grid | [line](components/1-molecules/table/line.png) [row-L](components/1-molecules/table/row-L.png) [row-R](components/1-molecules/table/row-R.png) |
+| [bar](root/bar.md) | saber+ion composite | [1-sided](components/1-molecules/saber+ion/button/1-sided.png) [bi-sided](components/1-molecules/saber+ion/button/bi-sided.png) |
+| [time-widget](root/time-widget.md) | personal history | [time](components/1-molecules/widgets/time.png) |
+
+### cells
+
+full page regions composed from molecules
+
+| cell | description |
+|------|-------------|
+| [portal-cell](root/portal-cell.md) | onboarding: citizenship, gift, hud, cyb-map |
+| [cyberver-cell](root/cyberver-cell.md) | learning: hud, mentors, learner, stats, faculties |
+| [oracle-cell](root/oracle-cell.md) | search: aip selector, mind, particle display, content feed |
+
+### aips
+
+complete autonomous applications built from cells
+
+[[cyb/oracle]] · [[cyb/brain]] · [[cyb/portal]] · [[cyberver]] · [[cyb/sense]] · [[cyb/sigma]] · [[teleport]] · [[sphere]] · [[warp]] · [[aos/hfr]]
+
+## properties
+
+| property | values |
+|----------|--------|
+| color | dark base, light foreground. emotion palette: green (confidence), red (danger), yellow (attention), blue (information), purple (rare) |
+| typography | monospace, hierarchy through size: h1(32) h2(24) h3(20) body(16) caption(14) micro(12) |
+| spacing | 8px grid. padding: 8, 16, 24. gaps: 24, 32, 48 |
+| motion | 150ms ease state changes, 200ms ease-out glass depth. no decorative animation |
+| responsive | desktop (>768) / mobile (<=768). molecules adapt, atoms stay identical |
+
+## interfaces
+
+every component exposes:
+
+- inputs: data, [[emotion]], context
+- outputs: action, state change, [[cyberlink]]
+- states: default, hover, active, disabled (+ loading, error, empty, expanded for stateful components)
+
+emotion overlays any state with a color signal
+
+## source tree
+
+```
+root/              knowledge graph pages (optica subgraph)
+components/
+  0-atoms/         atom assets
+    images/        icon library (16x16)
+  1-molecules/     molecule assets
+    adviser/       contextual hints
+    aip/           entity cards
+    avatar/        identity strips
+    brain-map/     graph file manager
+    button/        call-to-action variants
+    content/       particle renderers
+    display/       content containers
+    filter/        result filtering
+    input/         data entry
+    neuron/        identity cards (big, small)
+    pill/          tag badges
+    progress-bar/  progress indicators
+    saber+ion/     composite bars
+    table/         data grids
+    tabs/          navigation tabs
+    toggle/        binary switches
+    widgets/       sigma, sense, time
+```
+
+## status
+
+11 atoms defined. 13 molecules with assets. 3 cells specified. 10 aips listed. 23 component pages pending full description
+
 ## license
 
 don't trust. don't fear. don't beg.
