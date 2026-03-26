@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 48" width="128" height="48">
+  <!-- 0-atoms/button/default — saber + text + saber -->
+  <!-- prysm atom, acid palette -->
+  <g id="button-default">
+    <rect id="saber-left" x="0" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-right" x="126" y="0" width="2" height="48" fill="#00fe00"/>
+    <text id="label" x="64" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">action</text>
+  </g>
+</svg>

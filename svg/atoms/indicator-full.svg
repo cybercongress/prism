@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 76" width="76" height="76">
+  <!-- 0-atoms/indicator/full — circular progress at 100% -->
+  <!-- prysm atom, acid palette -->
+  <g id="indicator-full">
+    <circle id="track" cx="38" cy="38" r="36" fill="none" stroke="#00fe00" stroke-width="2"/>
+    <circle id="inner-bg" cx="38" cy="38" r="18" fill="#000000"/>
+    <text id="value" x="38" y="43" font-family="monospace" font-size="14" fill="#00fe00" text-anchor="middle">100%</text>
+  </g>
+</svg>

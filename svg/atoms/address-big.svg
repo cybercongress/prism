@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 16" width="320" height="16">
+  <!-- 0-atoms/address/big — full bech32 address with color-hash visualization -->
+  <!-- prysm atom, acid palette -->
+  <!-- based on Sketch: two rows of 3px-wide colored bars encoding the address hash -->
+  <g id="address-big">
+    <!-- address hash visualization (12 bars, 2 rows) -->
+    <g id="hash-bars" transform="translate(0,0)">
+      <rect x="0" y="0" width="3" height="6" fill="#00fe00"/>
+      <rect x="4" y="0" width="3" height="6" fill="#d500f9"/>
+      <rect x="8" y="0" width="3" height="6" fill="#00fe00"/>
+      <rect x="12" y="0" width="3" height="6" fill="#00acff"/>
+      <rect x="16" y="0" width="3" height="6" fill="#00acff"/>
+      <rect x="20" y="0" width="3" height="6" fill="#00fe00"/>
+      <rect x="24" y="0" width="3" height="6" fill="#ff5b00"/>
+      <rect x="28" y="0" width="3" height="6" fill="#00fe00"/>
+      <rect x="32" y="0" width="3" height="6" fill="#00fe00"/>
+      <rect x="36" y="0" width="3" height="6" fill="#d500f9"/>
+      <rect x="40" y="0" width="3" height="6" fill="#00acff"/>
+      <rect x="44" y="0" width="3" height="6" fill="#fcf000"/>
+      <rect x="0" y="6" width="3" height="6" fill="#00fe00"/>
+      <rect x="4" y="6" width="3" height="6" fill="#d500f9"/>
+      <rect x="8" y="6" width="3" height="6" fill="#00fe00"/>
+      <rect x="12" y="6" width="3" height="6" fill="#00acff"/>
+      <rect x="16" y="6" width="3" height="6" fill="#00acff"/>
+      <rect x="20" y="6" width="3" height="6" fill="#00fe00"/>
+      <rect x="24" y="6" width="3" height="6" fill="#ff5b00"/>
+      <rect x="28" y="6" width="3" height="6" fill="#00fe00"/>
+      <rect x="32" y="6" width="3" height="6" fill="#00fe00"/>
+      <rect x="36" y="6" width="3" height="6" fill="#d500f9"/>
+      <rect x="40" y="6" width="3" height="6" fill="#00acff"/>
+      <rect x="44" y="6" width="3" height="6" fill="#fcf000"/>
+    </g>
+    <!-- address text -->
+    <text id="address-text" x="56" y="12" font-family="monospace" font-size="12" fill="#ffffff">bostrom1qx4z...f8kp</text>
+    <!-- copy icon placeholder -->
+    <text id="copy-hint" x="306" y="12" font-family="monospace" font-size="10" fill="#777777">cp</text>
+  </g>
+</svg>

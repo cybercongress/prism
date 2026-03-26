@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 48" width="256" height="48">
+  <!-- 0-atoms/button/double — saber + text + saber + text + saber -->
+  <!-- prysm atom, acid palette -->
+  <g id="button-double">
+    <rect id="saber-1" x="0" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-2" x="127" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-3" x="254" y="0" width="2" height="48" fill="#00fe00"/>
+    <text id="label-left" x="64" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">confirm</text>
+    <text id="label-right" x="192" y="29" font-family="monospace" font-size="14" fill="#d7d7d7" text-anchor="middle">cancel</text>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 4" width="200" height="4">
+  <!-- 0-atoms/slider/progress — read-only progress bar -->
+  <!-- prysm atom, acid palette -->
+  <g id="slider-progress">
+    <rect id="track-bg" x="0" y="0" width="200" height="4" rx="2" fill="#ffffff" fill-opacity="0.15"/>
+    <rect id="track-fill" x="0" y="0" width="138" height="4" rx="2" fill="#00fe00"/>
+  </g>
+</svg>

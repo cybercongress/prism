@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 48" width="384" height="48">
+  <!-- 0-atoms/button/triple — 4 sabers + 3 text labels -->
+  <!-- prysm atom, acid palette -->
+  <g id="button-triple">
+    <rect id="saber-1" x="0" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-2" x="127" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-3" x="255" y="0" width="2" height="48" fill="#00fe00"/>
+    <rect id="saber-4" x="382" y="0" width="2" height="48" fill="#00fe00"/>
+    <text id="label-1" x="64" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">one</text>
+    <text id="label-2" x="192" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">two</text>
+    <text id="label-3" x="320" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">three</text>
+  </g>
+</svg>
