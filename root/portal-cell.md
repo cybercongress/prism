@@ -13,7 +13,7 @@ the first screen a new user encounters in [[cyb]]. the portal-cell guides a huma
 - citizenship — identity creation form. [[prysm/input]] for name/avatar + [[prysm/button]] to generate a [[neuron]] address. [[prysm/adviser]] guides each step
 - gift claim — display of welcome tokens. [[prysm/counter]] shows the gift amount + [[prysm/button]] to claim
 - hud introduction — interactive tour of the [[prysm/hud]] zones. [[prysm/adviser]] tooltips highlight each widget
-- cyb-map — overview of available [[aip]] applications. [[prysm/object]] cards for each app the neuron can explore
+- cyb-map — overview of available [[aip]] applications. [[prysm/aip]] cards for each app the neuron can explore
 
 ## interface
 
@@ -27,6 +27,6 @@ the first screen a new user encounters in [[cyb]]. the portal-cell guides a huma
 
 ## composition
 
-- portal-cell composed of [[prysm/display]] + [[prysm/input]] + [[prysm/button]] + [[prysm/adviser]] + [[prysm/object]] + [[prysm/counter]]
+- portal-cell composed of [[prysm/display]] + [[prysm/input]] + [[prysm/button]] + [[prysm/adviser]] + [[prysm/aip]] + [[prysm/counter]]
 - portal-cell renders inside the [[prysm/hud]] content zone
 - portal-cell is the entry point to [[cyb/portal]]

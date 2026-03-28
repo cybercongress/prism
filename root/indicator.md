@@ -24,5 +24,5 @@ a visual fill level — shows how much of something is complete, consumed, or re
 ## composition
 
 - indicator inside [[prysm/counter]] = number with visual context (e.g. 847 [[karma]] with a fill bar showing rank percentile)
-- indicator inside [[prysm/object]] = entity progress (staking completion, learning milestone)
+- indicator inside [[prysm/aip]] = entity progress (staking completion, learning milestone)
 - indicator inside [[prysm/display]] = section-level progress

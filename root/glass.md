@@ -36,6 +36,6 @@ translucent pane that contains other components. all composition in [[cyb]] happ
 
 ## composition
 
-- glass is the only surface atom. every [[prysm/hud]], [[prysm/display]], and [[prysm/object]] sits on glass
+- glass is the only surface atom. every [[prysm/hud]], [[prysm/display]], and [[prysm/aip]] sits on glass
 - glass panes nest: a card (glass) inside a section (glass) inside a screen (glass)
 - nesting depth should stay ≤ 3 to maintain visual clarity

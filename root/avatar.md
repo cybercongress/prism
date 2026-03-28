@@ -4,9 +4,9 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-identity strip molecule in [[prysm]]
+avatar molecule in [[prysm]]
 
-a compact horizontal display of a [[neuron]] or [[cyb/avatar]] identity. thinner than [[prysm/neuron-card]] — used where space is tight and recognition matters more than detail. shows avatar, name or address, and one key metric
+a compact horizontal display of a [[neuron]] or [[cyb/avatar]] identity. thinner than [[prysm/neuron-card]] — used where space is tight and recognition matters more than detail. shows avatar image, name or address, and one key metric
 
 ## interface
 
@@ -27,7 +27,7 @@ a compact horizontal display of a [[neuron]] or [[cyb/avatar]] identity. thinner
 
 ## composition
 
-- subject composed of [[prysm/glass]] + [[prysm/ion]] (avatar + label) + [[prysm/address]] (small) + [[prysm/counter]] (optional metric)
-- subject inside [[prysm/hud]] = active identity indicator
-- subject inside [[prysm/input]] = neuron selector field
-- subject inside [[cyb/sense]] = conversation participant
+- avatar composed of [[prysm/glass]] + [[prysm/ion]] (avatar + label) + [[prysm/address]] (small) + [[prysm/counter]] (optional metric)
+- avatar inside [[prysm/hud]] = active identity indicator
+- avatar inside [[prysm/input]] = neuron selector field
+- avatar inside [[cyb/sense]] = conversation participant

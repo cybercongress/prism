@@ -21,8 +21,8 @@
 | sketch name | prysm name | action |
 |-------------|------------|--------|
 | advicer | adviser | typo in Sketch, description is correct |
-| aipp | object (aip card) | description uses "object", Sketch uses "aipp" |
-| avatar | subject | description uses "subject", Sketch uses "avatar" |
+| aipp | aip | RESOLVED — renamed object → aip |
+| avatar | avatar | RESOLVED — renamed subject → avatar |
 | tripple | triple | typo in Sketch |
 | saber+ion | bar | description uses "bar" = saber+ion composite |
 

@@ -13,7 +13,7 @@ the primary discovery interface of [[cyb/oracle]]. where a [[neuron]] asks quest
 - [[aip]] selector — choose which search backend or agent to query. [[prysm/tabs]] or [[prysm/filter]] for switching
 - [[mind]] — navigation awareness indicator showing where the neuron is in the graph
 - particle display — the main result: a single [[particle]] rendered through [[prysm/content]] in full format
-- content feed — ranked list of related [[particle]] results. [[prysm/object]] cards ordered by [[cyberank]]
+- content feed — ranked list of related [[particle]] results. [[prysm/aip]] cards ordered by [[cyberank]]
 
 ## interface
 
@@ -28,6 +28,6 @@ the primary discovery interface of [[cyb/oracle]]. where a [[neuron]] asks quest
 
 ## composition
 
-- oracle-cell composed of [[prysm/input]] (search bar) + [[prysm/content]] (main result) + [[prysm/filter]] (type filter) + [[prysm/object]] (result cards) + [[prysm/display]] (featured result)
+- oracle-cell composed of [[prysm/input]] (search bar) + [[prysm/content]] (main result) + [[prysm/filter]] (type filter) + [[prysm/aip]] (result cards) + [[prysm/display]] (featured result)
 - oracle-cell renders inside the [[prysm/hud]] content zone
 - oracle-cell is the primary cell of [[cyb/oracle]]

@@ -23,10 +23,10 @@ renders the cryptographic identity of a [[neuron]] — the bech32 address that p
 ## variants
 
 - big — full address with monospace rendering, used in [[prysm/neuron-card]] and profile headers
-- small — truncated (first 8 + last 4 characters), used inline in [[prysm/object]], [[prysm/table]], and feeds
+- small — truncated (first 8 + last 4 characters), used inline in [[prysm/aip]], [[prysm/table]], and feeds
 
 ## composition
 
 - address inside [[prysm/neuron-card]] = identity anchor
-- address inside [[prysm/subject]] = compact identity reference
+- address inside [[prysm/avatar]] = compact identity reference
 - address inside [[prysm/table]] = row identifier for neuron lists

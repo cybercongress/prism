@@ -23,11 +23,11 @@ a two-state switch. the user taps, the state flips. used wherever [[cyb]] needs 
 
 - on — filled, active state
 - off — hollow, inactive state
-- star — favorite marker, used in [[prysm/object]] and [[prysm/neuron-card]] for bookmarking
+- star — favorite marker, used in [[prysm/aip]] and [[prysm/neuron-card]] for bookmarking
 
 ## composition
 
 - toggle inside [[prysm/filter]] = selectable filter option
 - toggle inside [[prysm/table]] = row selection
 - toggle inside [[prysm/bar]] = toolbar switch
-- star toggle inside [[prysm/object]] = favorite/bookmark action
+- star toggle inside [[prysm/aip]] = favorite/bookmark action

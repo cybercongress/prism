@@ -46,7 +46,7 @@ where atoms gain meaning. a molecule is two or more atoms composed into a functi
 
 molecules are grouped by role:
 - navigation — hud, tabs: how you move through [[cyb]]
-- content — content, display, neuron-card, object, subject, adviser: how you see data
+- content — content, display, neuron-card, aip, avatar, adviser: how you see data
 - input — input, filter: how you enter and refine data
 - data — table, bar: how you read structured information
 - widgets — brain, sense, sigma, time: persistent sidebar tools
@@ -60,8 +60,8 @@ each molecule adapts between desktop and mobile. atoms inside stay identical —
 | [content](root/content.md) | particle renderers by format | [text+L](components/1-molecules/content/text+icon-L.png) [LR](components/1-molecules/content/text+icon-LR.png) [R](components/1-molecules/content/text+icon-R.png) [H3](components/1-molecules/content/H3+icon.png) [num](components/1-molecules/content/number+indicator.png) |
 | [display](root/display.md) | content container | [highlight](components/1-molecules/display/highlight.png) [2-line](components/1-molecules/display/highlight-2-lines.png) [empty](components/1-molecules/display/empty-0.62%25.png) |
 | [neuron-card](root/neuron-card.md) | neuron identity card | [big](components/1-molecules/neuron/big/default.png) [small](components/1-molecules/neuron/small/default.png) |
-| [object](root/object.md) | entity card | [2-line](components/1-molecules/aip/2-lines.png) [3-line](components/1-molecules/aip/3-lines.png) [+menu](components/1-molecules/aip/3-lines+menu.png) |
-| [subject](root/subject.md) | identity strip | [2-line](components/1-molecules/avatar/2-line.png) [chooser](components/1-molecules/avatar/chooser.png) |
+| [aip](root/aip.md) | entity card | [2-line](components/1-molecules/aip/2-lines.png) [3-line](components/1-molecules/aip/3-lines.png) [+menu](components/1-molecules/aip/3-lines+menu.png) |
+| [avatar](root/avatar.md) | identity strip | [2-line](components/1-molecules/avatar/2-line.png) [chooser](components/1-molecules/avatar/chooser.png) |
 | [adviser](root/adviser.md) | contextual hint | [closed](components/1-molecules/adviser/closed.png) [positive](components/1-molecules/adviser/opened-positive.png) [negative](components/1-molecules/adviser/opened-negative.png) [neutral](components/1-molecules/adviser/opened-neutral.png) [particle](components/1-molecules/adviser/particle.png) |
 | [input](root/input.md) | data entry | [L](components/1-molecules/input/default/L.png) [R](components/1-molecules/input/default/R.png) [LR](components/1-molecules/input/default/LR.png) [dropdown](components/1-molecules/input/default/dropdown.png) |
 | [filter](root/filter.md) | result filtering | [3-items](components/1-molecules/filter/3-items.png) [wide](components/1-molecules/filter/wide.png) |

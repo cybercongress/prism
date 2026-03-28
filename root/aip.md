@@ -4,9 +4,9 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-entity card molecule in [[prysm]]
+aip card molecule in [[prysm]]
 
-the universal card for any entity in the [[cybergraph]] — a [[particle]], [[neuron]], [[cyb/avatar]], or [[aip]]. the object card shows identity, metadata, and available actions in a compact rectangular format
+the universal card for any entity in the [[cybergraph]] — a [[particle]], [[neuron]], [[cyb/avatar]], or [[aip]]. the aip card shows identity, metadata, and available actions in a compact rectangular format
 
 ## interface
 
@@ -29,7 +29,7 @@ the universal card for any entity in the [[cybergraph]] — a [[particle]], [[ne
 
 ## composition
 
-- object composed of [[prysm/glass]] + [[prysm/ion]] + [[prysm/text]] + [[prysm/toggle]] (star favorite) + [[prysm/button]] (menu)
-- object inside [[prysm/oracle-cell]] = search result item
-- object inside [[prysm/table]] = rich row with entity details
-- object inside feeds = content stream item
+- aip card composed of [[prysm/glass]] + [[prysm/ion]] + [[prysm/text]] + [[prysm/toggle]] (star favorite) + [[prysm/button]] (menu)
+- aip card inside [[prysm/oracle-cell]] = search result item
+- aip card inside [[prysm/table]] = rich row with entity details
+- aip card inside feeds = content stream item
