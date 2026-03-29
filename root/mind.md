@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 navigation awareness cell in [[prysm]]
 
-the action bar and spatial indicator of [[cyb]]. mind shows where the [[neuron]] is in the [[cybergraph]] and what actions are available from here. it sits between the [[prysm/hud]] frame and the active [[aip]] content, providing the persistent interaction layer: search input, navigation arrows, signing, and context-aware actions
+the commander — the bottom action bar of [[cyb]]. mind shows where the [[neuron]] is in the [[cybergraph]] and what actions are available from here. always at the bottom of the screen, on every device. provides the persistent interaction layer: search, navigation arrows, signing, and context-aware actions
 
 ## interface
 
@@ -43,4 +43,4 @@ the action bar and spatial indicator of [[cyb]]. mind shows where the [[neuron]]
 - mind composed of [[prysm/glass]] + [[prysm/input]] + [[prysm/button]] + [[prysm/ion]] + [[prysm/saber]]
 - mind inside [[prysm/hud]] = persistent navigation layer
 - mind adapts per [[aip]]: oracle gets search input, sense gets message input, sigma gets amount input
-- mobile mind replaces top input with bottom action bar
+- always at the bottom — desktop and mobile. layout adapts, position is constant

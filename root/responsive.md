@@ -48,16 +48,16 @@ molecules keep the same atoms but change layout
 | [[prysm/portal-cell]] | multi-column onboarding layout | single-column step-by-step flow |
 | [[prysm/cyberver-cell]] | stats + mentor list side by side | tabs switching between stats and mentors |
 
-## [[prysm/mind]]: transforms
+## [[prysm/mind]] (commander): adapts but stays at bottom
 
-the most changed component between modes
+the commander lives at the bottom of the screen on every device. layout adapts but position is constant
 
 | desktop | mobile |
 |---------|--------|
-| top input bar with search, navigation arrows, context | bottom action bar with back, forward, sign |
+| bottom bar with search, navigation arrows, sign, context actions | bottom bar with back, forward, sign |
 | always visible | revealed on scroll-up, hidden on scroll-down |
-| search input inline | search is a tap-to-expand overlay |
-| sign button in-context | sign button prominent in action bar |
+| wider layout allows more actions inline | compact, overflow to menu |
+| sign button in-context | sign button prominent |
 
 ## general rules
 
