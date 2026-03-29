@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 161" width="82" height="161">
+  <!-- 1-molecules/tooltip/halogram -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-tooltip-halogram" >
+    <rect id="Rectangle-697" x="-22.5" y="33.5" width="137.0" height="58.0" style="fill:#4c4c4c;fill-opacity:0.10" data-shape="path"/>
+    <text id="liquidity-module---send,-bridge,-swap" x="-17.0" y="53.0" font-family="monospace" font-size="14" fill="#ffffff">liquidity module - send, bridge, swap</text>
+    <rect id="ion-light-yello-left" x="0.0" y="130.0" width="82.0" height="29.0" style="fill:#d7d7d7" data-shape="path"/>
+    <circle id="Ellipse-130" cx="42.5" cy="159.5" r="1.5" style="fill:#ffffff"/>
+  </g>
+</svg>

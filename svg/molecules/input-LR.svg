@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 48" width="176" height="48">
+  <!-- 1-molecules/input/LR -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-input-LR" >
+    <g id="input-container" >
+      <text id="type-something" x="45.0" y="42.0" font-family="monospace" font-size="12" fill="#ffffff">type something</text>
+      <!-- use: atoms-saber-saber-input-saber-input at (0.0,9.0) 176.0x17.0 -->
+      <g id="text+icon-container" >
+        <!-- use: atoms-icon-_16x16-icon-accept-16 at (146.0,0.0) 16.0x16.0 -->
+        <!-- use: 0-atoms-text-text-C at (21.0,0.0) 120.0x16.0 -->
+        <!-- use: atoms-icon-_16x16-icon-accept-16 at (0.0,0.0) 16.0x16.0 -->
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 48" width="384" height="48">
+  <!-- 1-molecules/button/tripple -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-button-tripple" >
+    <!-- use: atoms-saber-saber-button-saber-button at (0.0,0.0) 32.0x48.0 -->
+    <!-- use: atoms-saber-saber-button-saber-button at (112.0,0.0) 32.0x48.0 -->
+    <!-- use: atoms-saber-saber-button-saber-button at (240.0,0.0) 32.0x48.0 -->
+    <!-- use: atoms-saber-saber-button-saber-button at (352.0,0.0) 32.0x48.0 -->
+    <!-- use: text-text-C at (32.0,16.0) 64.0x16.0 -->
+    <!-- use: text-text-C at (160.0,16.0) 64.0x16.0 -->
+    <!-- use: text-text-C at (288.0,16.0) 64.0x16.0 -->
+  </g>
+</svg>

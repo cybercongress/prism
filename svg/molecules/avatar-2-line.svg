@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 112" width="256" height="112">
+  <!-- 1-molecules/avatar/2-line -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-avatar-2-line" >
+    <g id="avatar-block" >
+      <text id="mastercyb" x="0.0" y="20.0" font-family="monospace" font-size="20" fill="#ffffff">mastercyb</text>
+      <text id="42-🔮🔮🔮🔮" x="10.0" y="51.0" font-family="monospace" font-size="14" fill="#ffffff">42 🔮🔮🔮🔮</text>
+    </g>
+    <!-- use: atoms-planet-96x96 at (144.0,8.0) 96.0x96.0 -->
+    <!-- use: atoms-icon-_icon-tokens-oracle-100x100 at (144.0,8.0) 96.0x96.0 -->
+  </g>
+</svg>

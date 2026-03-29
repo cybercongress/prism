@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 944 32" width="944" height="32">
+  <!-- 1-molecules/advicer/advicer-particle -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-advicer-advicer-particle" >
+    <rect id="ion-advicer-opened" x="0.0" y="-0.0" width="944.0" height="32.0" style="fill:#d7d7d7;fill-opacity:0.20" data-shape="path"/>
+    <g id="Group-3" >
+      <!-- use: 0-atoms-text-text-L at (0.0,0.0) 55.0x16.0 -->
+      <!-- use: 0-atoms-text-text-L at (60.0,0.0) 69.0x16.0 -->
+      <!-- use: 0-atoms-text-text-L at (134.0,0.0) 69.0x16.0 -->
+      <!-- use: 0-atoms-icons-16x16-icon-question-16 at (208.0,0.0) 16.0x16.0 -->
+    </g>
+    <g id="Group-2" >
+      <!-- use: 0-atoms-text-text-L at (137.0,2.0) 76.0x16.0 -->
+      <!-- use: 0-atoms-text-text-L at (0.0,2.0) 97.0x16.0 -->
+      <!-- use: 0-atoms-icons-16x16-icon-question-16 at (107.0,0.0) 20.0x20.0 -->
+    </g>
+    <g id="Group-4" >
+      <!-- use: 0-atoms-text-text-L at (64.0,2.0) 69.0x16.0 -->
+      <!-- use: 0-atoms-icons-16x16-icon-question-16 at (43.0,2.0) 16.0x16.0 -->
+      <!-- use: 0-atoms-icons-16x16-icon-question-16 at (138.0,2.0) 16.0x16.0 -->
+      <!-- use: 0-atoms-icons-16x16-icon-question-16 at (0.0,0.0) 38.0x20.0 -->
+    </g>
+  </g>
+</svg>

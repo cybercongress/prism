@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 76" width="794" height="76">
+  <!-- 1-molecules/progress-bar/horizontal -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-progress-bar-horizontal" >
+    <rect id="halo-line" x="0.0" y="38.0" width="794.0" height="2.0" style="fill:#ffffff;fill-opacity:0.15"/>
+    <rect id="filling-line" x="0.0" y="38.0" width="69.0" height="2.0" style="fill:#ffffff"/>
+    <circle id="Oval-bigg" cx="69.0" cy="38.0" r="38.0" style="fill:#d7d7d7"/>
+    <circle id="oval-medium" cx="68.5" cy="38.5" r="18.4" style="fill:#000000"/>
+    <circle id="Oval-small" cx="94.5" cy="65.5" r="5.5" style="fill:#000000"/>
+    <text id="9%" x="59.0" y="43.0" font-family="monospace" font-size="12" fill="#ffffff">9%</text>
+    <text id="0" x="0.0" y="59.0" font-family="monospace" font-size="12" fill="#ddffff">0</text>
+    <text id="100-000" x="749.0" y="59.0" font-family="monospace" font-size="12" fill="#ddffff">100 000</text>
+    <text id="9-817-addresses-registered" x="110.0" y="69.0" font-family="monospace" font-size="12" fill="#ffffff">9 817 addresses registered</text>
+  </g>
+</svg>

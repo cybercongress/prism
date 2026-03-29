@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 16" width="256" height="16">
+  <!-- 1-molecules/address/big -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-address-big" >
+    <!-- use: 1-molecules-content-text+icon-L at (0.0,0.0) 92.0x16.0 -->
+    <!-- use: 0-atoms-images-address-big at (95.0,2.0) 127.0x12.0 -->
+    <!-- use: 0-atoms-text-L at (226.0,0.0) 38.0x16.0 -->
+  </g>
+</svg>

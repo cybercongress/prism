@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 21" width="66" height="21">
+  <!-- 1-molecules/pill/pill-blue -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-pill-pill-blue" >
+    <rect id="Frame-Background" x="0.0" y="0.0" width="66.0" height="21.0" rx="15" style="fill:#304ffe"/>
+    <rect id="Clip" x="0.0" y="0.0" width="66.0" height="21.0" rx="15" style="fill:none"/>
+    <text id="neutral" x="7.0" y="17.0" font-family="monospace" font-size="16" fill="#ffffff">neutral</text>
+  </g>
+</svg>

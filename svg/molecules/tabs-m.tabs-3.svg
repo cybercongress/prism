@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 399 44" width="399" height="44">
+  <!-- 1-molecules/tabs/m.tabs-3 -->
+  <!-- prysm molecule, acid palette -->
+  <g id="1-molecules-tabs-m.tabs-3" >
+    <text id="Market" x="135.0" y="16.0" font-family="monospace" font-size="16" fill="#00acff">ask</text>
+    <text id="Tokens" x="0.0" y="16.0" font-family="monospace" font-size="16" fill="#00acff">search</text>
+    <text id=" Swap" x="286.0" y="24.0" font-family="monospace" font-size="24" fill="#ffffff"> learn</text>
+    <g id="saber" >
+      <rect id="ion-lamp-green" x="-19.0" y="19.0" width="40.0" height="2.0" style="fill:#ffffff"/>
+      <rect id="ion-light-green" x="32.0" y="-30.0" width="40.0" height="100.0" style="fill:#d7d7d7" data-shape="path"/>
+    </g>
+    <g id="saber" >
+      <rect id="ion-lamp-white" x="-19.0" y="19.0" width="40.0" height="2.0" style="fill:#ffffff"/>
+      <rect id="ion-light-white" x="32.0" y="-30.0" width="40.0" height="100.0" style="fill:#d7d7d7" data-shape="path"/>
+    </g>
+    <g id="saber" >
+      <rect id="ion-lamp-green" x="81.0" y="19.0" width="40.0" height="2.0" style="fill:#ffffff"/>
+      <rect id="ion-light-green" x="30.0" y="-30.0" width="40.0" height="100.0" style="fill:#d7d7d7" data-shape="path"/>
+    </g>
+    <g id="saber" >
+      <rect id="ion-lamp-green" x="81.0" y="19.0" width="40.0" height="2.0" style="fill:#ffffff"/>
+      <rect id="ion-light-green" x="30.0" y="-30.0" width="40.0" height="100.0" style="fill:#d7d7d7" data-shape="path"/>
+    </g>
+  </g>
+</svg>
