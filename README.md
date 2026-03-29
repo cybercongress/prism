@@ -45,10 +45,11 @@ the smallest visual units. an atom cannot be broken into smaller prysm component
 where atoms gain meaning. a molecule is two or more atoms composed into a functional unit with a clear interface: what data it takes, what actions it emits, what states it can be in. a neuron-card is a glass + address + counter + ion arranged to show identity. an input is a glass + text + button + saber wired for data entry. the molecule knows its domain — it understands what a neuron is, what a particle looks like, how to display a search result
 
 molecules are grouped by role:
-- navigation — hud, tabs: how you move through [[cyb]]
-- content — content, display, neuron-card, aip, avatar, adviser: how you see data
+- navigation — hud, tabs, mind (commander): how you move through [[cyb]]
+- content — content, display, neuron-card, aip, avatar, adviser, tooltip: how you see data
 - input — input, filter: how you enter and refine data
 - data — table, bar: how you read structured information
+- tags — pill: how you classify and filter
 - widgets — brain, sense, sigma, time: persistent sidebar tools
 
 each molecule adapts between desktop and mobile. atoms inside stay identical — the molecule rearranges their layout
@@ -68,6 +69,9 @@ each molecule adapts between desktop and mobile. atoms inside stay identical —
 | [table](root/table.md) | data grid | [line](components/1-molecules/table/line.png) [row-L](components/1-molecules/table/row-L.png) [row-R](components/1-molecules/table/row-R.png) |
 | [bar](root/bar.md) | saber+ion composite | [1-sided](components/1-molecules/saber+ion/button/1-sided.png) [bi-sided](components/1-molecules/saber+ion/button/bi-sided.png) |
 | [time-widget](root/time-widget.md) | personal history | [time](components/1-molecules/widgets/time.png) |
+| [pill](root/pill.md) | tag badge | [green](components/1-molecules/pill/green.png) [red](components/1-molecules/pill/red.png) [blue](components/1-molecules/pill/blue.png) [white](components/1-molecules/pill/white.png) |
+| [tooltip](root/tooltip.md) | floating contextual popup | — |
+| [mind](root/mind.md) | commander (bottom action bar) | — |
 
 ### cells
 
@@ -89,11 +93,12 @@ the top level. an aip (autonomous intelligent program) is a full-screen applicat
 
 | property | values |
 |----------|--------|
-| color | dark base, light foreground. emotion palette: green (confidence), red (danger), yellow (attention), blue (information), purple (rare) |
+| color | dark base, light foreground. 7 acid emotion colors from [[color-emotion spectrum]]: red (anger), orange (disgust), yellow (surprise), green (joy), blue (interest), indigo (sadness), violet (fear). see [COLOR_AUDIT.md](COLOR_AUDIT.md) |
 | typography | monospace, hierarchy through size: h1(32) h2(24) h3(20) body(16) caption(14) micro(12) |
 | spacing | 8px grid. padding: 8, 16, 24. gaps: 24, 32, 48 |
 | motion | 150ms ease state changes, 200ms ease-out glass depth. no decorative animation |
-| responsive | desktop (>768) / mobile (<=768). molecules adapt, atoms stay identical |
+| responsive | desktop (>768) / mobile (<=768). atoms identical, molecules rearrange, commander always at bottom. see [responsive](root/responsive.md) |
+| time | UTC 0, Unix epoch (1970) = year 0 of machine time. e.g. 2026 = year 56 |
 
 ## interfaces
 
@@ -109,32 +114,17 @@ emotion overlays any state with a color signal
 
 ```
 root/              knowledge graph pages (optica subgraph)
+svg/
+  atoms/           SVG atoms with acid palette (32 files)
 components/
-  0-atoms/         atom assets
+  0-atoms/         atom PNG assets from Sketch
     images/        icon library (16x16)
-  1-molecules/     molecule assets
-    adviser/       contextual hints
-    aip/           entity cards
-    avatar/        identity strips
-    brain-map/     graph file manager
-    button/        call-to-action variants
-    content/       particle renderers
-    display/       content containers
-    filter/        result filtering
-    input/         data entry
-    neuron/        identity cards (big, small)
-    pill/          tag badges
-    progress-bar/  progress indicators
-    saber+ion/     composite bars
-    table/         data grids
-    tabs/          navigation tabs
-    toggle/        binary switches
-    widgets/       sigma, sense, time
+  1-molecules/     molecule PNG assets from Sketch
 ```
 
 ## status
 
-11 atoms defined. 13 molecules with assets. 3 cells specified. 10 aips listed. 23 component pages pending full description
+11 atoms. 16 molecules. 3 cells. 1 commander (mind). 10 aips. 32 SVG atoms. acid color palette (17 tokens). responsive rules defined
 
 ## license
 
