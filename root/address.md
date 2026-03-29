@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 [[neuron]] address display atom in [[prysm]]
 
-renders the cryptographic identity of a [[neuron]] — the bech32 address that proves who she is. the address is the neuron's visible identity in [[cyb]], displayed wherever authorship or ownership matters
+renders the cryptographic identity of a [[neuron]] — the bech32 address that proves identity. the visible identity in [[cyb]], displayed wherever authorship or ownership matters
 
 ## interface
 
@@ -22,8 +22,13 @@ renders the cryptographic identity of a [[neuron]] — the bech32 address that p
 
 ## variants
 
-- big — full address with monospace rendering, used in [[prysm/neuron-card]] and profile headers
-- small — truncated (first 8 + last 4 characters), used inline in [[prysm/aip]], [[prysm/table]], and feeds
+- big — full address with monospace rendering and color hash-bar visualization, used in [[prysm/neuron-card]] and profile headers
+- big-hover — full address with copy icon revealed on hover
+- big-play — full address with action indicator
+- small — truncated (first 8 + last 4 characters) with mini hash bars, used inline in [[prysm/aip]], [[prysm/table]], and feeds
+- small-hover — truncated address with copy icon on hover
+
+the hash-bar visualization encodes each byte of the address as a 3px colored bar from the acid [[emotion]] palette — making every address visually unique and recognizable at a glance
 
 ## composition
 

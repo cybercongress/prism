@@ -28,6 +28,9 @@ the universal content display. any [[particle]] in the [[cybergraph]] — text, 
 - text + icon-R — text body with icon on the right
 - text + icon-LR — text body with icons on both sides
 - number + indicator — numeric value with [[prysm/indicator]] fill bar
+- value-change — numeric value with delta indicator (green up / red down). used for balance changes, karma shifts, price movement
+- date — timestamp display. UTC 0, year counted from Unix epoch (1970-01-01 — year 0 of machine time). relative ("2h ago") or absolute ("56.03.29" = March 29, year 56)
+- star-indicator — rating or quality score as star fill. used for content relevance in [[cyb/oracle]]
 - picture — image with aspect-ratio container
 - video, audio, pdf — embedded players
 

@@ -24,12 +24,19 @@ the way users put data into [[cyb]]. every search query, token amount, neuron se
 
 ## variants
 
+### desktop
 - text L — icon on the left, text to the right. standard search and text input
 - text R — icon on the right. used for inputs with action trigger
 - text LR — icons on both sides. used for complex inputs (search with filter)
 - dropdown — select from a list of options
-- neuron — specialized for entering/selecting a [[neuron]] address. validates bech32 format
+- neuron + dropdown — specialized for entering/selecting a [[neuron]] address with dropdown chooser. validates bech32 format
 - token + amount — dual field: token selector + numeric amount. used in [[cyb/sigma]] and [[teleport]]
+- sort/default — sort control input with direction toggle
+- sort/dropdown — sort control with column chooser
+
+### mobile
+- m.-text — mobile text input, full-width
+- m.-logScale — logarithmic scale selector with percentage markers (0%, 2%, 5%, 10%, 20%, 50%, max). used for staking and delegation amounts
 
 ## composition
 

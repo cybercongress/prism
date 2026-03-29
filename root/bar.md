@@ -25,9 +25,10 @@ the universal toolbar pattern. a saber line with ions attached — creating labe
 - 1-sided — saber on one edge, ions extend from it. used for section headers and single-direction toolbars
 - bi-sided — saber on both edges, ions between them. used for centered action groups
 - horizontal — saber runs horizontally with ions above or below. used for full-width dividers with labels
+- horizontal-1-sided — horizontal saber with ions on one side only
 - each variant supports three modes:
 	- button — ions act as clickable actions
-	- input — ions wrap [[prysm/input]] fields for inline data entry
+	- input — ions wrap [[prysm/input]] fields for inline data entry. has focus/passive states
 	- display — ions show read-only values
 
 ## composition

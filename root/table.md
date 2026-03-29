@@ -24,11 +24,34 @@ structured rows and columns for displaying lists, rankings, transactions, and de
 
 ## variants
 
+### row molecules
 - line — minimal, single-line rows separated by [[prysm/saber]]. used for simple lists
 - row-L — icon/label on the left, value on the right. used for key-value displays
 - row-R — value on the left, action on the right. used for transaction lists
+- list-row-16gutter — list row with 16px gutter spacing
+- list-row-8gutter — compact list row with 8px gutter
+- list-row-8gutter-R — compact row, right-aligned values
+
+### cell-level table components (2-cells/tables)
+- table-header — column header row with sort controls
+- table-legend — column count variants: 2-col, 3-col, 4-col, 5-col
+- table-scroll — scrollable table body with fixed header
+- table-sub-group — grouped rows with avatar: 2-col through 5-col, token variant
+- table-sub-sub-group — nested row grouping
+- receipt-closed — collapsed transaction receipt row
+- receipt-open — expanded transaction receipt with full details
+
+### sort
 - sort — column headers with sort indicators
 - sort/dropdown — sortable headers with dropdown for additional options
+
+## alignment rules
+
+- numeric columns: right-aligned. digits stack by place value so thousands, millions, decimals read as a visual column
+- text columns: left-aligned
+- icon/avatar columns: center-aligned
+- column headers inherit alignment from their data column
+- mixed columns (text + number): left-align, but monospace ensures digits still read consistently
 
 ## composition
 
