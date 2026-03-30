@@ -10,18 +10,35 @@ renders the cryptographic identity of a [[neuron]]. the address is a bech32 stri
 
 ## hash-bar visualization
 
-each byte of the address maps to a colored bar. bars are 3px wide with 2px gaps, arranged in two mirrored rows growing up and down from a center line. bar height (1-6 units) encodes the byte value. bar color comes from the acid [[emotion]] palette:
+each character of the address maps to a colored bar and a musical note. the address is both visible and audible — a unique waveform and a unique melody
 
-- [[green]] #00fe00 — most common, the base tone of identity
-- [[blue]] #00acff — exploration, linked addresses
-- [[violet]] #d500f9 — rare byte values
-- [[yellow]] #fcf000 — attention markers
-- [[orange]] #ff5b00 — infrequent, distinctive
+bars are 3px wide, arranged in two mirrored rows growing up and down from a center line. bar height encodes character frequency (common letters = tall, rare = short). text and bars flow together without gaps
 
-the result: every address has a unique visual fingerprint recognizable at a glance without reading the hex. two addresses that look alike in text are instantly distinguishable by their waveform
+big variant: prefix + all address bars + suffix
+small variant: truncated prefix + subset of bars + truncated suffix
 
-big variant: 32 bar pairs (prefix text + 32 up bars + 32 down bars + suffix text)
-small variant: 12 bar pairs (truncated prefix + 12 up + 12 down + truncated suffix)
+## character mapping
+
+each bech32 character belongs to one of 7 color-note groups:
+
+| color | note | characters | gain |
+|-------|------|------------|------|
+| #36D6AE green | E3 | a, g, l, m, s | 1.0 → 0.4 |
+| #00EDEB cyan | G3 | b, h, n, t | 1.0 → 0.4 |
+| #000AFF indigo | A3 | c, i, o, u | 1.0 → 0.4 |
+| #1fcbff blue | B3 | d, f, j, p, r, v | 1.0 → 0.5 |
+| #F62BFD violet | D3 | e, k, q, w | 1.0 → 0.4 |
+| #FCF000 yellow | B2 | x, z | 0.7 → 0.6 |
+| #FF5C00 orange | F#3 | y | 0.7 |
+| #777777 gray | sustain (pause) | 0-9 | — |
+
+gain decreases with bar height — tall bars are loud, short bars are quiet. digits produce no note (sustain), extending the previous note duration from 16th to quarter note — creating rhythmic pauses in the melody
+
+## sound
+
+click on an address to hear it. each character plays its note sequentially (0.2s per note) over a pad drone (E3). the melody is deterministic — the same address always sounds the same. neurons recognize familiar addresses by ear
+
+the sound is synthesized with Tone.js using sampled lead and pad instruments
 
 ## interface
 
