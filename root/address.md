@@ -23,13 +23,13 @@ each bech32 character belongs to one of 7 color-note groups:
 
 | color | note | characters | gain |
 |-------|------|------------|------|
-| #36D6AE green | E3 | a, g, l, m, s | 1.0 → 0.4 |
-| #00EDEB cyan | G3 | b, h, n, t | 1.0 → 0.4 |
-| #000AFF indigo | A3 | c, i, o, u | 1.0 → 0.4 |
-| #1fcbff blue | B3 | d, f, j, p, r, v | 1.0 → 0.5 |
-| #F62BFD violet | D3 | e, k, q, w | 1.0 → 0.4 |
-| #FCF000 yellow | B2 | x, z | 0.7 → 0.6 |
-| #FF5C00 orange | F#3 | y | 0.7 |
+| #00fe00 green | E3 | a, g, l, m, s | 1.0 → 0.4 |
+| #00acff blue | G3 | b, h, n, t | 1.0 → 0.4 |
+| #304ffe indigo | A3 | c, i, o, u | 1.0 → 0.4 |
+| #00acff blue | B3 | d, f, j, p, r, v | 1.0 → 0.5 |
+| #d500f9 violet | D3 | e, k, q, w | 1.0 → 0.4 |
+| #fcf000 yellow | B2 | x, z | 0.7 → 0.6 |
+| #ff5b00 orange | F#3 | y | 0.7 |
 | #777777 gray | sustain (pause) | 0-9 | — |
 
 gain decreases with bar height — tall bars are loud, short bars are quiet. digits produce no note (sustain), extending the previous note duration from 16th to quarter note — creating rhythmic pauses in the melody
