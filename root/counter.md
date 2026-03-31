@@ -11,7 +11,7 @@ gravity: 4
 density: 6.31
 ---
 
-numeric display atom in [[prysm]]
+numeric display molecule in [[prysm]]
 
 renders a single number with optional [[emotion]] color. used wherever [[cyb]] shows a quantity: [[karma]], token balance, [[cyberank]] score, link count
 

@@ -4,7 +4,7 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-continuous value atom in [[prysm]]
+continuous value molecule in [[prysm]]
 
 a draggable control for selecting a value within a range. snaps to the 8px grid. used for amounts, thresholds, and progress visualization
 

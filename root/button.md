@@ -11,7 +11,7 @@ gravity: 2
 density: 4.81
 ---
 
-call-to-action atom in [[prysm]]
+call-to-action molecule in [[prysm]]
 
 the primary interaction primitive. every action a [[neuron]] takes in [[cyb]] flows through a button
 

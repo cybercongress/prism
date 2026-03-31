@@ -4,7 +4,7 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-progress display atom in [[prysm]]
+progress display molecule in [[prysm]]
 
 a visual fill level — shows how much of something is complete, consumed, or remaining. simpler than [[prysm/slider]]: read-only, no interaction
 

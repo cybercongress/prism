@@ -4,7 +4,7 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-binary state atom in [[prysm]]
+binary state molecule in [[prysm]]
 
 a two-state switch. the user taps, the state flips. used wherever [[cyb]] needs a yes/no, on/off, or favorite/unfavorite choice
 

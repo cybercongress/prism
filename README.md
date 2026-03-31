@@ -22,20 +22,14 @@ atoms → molecules → cells → aips
 
 ### atoms
 
-the smallest visual units. an atom cannot be broken into smaller prysm components — it is a single rendered element with one responsibility. a glass pane, a line of text, a button, a toggle switch. atoms carry no domain logic. they accept data and emotion, render a visual, and emit events. they look the same on desktop and mobile. they know nothing about neurons, particles, or cyberlinks — that meaning comes from how molecules combine them
+the smallest visual units. an atom cannot be broken into smaller prysm components — it is a single rendered element with one responsibility. a glass pane, a line of text, a divider line. atoms carry no domain logic. they accept data and emotion, render a visual, and emit events. they look the same on desktop and mobile. they know nothing about neurons, particles, or cyberlinks — that meaning comes from how molecules combine them
 
-11 atoms span all visual needs: surfaces (glass), typography (text), actions (button), state (toggle, slider, indicator, counter), identity (address), structure (ion, saber), and iconography (images)
+5 atoms: surfaces (glass), typography (text), structure (ion, saber), iconography (images)
 
 | atom | description | variants |
 |------|-------------|----------|
 | [glass](root/glass.md) | surface pane, foundational container | plane, side-button |
 | [text](root/text.md) | typography | left, center, right, paragraph |
-| [button](root/button.md) | call-to-action | default, double, triple, side |
-| [toggle](root/toggle.md) | binary state | on, off, star |
-| [slider](root/slider.md) | continuous value | range, progress bar |
-| [indicator](root/indicator.md) | progress display | partial, full |
-| [counter](root/counter.md) | numeric display with emotion color | integer, decimal, abbreviated |
-| [address](root/address.md) | neuron address | big, small |
 | [ion](root/ion.md) | icon-label pair | centric, horizontal, input, star, trapezoid |
 | [saber](root/saber.md) | accent line and divider | 1px, 2px, horizontal |
 | [images](root/images.md) | icon library | 16, 20, 32, 48, 96 px |
@@ -45,9 +39,11 @@ the smallest visual units. an atom cannot be broken into smaller prysm component
 where atoms gain meaning. a molecule is two or more atoms composed into a functional unit with a clear interface: what data it takes, what actions it emits, what states it can be in. a neuron-card is a glass + address + counter + ion arranged to show identity. an input is a glass + text + button + saber wired for data entry. the molecule knows its domain — it understands what a neuron is, what a particle looks like, how to display a search result
 
 molecules are grouped by role:
+- actions — button, toggle: how you interact
 - navigation — hud, tabs, mind (commander): how you move through [[cyb]]
 - content — content, display, neuron-card, aip, avatar, adviser, tooltip: how you see data
-- input — input, filter: how you enter and refine data
+- identity — address, counter, indicator: how you read state
+- input — input, filter, slider: how you enter and refine data
 - data — table, bar: how you read structured information
 - tags — pill: how you classify and filter
 - widgets — brain, sense, sigma, time: persistent sidebar tools
@@ -56,6 +52,12 @@ each molecule adapts between desktop and mobile. atoms inside stay identical —
 
 | molecule | description | assets |
 |----------|-------------|--------|
+| [button](root/button.md) | call-to-action (saber + text + saber) | default, double, triple, side |
+| [toggle](root/toggle.md) | binary state switch | on, off, star |
+| [slider](root/slider.md) | continuous value selector | range, progress |
+| [indicator](root/indicator.md) | progress display | partial, full |
+| [counter](root/counter.md) | numeric display with emotion | default, danger |
+| [address](root/address.md) | neuron identity with hash-bar waveform | big, small |
 | [hud](root/hud.md) | heads-up display shell | — |
 | [tabs](root/tabs.md) | section navigation | [3](components/1-molecules/tabs/3-items.png) [4](components/1-molecules/tabs/4-items.png) [5](components/1-molecules/tabs/5-items.png) [m](components/1-molecules/tabs/m.3-items.png) |
 | [content](root/content.md) | particle renderers by format | [text+L](components/1-molecules/content/text+icon-L.png) [LR](components/1-molecules/content/text+icon-LR.png) [R](components/1-molecules/content/text+icon-R.png) [H3](components/1-molecules/content/H3+icon.png) [num](components/1-molecules/content/number+indicator.png) |
@@ -124,7 +126,7 @@ components/
 
 ## status
 
-11 atoms. 16 molecules. 3 cells. 1 commander (mind). 10 aips. 32 SVG atoms. acid color palette (17 tokens). responsive rules defined
+5 atoms. 22 molecules. 3 cells. 10 aips. 17 atom SVGs. 59 molecule SVGs. acid color palette (17 tokens). responsive rules defined
 
 ## license
 

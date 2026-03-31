@@ -4,7 +4,7 @@ crystal-type: entity
 crystal-domain: cyber
 ---
 
-[[neuron]] address display atom in [[prysm]]
+[[neuron]] address display molecule in [[prysm]]
 
 renders the cryptographic identity of a [[neuron]]. the address is a bech32 string with a hash-bar visualization — a unique colorful waveform derived from the address bytes. text and bars flow together without gaps: `bostrom1|||||||||vug5`
 
