@@ -1,11 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 48" width="256" height="48">
-  <!-- 0-atoms/button/double — saber + text + saber + text + saber -->
-  <!-- prysm atom, acid palette -->
-  <g id="button-double">
-    <rect id="saber-1" x="0" y="0" width="2" height="48" fill="#00fe00"/>
-    <rect id="saber-2" x="127" y="0" width="2" height="48" fill="#00fe00"/>
-    <rect id="saber-3" x="254" y="0" width="2" height="48" fill="#00fe00"/>
-    <text id="label-left" x="64" y="29" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">confirm</text>
-    <text id="label-right" x="192" y="29" font-family="monospace" font-size="14" fill="#d7d7d7" text-anchor="middle">cancel</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 96" width="520" height="96">
+  <!-- 0-atoms/button/double -->
+  <defs>
+    <linearGradient id="glow-r" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00fe00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00fe00" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glow-l" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00fe00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00fe00" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- saber 1 (left edge) -->
+  <rect x="32" y="8" width="2" height="80" fill="#ffffff"/>
+  <rect x="34" y="8" width="24" height="80" fill="url(#glow-r)"/>
+  <!-- saber 2 (center divider) -->
+  <rect x="259" y="8" width="2" height="80" fill="#ffffff"/>
+  <rect x="261" y="8" width="24" height="80" fill="url(#glow-r)"/>
+  <rect x="235" y="8" width="24" height="80" fill="url(#glow-l)"/>
+  <!-- saber 3 (right edge) -->
+  <rect x="486" y="8" width="2" height="80" fill="#ffffff"/>
+  <rect x="462" y="8" width="24" height="80" fill="url(#glow-l)"/>
+  <!-- labels -->
+  <text x="147" y="54" font-family="monospace" font-size="16" fill="#ffffff" text-anchor="middle">confirm</text>
+  <text x="374" y="54" font-family="monospace" font-size="16" fill="#ffffff" text-anchor="middle">cancel</text>
 </svg>
