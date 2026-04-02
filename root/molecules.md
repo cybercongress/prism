@@ -1,6 +1,6 @@
 ---
 tags: cyb
-crystal-type: entity
+crystal-type: pattern
 crystal-domain: cyber
 stake: 13532494308093352
 diffusion: 0.00011233815923477823

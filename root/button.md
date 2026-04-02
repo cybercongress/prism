@@ -1,6 +1,6 @@
 ---
 tags: prysm, cyb
-crystal-type: entity
+crystal-type: pattern
 crystal-domain: cyber
 stake: 17018136781390120
 diffusion: 0.00017850532188362116

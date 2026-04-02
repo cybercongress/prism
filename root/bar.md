@@ -1,6 +1,6 @@
 ---
 tags: prysm, cyb
-crystal-type: entity
+crystal-type: pattern
 crystal-domain: cyber
 ---
 
