@@ -13,54 +13,91 @@ density: 4.81
 
 call-to-action molecule in [[prysm]]
 
-the primary interaction primitive. every action a [[neuron]] takes in [[cyb]] flows through a button
+the primary interaction primitive. every action a [[neuron]] takes in [[cyb]] flows through a button. a transparent region bounded by vertical [[prysm/saber]] lines with glow radiating inward
 
-## visual design
+## protocol role
 
-a button is a transparent region bounded by two vertical [[prysm/saber]] lines. the sabers are white (2px) with a green glow that radiates inward (~24px gradient fading to transparent). the button has no background — the glow and the sabers define its boundaries
+button is a molecule in the element tree $\mathcal{T}$. its membrane is whatever zone or molecule contains it. button does not have a dedicated grid zone — it lives inside [[prysm/mind]], [[prysm/bar]], [[prysm/display]], and other molecules
 
-### text color rules
+## sizing
 
-- default: #ffffff white — neutral actions (navigate, open, select)
-- danger: #ff0000 red — destructive or irreversible actions (delete key, burn tokens, revoke access)
-- caution: #fcf000 yellow — actions requiring attention (large transfers, delegation changes)
-- confirm: #00fe00 green — positive completion actions (sign, stake, claim)
-- disabled: #777777 gray — unavailable actions
+| variant | sizing |
+|---------|--------|
+| default | fix(auto, content) × fix($6g$) |
+| double | fix(auto) × fix($6g$) — two actions side by side |
+| triple | fix(auto) × fix($6g$) — three actions |
 
-the text color carries the [[emotion]] of the action. a white button is safe. a red button demands attention
+$s_{min} = (6g, 6g)$ — minimum for one saber + label + saber
 
-## interface
+## structure
 
-- inputs
-	- text: label describing the action
-	- icon: optional 16px or 20px [[prysm/images]] glyph
-	- [[emotion]]: determines saber glow color and text color
-	- action: callback triggered on press
-	- adviser: tooltip text shown on hover via [[prysm/adviser]]
-- outputs
-	- action event: propagated to parent component
-- states
-	- default, hover, active, disabled (sabers dim to gray), loading
+default:
+```
+saber [vertical, g/4, glow inward 3g, emotion color]
+text [body, label, emotion color]
+saber [vertical, g/4, glow inward 3g, emotion color]
+```
 
-## variants
+double:
+```
+saber | text action1 | saber | text action2 | saber
+```
 
-- default — single action bounded by two sabers, most common
-- double — two actions side-by-side, three sabers (left | action1 | middle | action2 | right)
-- triple — three actions, four sabers (rare, for multi-path decisions)
-- side — attached to the edge of a [[prysm/glass]] pane, used in [[prysm/hud]] sidebar widgets
+no glass background — the button is transparent. sabers and glow define the boundaries
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 12g$): icon + label + sabers
+- $l_2$ ($w_{min} = 6g$): icon only + sabers
+
+## emotion
+
+text color and saber glow carry [[emotion]] of the action:
+
+| action type | text color | saber glow |
+|-----------|-----------|------------|
+| neutral (navigate, open) | #ffffff | #ffffff |
+| confirm (sign, stake, claim) | #00fe00 | #00fe00 |
+| danger (delete key, burn tokens) | #ff0000 | #ff0000 |
+| caution (large transfer) | #fcf000 | #fcf000 |
+| disabled | #4b4b4d | none |
+
+a white button is safe. a red button demands attention. destructive actions are never the leftmost button
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | sabers white/emotion, glow at $3g$ | — |
+| hover | glow-spread increases to $4g$ | pointer over button |
+| active | glow pulses once, scale 0.95× | tap/click |
+| disabled | sabers dim to #4b4b4d, no glow, text gray | action unavailable |
+| loading | glow animates (breathe) | action in progress |
+
+state transitions: $150\text{ms}$ ease
 
 ## placement
 
-- primary action buttons live in the [[prysm/mind]] (commander) at the bottom of the screen — sign, send, confirm
-- secondary actions live inside content areas — inside [[prysm/bar]], [[prysm/display]], [[prysm/neuron-card]]
-- destructive actions (red text) are never the first or leftmost button — always require a deliberate reach
-- side buttons attach to the vertical center of the left or right screen edge for persistent widget access ([[cyb/sigma]] right, [[cyb/sense]] right, [[cyb/brain]] left)
-- double/triple buttons: the primary action is on the left, secondary/cancel on the right
-- on mobile (<=768px): buttons stretch to full width when inside the commander
+- primary actions: inside [[prysm/mind]] (commander) — sign, send, confirm
+- secondary actions: inside [[prysm/bar]], [[prysm/display]], [[prysm/neuron-card]]
+- destructive actions: never first or leftmost — always require deliberate reach
+- double/triple: primary action on the left, secondary/cancel on the right
+- on mobile ($\square_w \leq 96g$): buttons stretch to fill when inside commander
 
-## composition
+## 3D
 
-- buttons compose into [[prysm/bar]] molecules when paired with [[prysm/saber]] and [[prysm/ion]]
-- button + [[prysm/adviser]] = guided action
-- button inside [[prysm/input]] = submit trigger
-- button inside [[prysm/mind]] = commander action (sign, navigate)
+button renders at the same $p_z$ as its membrane. in 3D, button sabers glow in the xy-plane. button faces the neuron (billboard)
+
+## ECS
+
+- Entity: button organelle
+- Components:
+  - `Sizing { width, height: Fix(6) }`
+  - `ButtonVariant { default | double | triple }`
+  - `ButtonLabel { text }`
+  - `ButtonIcon { glyph: Option }`
+  - `Emotion { color }` — determines text + saber glow
+  - `FoldSet { conformations }`
+  - `TapAction { callback }`
+- System: `ButtonSystem` reads tap events, executes `TapAction`, manages state transitions

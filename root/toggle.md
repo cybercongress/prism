@@ -6,28 +6,65 @@ crystal-domain: cyber
 
 binary state molecule in [[prysm]]
 
-a two-state switch. the user taps, the state flips. used wherever [[cyb]] needs a yes/no, on/off, or favorite/unfavorite choice
+a two-state switch. tap to flip. glass track + glass thumb (circle). used for on/off, yes/no, favorite/unfavorite
 
-## interface
+## protocol role
 
-- inputs
-	- state: boolean (on or off)
-	- [[emotion]]: color signal — green when active, neutral when off
-	- disabled: prevents interaction
-- outputs
-	- state change event: emitted on tap
-- states
-	- on, off, disabled
+molecule in $\mathcal{T}$. lives inside [[prysm/filter]], [[prysm/table]], [[prysm/aip]], and other molecules
+
+## sizing
+
+fix($5g$) × fix($3g$)
+
+$s_{min} = (5g, 3g)$ — toggle does not fold
+
+## structure
+
+```
+glass [fix(5g) × fix(3g), corner-radius 3g/2] — track
+  glass [fix(2g) × fix(2g), corner-radius g] — thumb (circle)
+```
+
+on: thumb moves to right, track tints with [[emotion]] green. off: thumb at left, track gray
 
 ## variants
 
-- on — filled, active state
-- off — hollow, inactive state
-- star — favorite marker, used in [[prysm/aip]] and [[prysm/neuron-card]] for bookmarking
+| variant | visual | use |
+|---------|--------|-----|
+| on | thumb right, track #00fe00 | active state |
+| off | thumb left, track #4b4b4d | inactive state |
+| star | ion (star glyph) replaces toggle | bookmark/favorite in [[prysm/aip]] |
 
-## composition
+## emotion
 
-- toggle inside [[prysm/filter]] = selectable filter option
-- toggle inside [[prysm/table]] = row selection
-- toggle inside [[prysm/bar]] = toolbar switch
-- star toggle inside [[prysm/aip]] = favorite/bookmark action
+| state | color |
+|-------|-------|
+| on | #00fe00 (green) |
+| off | #4b4b4d (gray) |
+| star active | #fcf000 (yellow) |
+| star inactive | #777777 (dim) |
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| on | thumb right, green track | — |
+| off | thumb left, gray track | — |
+| hover | track opacity +0.1 | pointer over |
+| disabled | all dims, no interaction | membrane disabled |
+
+state transitions: thumb slides $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$. faces neuron (billboard)
+
+## ECS
+
+- Entity: toggle organelle
+- Components:
+  - `Sizing { width: Fix(5), height: Fix(3) }`
+  - `ToggleState { on | off }`
+  - `ToggleVariant { switch | star }`
+  - `Emotion { color }`
+- System: `ToggleSystem` handles tap, flips `ToggleState`, updates `Emotion`

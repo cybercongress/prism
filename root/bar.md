@@ -4,36 +4,72 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-[[prysm/saber]] + [[prysm/ion]] composite molecule in [[prysm]]
+toolbar molecule in [[prysm]]
 
-the universal toolbar pattern. a saber line with ions attached — creating labeled action strips, input rows, and display headers. the bar is how [[cyb]] organizes horizontal sequences of actions, values, and controls
+[[prysm/saber]] + [[prysm/ion]] composite. the universal toolbar pattern — a saber line with ions attached, creating labeled action strips, input rows, and display headers
 
-## interface
+## protocol role
 
-- inputs
-	- items: list of [[prysm/ion]] elements
-	- mode: button, input, or display
-	- [[emotion]]: accent color for the [[prysm/saber]] line
-- outputs
-	- action event: from button-mode items
-	- value change event: from input-mode items
-- states
-	- default, hover (per item), active (per item)
+molecule in $\mathcal{T}$. lives inside space zone content, [[prysm/table]] headers, [[prysm/display]]
+
+## sizing
+
+fill × fix($6g$)
+
+$s_{min} = (8g, 4g)$
+
+## structure
+
+```
+stack horizontal [gap g/2]
+  saber [vertical, g/4]
+  ion [2g] + text [caption]
+  saber [vertical, g/4]
+  ion [2g] + text [caption]
+  saber [vertical, g/4]
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 20g$): all items with labels
+- $l_2$ ($w_{min} = 8g$): icons only
 
 ## variants
 
-- 1-sided — saber on one edge, ions extend from it. used for section headers and single-direction toolbars
-- bi-sided — saber on both edges, ions between them. used for centered action groups
-- horizontal — saber runs horizontally with ions above or below. used for full-width dividers with labels
-- horizontal-1-sided — horizontal saber with ions on one side only
-- each variant supports three modes:
-	- button — ions act as clickable actions
-	- input — ions wrap [[prysm/input]] fields for inline data entry. has focus/passive states
-	- display — ions show read-only values
+| variant | layout | use |
+|---------|--------|-----|
+| 1-sided | saber on one edge, ions extend | section headers |
+| bi-sided | saber on both edges | centered action groups |
+| horizontal | saber runs horizontally, ions above/below | full-width dividers |
 
-## composition
+each variant supports modes: button (clickable), input (data entry), display (read-only)
 
-- bar composed of [[prysm/saber]] + [[prysm/ion]] + optional [[prysm/button]] or [[prysm/input]]
-- bar inside [[prysm/hud]] = toolbar for the active [[aip]]
-- bar inside [[prysm/table]] = column header row
-- bar inside cells = section action strip
+## emotion
+
+saber glow carries [[emotion]] of the context (default #ffffff)
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | sabers white | — |
+| hover | hovered item brightens | pointer over item |
+| active | item scales 0.95× | tap |
+
+state transitions: $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$
+
+## ECS
+
+- Entity: bar organelle
+- Components:
+  - `Sizing { width: Fill, height: Fix(6) }`
+  - `BarVariant { one_sided | bi_sided | horizontal }`
+  - `BarMode { button | input | display }`
+  - `BarItems { list of (icon, label, action) }`
+  - `FoldSet { conformations }`
+- System: `BarSystem` handles item interactions

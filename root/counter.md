@@ -13,21 +13,62 @@ density: 6.31
 
 numeric display molecule in [[prysm]]
 
-renders a single number with optional [[emotion]] color. used wherever [[cyb]] shows a quantity: [[karma]], token balance, [[cyberank]] score, link count
+renders a number with [[emotion]] color. text (number) + saber (change indicator line). used for [[karma]], token balance, [[cyberank]], link count
 
-## interface
+## protocol role
 
-- inputs
-	- number: the value to display
-	- [[emotion]]: color signal (green for growth, red for decline, neutral for static)
-	- adviser: hover text explaining the number via [[prysm/adviser]]
-	- format: integer, decimal, abbreviated (1.2k, 3.4M)
-- outputs
-	- display only — no interaction
+molecule in $\mathcal{T}$. lives inside [[prysm/neuron-card]], [[prysm/aip]], [[prysm/display]], [[prysm/widget]]
 
-## composition
+## sizing
 
-- counter inside [[prysm/aip]] = entity metric
-- counter inside [[cyb/sigma]] = token balance
-- counter inside [[prysm/neuron-card]] = [[karma]] or rank display
-- counter + [[prysm/indicator]] = progress toward a goal
+fix(auto, content) × fix($4g$)
+
+$s_{min} = (4g, 2g)$ — minimum for one digit visible
+
+## structure
+
+```
+stack vertical
+  text [h3 or body, number, emotion color]
+  saber [horizontal, g/8, emotion color, fix(3g)]
+```
+
+saber = change indicator. its length shows magnitude of recent change
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 10g$): full number + change indicator
+- $l_2$ ($w_{min} = 4g$): abbreviated number (1.2k, 3.4M) + no indicator
+
+## emotion
+
+| change | text color | saber color |
+|--------|-----------|------------|
+| growth | #00fe00 (green) | #00fe00 |
+| decline | #ff0000 (red) | #ff0000 |
+| stable | #ffffff (white) | #ffffff |
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | number at current value | — |
+| updated | number flashes, saber appears | value changed |
+| loading | skeleton placeholder | fetching value |
+
+state transitions: $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$. faces neuron (billboard)
+
+## ECS
+
+- Entity: counter organelle
+- Components:
+  - `Sizing { width: auto, height: Fix(4) }`
+  - `CounterValue { current, previous, format }`
+  - `FoldSet { conformations }`
+  - `Emotion { color }` — from value change direction
+- System: `CounterSystem` reads data source, computes change direction, writes `Emotion`

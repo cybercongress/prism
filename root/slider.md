@@ -6,27 +6,64 @@ crystal-domain: cyber
 
 continuous value molecule in [[prysm]]
 
-a draggable control for selecting a value within a range. snaps to the 8px grid. used for amounts, thresholds, and progress visualization
+a draggable control for selecting a value within a range. glass track + glass fill + glass handle (circle). snaps to $g$ grid
 
-## interface
+## protocol role
 
-- inputs
-	- value: current position (0.0–1.0)
-	- min, max: range bounds
-	- step: snap increment (optional)
-	- [[emotion]]: fill color — green for healthy ranges, red for danger zones, yellow for caution
-- outputs
-	- value change event: emitted on drag
-- states
-	- default, hover, active, disabled
+molecule in $\mathcal{T}$. lives inside [[prysm/input]], [[prysm/bar]], [[prysm/display]]
+
+## sizing
+
+fill × fix($3g$)
+
+$s_{min} = (10g, 3g)$
+
+## structure
+
+```
+glass [fill × fix(g/4), corner-radius g/8] — track background
+glass [fix(level × track_w) × fix(g/4), corner-radius g/8, emotion tint] — fill
+glass [fix(2g) × fix(2g), corner-radius g] — handle (circle)
+```
 
 ## variants
 
-- range selector — interactive, user drags the handle to set a value. used in token amount inputs, delegation splits, and threshold settings
-- progress bar — read-only, displays completion or fill level. used in loading states and [[prysm/indicator]] compositions
+| variant | interaction | use |
+|---------|------------|-----|
+| range | drag handle to set value | token amounts, delegation splits |
+| progress | read-only, no handle | loading, staking progress (pill can also serve this) |
 
-## composition
+## emotion
 
-- slider inside [[prysm/input]] = amount selector for token operations
-- slider inside [[prysm/bar]] = inline range control
-- slider as progress bar inside [[prysm/display]] = loading or staking progress
+fill color carries [[emotion]]:
+
+| range | color |
+|-------|-------|
+| healthy | #00fe00 (green) |
+| caution | #fcf000 (yellow) |
+| danger | #ff0000 (red) |
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | handle at current position | — |
+| hover | handle scale 1.2× | pointer over handle |
+| dragging | handle follows pointer, fill updates | drag |
+| disabled | gray, no interaction | membrane disabled |
+
+state transitions: $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$
+
+## ECS
+
+- Entity: slider organelle
+- Components:
+  - `Sizing { width: Fill, height: Fix(3) }`
+  - `SliderValue { current, min, max, step }`
+  - `SliderVariant { range | progress }`
+  - `Emotion { color }`
+- System: `SliderDragSystem` reads drag events, updates `SliderValue`, writes fill width

@@ -6,41 +6,93 @@ crystal-domain: cyber
 
 data entry molecule in [[prysm]]
 
-the way users put data into [[cyb]]. every search query, token amount, neuron selection, and text submission flows through this molecule. the input captures keystrokes, validates format, and emits structured data
+the way data enters [[cyb]]. every search query, token amount, neuron selection, and text submission flows through input. glass + text + saber (underline) + ion (icons)
 
-## interface
+## protocol role
 
-- inputs
-	- type: text, neuron, token+amount, select
-	- placeholder: hint text
-	- icon: optional [[prysm/images]] glyph (left, right, or both)
-	- validation: format rules
-	- [[emotion]]: border color reflects validation state — green for valid, red for error, neutral for idle
-- outputs
-	- value change event: emitted on each keystroke
-	- submit event: emitted on enter or button press
-- states
-	- default, focus, filled, error, disabled
+input is a molecule in the element tree $\mathcal{T}$. lives inside [[prysm/mind]] (commander), [[prysm/bar]], and other molecules. not a grid zone
+
+## sizing
+
+| variant | sizing |
+|---------|--------|
+| standard | fill × fix($6g$) |
+| compact | fill × fix($4g$) |
+
+$s_{min} = (10g, 4g)$ — minimum for placeholder text visible
+
+## structure
+
+```
+glass [fill × fix(6g), depth midground]
+  stack horizontal [gap g/2]
+    ion [2g, left icon (optional)]
+    text [body, input text / placeholder]
+    ion [2g, right icon (optional)]
+  saber [horizontal, g/8, underline, emotion glow]
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 20g$): left icon + text + right icon + underline
+- $l_2$ ($w_{min} = 10g$): text + underline only
 
 ## variants
 
-### desktop
-- text L — icon on the left, text to the right. standard search and text input
-- text R — icon on the right. used for inputs with action trigger
-- text LR — icons on both sides. used for complex inputs (search with filter)
-- dropdown — select from a list of options
-- neuron + dropdown — specialized for entering/selecting a [[neuron]] address with dropdown chooser. validates bech32 format
-- token + amount — dual field: token selector + numeric amount. used in [[cyb/sigma]] and [[teleport]]
-- sort/default — sort control input with direction toggle
-- sort/dropdown — sort control with column chooser
+| variant | content | use |
+|---------|---------|-----|
+| text L | icon left, text right | search, general input |
+| text R | text left, icon right | input with action trigger |
+| text LR | icons both sides | search with filter |
+| dropdown | text + chevron icon | select from list |
+| neuron | [[prysm/address]] format, bech32 validation | neuron selector |
+| token + amount | token icon + number | [[cyb/sigma]], [[teleport]] |
 
-### mobile
-- m.-text — mobile text input, full-width
-- m.-logScale — logarithmic scale selector with percentage markers (0%, 2%, 5%, 10%, 20%, 50%, max). used for staking and delegation amounts
+### mobile variants
 
-## composition
+- m.-text: full width, $4g$ height
+- m.-logScale: logarithmic scale selector (0%, 2%, 5%, 10%, 20%, 50%, max) for staking
 
-- input composed of [[prysm/glass]] + [[prysm/text]] + [[prysm/ion]] + [[prysm/button]] (submit) + [[prysm/saber]] (underline)
-- input inside [[prysm/oracle-cell]] = search bar
-- input inside [[prysm/bar]] = inline data entry in toolbars
-- input + [[prysm/adviser]] = validated entry with guidance
+## emotion
+
+saber underline carries input state [[emotion]]:
+
+| state | glow-color |
+|-------|-----------|
+| idle | #ffffff |
+| focus | #00acff (blue) |
+| valid | #00fe00 (green) |
+| error | #ff0000 (red) |
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | placeholder text, saber white | — |
+| focus | cursor visible, saber blue glow | tap on input |
+| typing | text replaces placeholder, saber blue | keystrokes |
+| valid | saber green | validation passed |
+| error | saber red, adviser appears with error message | validation failed |
+| disabled | text gray, no interaction | membrane disabled |
+
+state transitions: $150\text{ms}$ ease
+
+## 3D
+
+input renders at the same $p_z$ as its membrane. faces neuron (billboard)
+
+## ECS
+
+- Entity: input organelle
+- Components:
+  - `Sizing { width: Fill, height: Fix(6) }`
+  - `InputVariant { text_l | text_r | text_lr | dropdown | neuron | token_amount }`
+  - `InputValue { text }`
+  - `InputPlaceholder { text }`
+  - `InputValidation { predicate }`
+  - `SaberGlow { color }` — underline emotion
+  - `FoldSet { conformations }`
+- Systems:
+  - `InputFocusSystem` manages focus, cursor, keyboard
+  - `InputValidationSystem` reads value, runs predicate, writes emotion

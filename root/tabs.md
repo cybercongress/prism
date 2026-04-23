@@ -6,28 +6,60 @@ crystal-domain: cyber
 
 section navigation molecule in [[prysm]]
 
-a horizontal row of selectable items. one is active, the rest wait. tabs switch between sections within an [[aip]] or between [[aip]] applications in the [[prysm/hud]]. the primary way users move laterally through [[cyb]]
+a horizontal row of selectable items. one active, the rest idle. switches between sections within an [[aip]]. glass + ion (per tab) + saber (active underline)
 
-## interface
+## protocol role
 
-- inputs
-	- items: list of (icon, label) pairs — each item is a [[prysm/ion]] in centric layout
-	- active index: which tab is selected
-	- [[emotion]]: highlight color for the active tab
-- outputs
-	- selection event: emitted when user taps an inactive tab
-- states
-	- default, hover (per tab), active (selected tab)
+molecule in $\mathcal{T}$. lives inside space zone, within [[aip]] content
 
-## variants
+## sizing
 
-- 3-items — compact, used in sub-section navigation
-- 4-items — standard [[aip]] navigation
-- 5-items — extended, used for [[aip]] applications with many sections
-- mobile variants: 3-items stacks to bottom bar
+fill × fix($6g$)
 
-## composition
+$s_{min} = (15g, 4g)$ — minimum 3 tabs visible
 
-- tabs composed of [[prysm/ion]] atoms (centric layout) on a [[prysm/glass]] strip with [[prysm/saber]] underline on the active item
-- tabs inside [[prysm/hud]] = global [[aip]] switcher
-- tabs inside cells = section-level navigation
+## structure
+
+```
+glass [fill × fix(6g), depth midground]
+  stack horizontal [gap 0]
+    stack vertical [per tab]
+      ion [2g, tab icon]
+      text [micro, tab label]
+      saber [horizontal, g/4, glow] — active tab only
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 30g$): 5 tabs, icon + label
+- $l_2$ ($w_{min} = 15g$): 3 tabs, icon only
+- $l_3$ ($w_{min} = 8g$, mobile): 3 tabs as bottom bar, icon only
+
+## emotion
+
+active tab saber glow = [[emotion]] of the active section (default #00fe00 green)
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | active tab has saber underline | — |
+| hover | hovered tab text brightens | pointer over tab |
+| active | saber slides to new tab | tap |
+
+state transitions: saber slide $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$
+
+## ECS
+
+- Entity: tabs organelle
+- Components:
+  - `Sizing { width: Fill, height: Fix(6) }`
+  - `TabItems { list of (icon, label, section_id) }`
+  - `ActiveTab { index }`
+  - `FoldSet { conformations }`
+- System: `TabsSystem` handles tap, updates `ActiveTab`, animates saber
