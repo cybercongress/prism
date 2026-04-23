@@ -4,48 +4,73 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-icon-label pair atom in [[prysm]]
+icon atom in [[prysm]]
 
-the most versatile structural atom. combines a [[prysm/images]] glyph with a [[prysm/text]] label into a single semantic unit. used everywhere a concept needs both visual and textual representation
+a single glyph rendered at a fixed size. ion is the visual symbol — an icon that represents a concept, action, or state. when paired with [[prysm/text]] inside a molecule, they form an icon-label unit. but ion itself is only the icon
 
-## parameters
+## protocol role
 
-| parameter | values | default |
-|-----------|--------|---------|
-| icon | [[prysm/images]] glyph name | — (required) |
-| icon-size | 16, 20, 32, 48 px | 16 |
-| label | text string | — (optional) |
-| label-size | body (16px), caption (14px), micro (12px) | caption (14px) |
-| layout | centric, horizontal, input, star, trapezoid, vertical | horizontal |
-| gap | 4, 8 px | 4 |
-| color | any hex from palette | #ffffff |
-| [[emotion]] | overrides color for both icon and label | none |
+ion is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: vector. it has no sub-organelles. its membrane constrains it, it occupies a fixed square, membrane places it
 
-### layouts
+## sizing
 
-| layout | arrangement | icon-label gap | use |
-|--------|-------------|---------------|-----|
-| centric | icon above, label below, center-aligned | 4px | [[prysm/tabs]], grid navigation |
-| horizontal | icon left, label right | 8px | inline items, default layout |
-| input | icon inside field, label as placeholder | 4px | [[prysm/input]] fields |
-| star | icon centered, label as tooltip on hover | 0 (tooltip offset) | compact actions |
-| trapezoid | angled layout, distinctive shape | 4px | [[prysm/hud]] navigation |
-| vertical | label above, icon below | 4px | stat displays |
+all values in spatial quanta $g$
 
-### constraints
+| parameter | sizing type | values | default |
+|-----------|-----------|--------|---------|
+| icon | — | [[prysm/images]] glyph name | required |
+| size | fix | $2g$, $5g/2$, $4g$, $6g$, $12g$ | $2g$ |
+| color | — | #ffffff or [[emotion]] hex | #ffffff |
 
-- icon and label always share the same [[emotion]] color — they are one unit
-- when label is omitted, ion renders as icon-only (icon-size becomes the element size)
-- touch target: min 32x32 px regardless of visual size (padding added as needed)
+### size scale
 
-## variants
+| size | $k \cdot g$ | where in [[prysm/grid]] |
+|------|-----------|------------------------|
+| $2g$ | inline with body text | commander: action icons. space: inline icons |
+| $5g/2$ | standalone small | tabs in bottom row (stars) |
+| $4g$ | medium | context, avatar: zone icons. S, Σ: widget icons |
+| $6g$ | large | space: onboarding, featured content |
+| $12g$ | hero | space: welcome screens |
 
-- centric, horizontal, input, star, trapezoid, vertical (see layouts table)
+## occupy
 
-## composition
+ion occupies a fixed square:
 
-- ion is the building block of [[prysm/tabs]] — each tab is an ion in centric layout
-- ion inside [[prysm/bar]] = labeled toolbar action
-- ion inside [[prysm/button]] = icon-enhanced call-to-action
-- ion + [[prysm/saber]] = the [[prysm/bar]] molecule
-- ion inside [[prysm/content]] = formatted metadata field
+$$s = (size, size)$$
+
+$s_{min} = (2g, 2g)$ — smallest legible icon
+
+touch target: if $size < 4g$, the membrane adds padding to ensure the interactive area is at least $4g \times 4g$. the ion's occupied size does not change — the membrane's placement accounts for touch padding
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | color from palette | — |
+| hover | color shifts to [[emotion]], scale 1.1× for $150\text{ms}$ | pointer over ion |
+| active | color = [[emotion]], scale 0.95× | tap/click |
+| disabled | color dims to #4b4b4d | membrane disabled |
+
+state transitions: $150\text{ms}$ ease
+
+## adaptation
+
+ion size does not change between desktop and mobile. the same $2g$ icon renders on both. when a molecule folds, it may switch to a conformation that uses a smaller or larger ion, but the ion itself does not scale — it snaps to a fixed size from the scale
+
+## 3D
+
+in the 3D extension (§11 of [[prysm/layout]]):
+
+- ion renders at the same $p_z$ as its membrane
+- ion always faces the neuron (billboard) — icons must be recognizable from any angle
+- size in quanta is constant in world space
+
+## ECS
+
+- Entity: ion organelle
+- Components:
+  - `Sizing { width: Fix(size), height: Fix(size) }`
+  - `IonGlyph { name }` — which icon from [[prysm/images]]
+  - `IonSize { token }` — size from scale
+  - `IonColor { color }` — from palette or [[emotion]]
+- System: ion participates in `OccupySystem` as a leaf — returns $(size, size)$

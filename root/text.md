@@ -6,58 +6,98 @@ crystal-domain: cyber
 
 typography atom in [[prysm]]
 
-the only way text appears in [[cyb]]. every word, label, heading, and paragraph renders through this atom. monospace foundation — a single font family across the entire interface. hierarchy comes from size and weight, never from decoration
+the only way text appears in [[cyb]]. monospace foundation — a single font family across the entire interface. hierarchy comes from size and weight, never from decoration
 
-## parameters
+## protocol role
 
-| parameter | values | default |
-|-----------|--------|---------|
-| content | any string | — (required) |
-| size | h1 (32px), h2 (24px), h3 (20px), body (16px), caption (14px), micro (12px) | body (16px) |
-| weight | regular (400), medium (500) | regular |
-| align | left, center, right | left |
-| color | any hex from palette | #ffffff (white) |
-| [[emotion]] | overrides color with emotion hex | none |
-| line-height | 1.0, 1.2, 1.4, 1.6 | 1.4 for paragraph, 1.0 for labels |
-| max-lines | 1, 2, 3, unlimited | unlimited |
-| truncate | ellipsis, clip, none | none |
+text is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: text. it has no sub-organelles. its membrane constrains it, it occupies space based on content and font size, membrane places it
 
-### font
+## sizing
 
-- family: monospace (single family everywhere)
-- no bold. no italic. no underline. no decoration
-- hierarchy only through size and weight
+all values in spatial quanta $g$
+
+| parameter | sizing type | values | default |
+|-----------|-----------|--------|---------|
+| content | — | any string | required |
+| size | fix | h1($4g$), h2($3g$), h3($5g/2$), body($2g$), caption($7g/4$), micro($3g/2$) | body($2g$) |
+| weight | — | regular (400), medium (500) | regular |
+| align | — | left, center, right | left |
+| line-height | — | 1.0, 1.2, 1.4 | 1.4 for paragraph, 1.0 for labels |
+| max-lines | — | 1, 2, 3, unlimited | unlimited |
 
 ### size scale
 
-| token | px | line-height | use |
-|-------|----|-------------|-----|
-| h1 | 32 | 1.2 | page titles, hero numbers |
-| h2 | 24 | 1.2 | section headers |
-| h3 | 20 | 1.2 | subsection headers, card titles |
-| body | 16 | 1.4 | content text, descriptions |
-| caption | 14 | 1.4 | labels, metadata, secondary info |
-| micro | 12 | 1.0 | timestamps, minimal annotations |
+| token | size | line-height | where in [[prysm/grid]] |
+|-------|------|-------------|------------------------|
+| h1 | $4g$ | 1.2 | space: page titles, hero numbers |
+| h2 | $3g$ | 1.2 | space: section headers |
+| h3 | $5g/2$ | 1.2 | space: subsection headers. context, avatar: zone labels |
+| body | $2g$ | 1.4 | space: content text. commander: input text |
+| caption | $7g/4$ | 1.4 | stars, time: labels, metadata. S, Σ: counts |
+| micro | $3g/2$ | 1.0 | time: timestamps. graph: annotations |
 
-### color rules
+### font
 
-- default: #ffffff white on dark backgrounds
-- secondary: #d7d7d7 gray-100 for less important text
-- dim: #777777 gray-300 for placeholders and disabled
-- muted: #4b4b4d gray-500 for ghost text
-- emotion override: text color becomes the [[emotion]] hex when signaling state
+- family: Play (single family everywhere)
+- no bold. no italic. no underline. no decoration
+- hierarchy only through size and weight
 
-## variants
+## occupy
 
-- left — default alignment, used in body content and lists
-- center — used in headings, empty states, and onboarding
-- right — used in numeric columns and [[prysm/counter]]
-- paragraph — multi-line block with line-height 1.4 and 8px spacing between paragraphs
+text occupies space based on content length and font size:
 
-## composition
+$s_w = \text{chars} \cdot \text{char\_width}(size)$
+$s_h = \text{lines} \cdot size \cdot \text{line\_height}$
 
-- text inside [[prysm/button]] = action label
-- text inside [[prysm/ion]] = icon caption
-- text inside [[prysm/counter]] = formatted number
-- text inside [[prysm/display]] = emphasized content
-- text is the most composed atom — every molecule contains at least one
+when $s_w > c_w$ (text exceeds membrane constraint): text wraps to next line, increasing $s_h$. when max-lines reached and content still exceeds: truncate with ellipsis
+
+$s_{min} = (\text{char\_width}(size),\; size \cdot \text{line\_height})$ — one character at current size. below this, text is illegible. for body($2g$) at line-height 1.4: $s_{min} \approx (g, 3g)$
+
+note: text glyph metrics are the one exception to quantum alignment (invariant I5) — character widths are determined by the font, not by $g$
+
+## color
+
+| level | color | use |
+|-------|-------|-----|
+| primary | #ffffff | default on dark backgrounds |
+| secondary | #d7d7d7 | less important text |
+| dim | #777777 | placeholders, disabled |
+| muted | #4b4b4d | ghost text |
+| [[emotion]] | acid palette | overrides color when signaling state |
+
+## states
+
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | color from palette | — |
+| hover | underline appears (for linked text) | pointer over text |
+| active | color shifts to [[emotion]] | tap/click |
+| disabled | color dims to #4b4b4d | membrane disabled |
+| selected | background highlight at 15% opacity of [[emotion]] | text selection |
+
+state transitions: $150\text{ms}$ ease
+
+## adaptation
+
+text size tokens do not change between desktop and mobile. the same body($2g$) renders on both. adaptation happens through the membrane: narrower membrane → text wraps to more lines or molecule folds to a conformation that uses smaller text token
+
+## 3D
+
+in the 3D extension (§11 of [[prysm/layout]]):
+
+- text renders on a plane at the same $p_z$ as its membrane
+- text always faces the neuron (billboard orientation) — legibility requires frontal view
+- text size in quanta is constant in world space. at greater distance from neuron, text appears smaller but remains sharp
+
+## ECS
+
+- Entity: text organelle
+- Components:
+  - `Sizing { width, height }` — computed from content + font size
+  - `TextContent { string }`
+  - `TextSize { token }` — h1, h2, h3, body, caption, micro
+  - `TextWeight { regular | medium }`
+  - `TextAlign { left | center | right }`
+  - `TextColor { color }` — from palette or [[emotion]] override
+  - `MaxLines { n }` — truncation limit
+- System: text participates in `OccupySystem` — computes size from content metrics, respects $c_w$ for wrapping

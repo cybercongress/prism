@@ -4,70 +4,101 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-accent line and divider atom in [[prysm]]
+line atom in [[prysm]]
 
 a thin luminous line. separates, accents, and frames. carries [[emotion]] color through glow
 
-## parameters
+## protocol role
 
-| parameter | type | values | default |
-|-----------|------|--------|---------|
-| orientation | enum | vertical, horizontal | vertical |
-| weight | px | 1, 2 | 1 |
-| length | px | any (snaps to 8px grid) | fills parent |
-| color | hex | #ffffff | #ffffff |
-| glow-color | hex | any [[emotion]] hex, none | none |
-| glow-spread | px | 0, 12, 24 | 0 |
-| glow-direction | enum | inward, outward, both | inward |
+saber is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: vector. it has no sub-organelles. its membrane constrains it, it occupies space, membrane places it
 
-## where it appears
+## sizing
 
-### as button frame
+all values in spatial quanta $g$
 
-- orientation: vertical
-- weight: 2px
-- glow-color: #00fe00 (green) or [[emotion]] of the action
-- glow-spread: 24px
-- glow-direction: inward (toward button center)
-- position: left and right edges of [[prysm/button]]
+| parameter | sizing type | values | default |
+|-----------|-----------|--------|---------|
+| orientation | — | vertical, horizontal | vertical |
+| weight | fix | $g/8$, $g/4$ | $g/8$ (thinnest line) |
+| length | fix or fill | any $k \cdot g$, or fill (membrane's offered dimension) | fill |
+| glow-spread | fix | $0$, $3g/2$, $3g$ | $0$ |
+| glow-direction | — | inward, outward | inward |
+| color | — | #ffffff | #ffffff |
+| glow-color | — | any [[emotion]] hex, none | #ffffff |
 
-### as table row separator
+$s_{min}$: vertical saber $(g/8,\; g)$, horizontal saber $(g,\; g/8)$. weight is always fix (a line does not scale its thickness). length cannot be less than $g$ — below that the line is indistinguishable from noise
 
-- orientation: horizontal
-- weight: 1px
-- glow: none
-- position: between rows in [[prysm/table]], full width of the table
+## occupy
 
-### as hud frame
+for a vertical saber: $s = (\text{weight}, \text{length})$
+for a horizontal saber: $s = (\text{length}, \text{weight})$
 
-- orientation: vertical and horizontal
-- weight: 2px
-- glow-color: #00fe00
-- glow-spread: 12px
-- glow-direction: outward (away from content)
-- position: borders between [[prysm/hud]] zones (sidebar edges, top bar bottom edge)
+when length = fill: saber occupies the full offered dimension of its membrane
 
-### as bar accent
+## where in [[prysm/grid]]
 
-- orientation: vertical
-- weight: 2px
-- glow: none
-- position: left or right edge of [[prysm/bar]], paired with [[prysm/ion]]
+saber appears both as grid zone boundary and inside molecules:
 
-### as content divider
+### grid zones
 
-- orientation: horizontal
-- weight: 1px
-- glow: none
-- position: between content sections inside [[prysm/display]], full width minus padding
+| zone | orientation | weight | glow | glow-spread | glow-direction | role |
+|------|------------|--------|------|-------------|---------------|------|
+| commander | horizontal | $g/4$ | #ffffff | $3g/2$ | outward | input field underline |
+| context / avatar header | horizontal | $g/4$ | #ffffff | $3g/2$ | outward | zone boundary bottom edge |
+| S (sense) | vertical | $g/4$ | #ffffff | $3g/2$ | inward | widget edge accent |
+| Σ (sigma) | vertical | $g/4$ | #ffffff | $3g/2$ | inward | widget edge accent |
 
-### as timeline spine
+### inside molecules
 
-- orientation: vertical
-- weight: 1px
-- glow: none
-- position: center of [[prysm/time-widget]], events attach to left and right
+| context | orientation | weight | glow | glow-spread | glow-direction |
+|---------|------------|--------|------|-------------|---------------|
+| [[prysm/button]] frame | vertical | $g/4$ | [[emotion]] of action | $3g$ | inward |
+| [[prysm/table]] row separator | horizontal | $g/8$ | none | $0$ | — |
+| [[prysm/bar]] accent | vertical | $g/4$ | none | $0$ | — |
+| [[prysm/display]] section divider | horizontal | $g/8$ | none | $0$ | — |
+| [[prysm/time-widget]] timeline spine | vertical | $g/8$ | none | $0$ | — |
+| [[prysm/input]] field underline | horizontal | $g/8$ | [[emotion]] | $3g/2$ | outward |
 
-## mobile
+## states
 
-same parameters. no changes — saber is identical on desktop and mobile
+| state | visual change | trigger |
+|-------|-------------|---------|
+| default | line at color, glow at glow-color | — |
+| hover | glow-spread increases by $g/2$ | pointer near saber (inherited from membrane) |
+| active | glow pulses once | tap/click on membrane containing saber |
+| disabled | color dims to #4b4b4d, no glow | membrane disabled |
+
+state transitions: $150\text{ms}$ ease
+
+## emotion
+
+saber carries [[emotion]] through glow-color. emotion is computed, not assigned
+
+| context | emotion source | effect |
+|---------|---------------|--------|
+| [[prysm/button]] frame | action type | green confirm, red danger, yellow caution, white neutral |
+| commander input underline | input state | green valid, red error, white idle |
+| S, Σ widget edge | widget state | green active, white idle |
+| grid zone border | zone state | reflects zone emotion |
+| [[prysm/table]] separator | — | no emotion (white, no glow) |
+
+## adaptation
+
+saber is identical on desktop and mobile. weight and glow do not change with $\square$. length adapts through fill — it stretches or shrinks with its membrane
+
+## 3D
+
+in the 3D extension (§11 of [[prysm/layout]]):
+
+- saber renders as a line in world space at the same $p_z$ as its membrane
+- glow extends in the xy-plane, not along z
+- saber weight and length unchanged — spatial quantum $g$ is constant in world coordinates
+
+## ECS
+
+- Entity: saber organelle
+- Components:
+  - `Sizing { width, height }` — one dimension fix (weight), other fix or fill (length)
+  - `SaberOrientation { vertical | horizontal }`
+  - `SaberGlow { color: Option<Color>, spread, direction }`
+- System: saber participates in `OccupySystem` as a leaf — returns its size directly from `Sizing`
