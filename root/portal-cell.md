@@ -6,27 +6,85 @@ crystal-domain: cyber
 
 onboarding cell in [[prysm]]
 
-the first screen a new user encounters in [[cyb]]. the portal-cell guides a human from stranger to [[neuron]] — creating an identity, claiming a gift, learning the [[prysm/hud]], and orienting in the [[cybergraph]]. every step is a guided transition from the physical world into the cyber world
+the first screen a new [[neuron]] encounters in [[cyb]]. guides from stranger to neuron — creating identity, claiming gift, learning the interface. every step is a guided transition into the [[cybergraph]]
 
-## regions
+## protocol role
 
-- citizenship — identity creation form. [[prysm/input]] for name/avatar + [[prysm/button]] to generate a [[neuron]] address. [[prysm/adviser]] guides each step
-- gift claim — display of welcome tokens. [[prysm/counter]] shows the gift amount + [[prysm/button]] to claim
-- hud introduction — interactive tour of the [[prysm/hud]] zones. [[prysm/adviser]] tooltips highlight each widget
-- cyb-map — overview of available [[aip]] applications. [[prysm/aip]] cards for each app the neuron can explore
+cell in the element tree $\mathcal{T}$. renders inside space zone of [[prysm/grid]]. a cell composing molecules into the [[cyb/portal]] experience
 
-## interface
+## sizing
 
-- inputs
-	- onboarding state: which step the user is on
-	- [[emotion]]: encouraging green throughout — welcoming the new neuron
-- outputs
-	- citizenship event: neuron created
-	- gift claim event: tokens received
-	- navigate event: proceed to chosen [[aip]]
+fill × fill (occupies entire space zone)
 
-## composition
+## structure
 
-- portal-cell composed of [[prysm/display]] + [[prysm/input]] + [[prysm/button]] + [[prysm/adviser]] + [[prysm/aip]] + [[prysm/counter]]
-- portal-cell renders inside the [[prysm/hud]] content zone
-- portal-cell is the entry point to [[cyb/portal]]
+```
+glass [fill × fill, depth background, overflow scroll]
+  stack vertical [gap 3g, padding 3g]
+    --- step 1: identity ---
+    display [highlight]
+      text [h2, "create your neuron"]
+      input [name/alias]
+      button [confirm, "generate identity"]
+      adviser [bar, green, guidance text]
+    --- step 2: gift ---
+    display [highlight]
+      text [h2, "claim your gift"]
+      counter [gift amount]
+      button [confirm, "claim"]
+    --- step 3: orientation ---
+    display
+      text [body, interface tour]
+      adviser [guidance for each zone]
+    --- step 4: explore ---
+    display
+      text [h2, "explore"]
+      stack horizontal [gap g]
+        aip [oracle card]
+        aip [brain card]
+        aip [sense card]
+        aip [sigma card]
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 40g$): multi-column step layout with side illustrations
+- $l_2$ ($w_{min} = 20g$): single column, steps stacked vertically
+- $l_3$ ($w_{min} = 10g$, mobile): single column, compact padding $g$
+
+## emotion
+
+encouraging green throughout — welcoming the new neuron. adviser messages are positive (green tint)
+
+## states
+
+| state | visual | trigger |
+|-------|--------|---------|
+| step 1 | identity creation form | new neuron, no address |
+| step 2 | gift claim | identity created |
+| step 3 | interface tour | gift claimed |
+| step 4 | aip exploration | tour complete |
+
+## interaction
+
+- fill input + tap button → progress to next step
+- adviser guides each step with contextual hints
+- each step completes with a confirmed action (identity generation, gift claim)
+
+## 3D
+
+portal-cell renders at ambient $p_z$. in 3D, onboarding steps could be positioned as stepping stones approaching the neuron — each completed step brings closer
+
+## ECS
+
+- Entity: portal-cell organelle
+- Components:
+  - `Sizing { width: Fill, height: Fill }`
+  - `Overflow { scroll }`
+  - `FoldSet { conformations }`
+  - `OnboardingStep { current: 1..4 }`
+- Systems:
+  - `PortalStepSystem` manages step progression
+  - `PortalIdentitySystem` handles neuron creation
+  - `PortalGiftSystem` handles gift claim
