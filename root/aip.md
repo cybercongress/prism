@@ -4,78 +4,95 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-entity card molecule in [[prysm]]
+application molecule in [[prysm]]
 
-the universal card for any entity in the [[cybergraph]] — a [[particle]], [[neuron]], or [[aip]]. shows identity, metadata, and available actions in a compact format
+the [[aip]] icon in the top-left corner of [[prysm/grid]] (inside [[prysm/context]] zone). by default shows the active application icon. tap opens a dropdown menu listing available applications — each item is an icon + text label. menu extends down from the icon, max length to the middle of the screen
 
 ## protocol role
 
-molecule in $\mathcal{T}$. lives inside space zone content, search results, [[prysm/oracle-cell]], feeds
+aip is a molecule in the element tree $\mathcal{T}$. lives inside [[prysm/context]] zone. the icon is always visible. the menu is an overlay at $\mathcal{U} = 30$ (interrupting)
 
 ## sizing
 
-fill × auto
+| element | sizing |
+|---------|--------|
+| icon (collapsed) | fix($4g$) × fix($4g$) |
+| menu (expanded) | fix($25g$) × auto, max height = $\square_h / 2$ |
 
-$s_{min} = (10g, 4g)$
+$s_{min} = (4g, 4g)$ — icon only
 
 ## structure
 
-2-line:
+collapsed (default):
 ```
-glass [fill × auto, depth midground]
-  stack horizontal [gap g]
-    ion [4g, entity icon]
-    stack vertical
-      text [body, title]
-      text [caption, subtitle]
+ion [4g, active aip icon]
 ```
 
-3-line:
+expanded (on tap):
 ```
-glass [fill × auto, depth midground]
-  stack horizontal [gap g]
-    ion [4g, entity icon]
-    stack vertical
-      text [body, title]
-      text [caption, subtitle]
-      text [micro, description]
-    toggle [star, favorite]
+glass [fix(25g) × auto, depth foreground, max height square_h/2, overflow scroll]
+  stack vertical [gap g/2]
+    stack horizontal [gap g]
+      ion [2g, oracle icon]
+      text [body, "Oracle"]
+    stack horizontal [gap g]
+      ion [2g, brain icon]
+      text [body, "Brain"]
+    stack horizontal [gap g]
+      ion [2g, portal icon]
+      text [body, "Portal"]
+    stack horizontal [gap g]
+      ion [2g, sense icon]
+      text [body, "Sense"]
+    stack horizontal [gap g]
+      ion [2g, sigma icon]
+      text [body, "Sigma"]
+    ...
 ```
 
 ## fold
 
-$\mathcal{F}$:
-- $l_1$ ($w_{min} = 25g$): 3-line + star + context menu
-- $l_2$ ($w_{min} = 15g$): 2-line
-- $l_3$ ($w_{min} = 6g$): icon + title only
+aip does not fold — icon is always $4g$ × $4g$. menu appears/disappears, does not fold
 
 ## emotion
 
-glass accent from entity [[cyberank]]: high-confidence = green, low = neutral
+active aip icon can carry [[emotion]] reflecting the aip's state (e.g. sense icon glows when unread messages). inactive items in menu are neutral
 
 ## states
 
 | state | visual | trigger |
 |-------|--------|---------|
-| default | card visible | — |
-| hover | glass opacity +0.1, menu trigger appears | pointer over |
-| expanded | context menu (link, stake, share) visible | tap menu trigger |
-| active | navigate to entity | tap card |
+| collapsed | icon only | default |
+| expanded | menu drops down from icon | tap on icon |
+| hover (menu item) | item text brightens | pointer over item |
+| active (menu item) | navigate to selected aip | tap on item |
 
-state transitions: $150\text{ms}$ ease
+state transitions: menu slide down $150\text{ms}$ ease
+
+## interaction
+
+- tap icon → toggle menu (expand/collapse)
+- tap menu item → navigate to that [[aip]], menu closes
+- tap outside menu → close menu
+- active aip is highlighted in menu list
+
+## where in [[prysm/grid]]
+
+inside [[prysm/context]] zone (row 1, col 1). icon is part of context. menu is overlay at z: 30, drops down from context zone
 
 ## 3D
 
-renders at membrane's $p_z$. gravity determines depth — high-focus entities are closer to neuron
+icon renders at frame $p_z$ ($\mathcal{U} = 10$). menu renders at interrupting $p_z$ ($\mathcal{U} = 30$) — closer to neuron than frame
 
 ## ECS
 
-- Entity: aip card organelle
+- Entity: aip organelle
 - Components:
-  - `Sizing { width: Fill, height: auto }`
-  - `AipEntity { type, cid, title, subtitle, icon }`
-  - `FoldSet { conformations }`
-  - `Emotion { accent_color }` — from cyberank
-  - `ToggleStar { favorited }`
-  - `TapAction { navigate_to }`
-- System: `AipCardSystem` reads entity data, writes components
+  - `Sizing { width: Fix(4), height: Fix(4) }` — icon
+  - `AipList { list of (aip_id, icon, label) }` — available applications
+  - `ActiveAip { aip_id }` — currently active
+  - `Visibility { collapsed | expanded }` — menu state
+  - `Emotion { color }` — from active aip state
+- Systems:
+  - `AipMenuSystem` handles tap to toggle, tap on item to navigate
+  - `AipEmotionSystem` reads aip states, writes icon emotion

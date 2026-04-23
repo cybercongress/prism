@@ -41,7 +41,7 @@ each bech32 character maps to a color and a musical note:
 | color | note | characters |
 |-------|------|-----------|
 | #00fe00 green | E3 | a, g, l, m, s |
-| #00acff blue | G3, B3 | b, d, f, h, j, n, p, r, t, v |
+| #00acff blue | G3 | b, d, f, h, j, n, p, r, t, v |
 | #304ffe indigo | A3 | c, i, o, u |
 | #d500f9 violet | D3 | e, k, q, w |
 | #fcf000 yellow | B2 | x, z |

@@ -46,7 +46,7 @@ glass [fill × fix(6g), depth midground]
 
 $\mathcal{F}$:
 - $l_1$ ($w_{min} = 25g$): big — avatar + name + address + karma + rank
-- $l_2$ ($w_{min} = 15g$): small — avatar + name + karma
+- $l_2$ ($w_{min} = 15g$): small — avatar + name + rank
 - $l_3$ ($w_{min} = 6g$): avatar image only
 
 ## emotion

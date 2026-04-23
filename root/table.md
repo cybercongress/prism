@@ -40,7 +40,7 @@ grid [fill × auto, col-gap g, row-gap 0]
 $\mathcal{F}$:
 - $l_1$ ($w_{min} = 40g$): all columns visible
 - $l_2$ ($w_{min} = 20g$): primary + secondary columns
-- $l_3$ ($w_{min} = 10g$): primary column only, horizontal scroll for rest
+- $l_3$ ($w_{min} = 10g$): primary column only. if horizontal scroll needed: left column and top row stay fixed (pinned) — never lose reference
 
 ## alignment rules
 
