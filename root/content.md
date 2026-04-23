@@ -6,36 +6,67 @@ crystal-domain: cyber
 
 [[particle]] renderer molecule in [[prysm]]
 
-the universal content display. any [[particle]] in the [[cybergraph]] — text, image, video, audio, pdf, 3d model — passes through this molecule to become visible. content adapts its rendering to the particle format while keeping a consistent frame
+the universal content display. any [[particle]] — text, image, video, audio — passes through content to become visible. adapts rendering to the particle format while keeping a consistent frame
 
-## interface
+## protocol role
 
-- inputs
-	- particle: the content to render (IPFS hash or inline data)
-	- format: heading, text, number, link, picture, video, pdf, audio, avatar
-	- [[emotion]]: color accent
-- outputs
-	- navigate event: tap a link particle
-	- expand event: open particle in full view
-	- [[cyberlink]] event: when interaction creates a link
-- states
-	- loading, rendered, error, empty
+molecule in $\mathcal{T}$. lives inside space zone, [[prysm/display]], [[prysm/oracle-cell]]
 
-## variants
+## sizing
 
-- heading — large [[prysm/text]] with optional [[prysm/images]] icon
-- text + icon-L — text body with icon on the left
-- text + icon-R — text body with icon on the right
-- text + icon-LR — text body with icons on both sides
-- number + indicator — numeric value with [[prysm/indicator]] fill bar
-- value-change — numeric value with delta indicator (green up / red down). used for balance changes, karma shifts, price movement
-- date — timestamp display. UTC 0, year counted from Unix epoch (1970-01-01 — year 0 of machine time). relative ("2h ago") or absolute ("56.03.29" = March 29, year 56)
-- star-indicator — rating or quality score as star fill. used for content relevance in [[cyb/oracle]]
-- picture — image with aspect-ratio container
-- video, audio, pdf — embedded players
+fill × auto (content-determined height)
 
-## composition
+$s_{min} = (8g, 2g)$
 
-- content inside [[prysm/oracle-cell]] = search result feed
-- content inside [[prysm/display]] = framed content block
-- content is composed of [[prysm/text]] + [[prysm/images]] + [[prysm/ion]] + [[prysm/indicator]]
+## structure
+
+depends on particle format:
+
+| format | structure |
+|--------|----------|
+| heading | text [h1/h2/h3] + optional ion |
+| text + icon-L | ion left + text right |
+| text + icon-R | text left + ion right |
+| text + icon-LR | ion + text + ion |
+| number + change | counter molecule |
+| date | text [micro, machine time format: "56.03.29" or "2h ago"] |
+| value-change | text [number] + saber [change indicator] + pill [delta, emotion] |
+| star-indicator | ion [star] × fill level |
+| picture | raster leaf [image, scale to fit] |
+| video | raster leaf [video frame] + button [play] |
+| audio | ion [waveform] + button [play] + slider [progress] |
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 25g$): full format with icons and details
+- $l_2$ ($w_{min} = 10g$): text only, truncated
+- $l_3$ ($w_{min} = 4g$): icon indicating particle type
+
+## emotion
+
+content carries [[emotion]] from [[cyberank]] of the particle: high-confidence results = green accent, low = neutral
+
+## states
+
+| state | visual | trigger |
+|-------|--------|---------|
+| loading | skeleton placeholder | fetching particle |
+| rendered | content visible | loaded |
+| error | red adviser message | load failed |
+| empty | dim text "no content" | particle has no data |
+
+## 3D
+
+renders at membrane's $p_z$. image/video particles face neuron (billboard)
+
+## ECS
+
+- Entity: content organelle
+- Components:
+  - `Sizing { width: Fill, height: auto }`
+  - `ParticleCid { cid }` — content address
+  - `ParticleFormat { heading | text | image | video | audio | ... }`
+  - `FoldSet { conformations }`
+  - `Emotion { color }` — from cyberank
+- System: `ContentRenderSystem` reads `ParticleCid`, determines format, spawns appropriate leaf organelles

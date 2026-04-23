@@ -4,31 +4,65 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-content container molecule in [[prysm]]
+content frame molecule in [[prysm]]
 
-a [[prysm/glass]] pane that frames content with optional emphasis. the display gives content a visual home — a bordered, highlighted, or empty region that draws attention or indicates absence
+a [[prysm/glass]] pane that frames content with optional emphasis. gives content a visual home — a bordered, highlighted, or empty region
 
-## interface
+## protocol role
 
-- inputs
-	- content: child components to render inside
-	- emphasis: none, highlight, sized
-	- [[emotion]]: tint for the glass surface
-- outputs
-	- display only — interaction comes from child components
-- states
-	- default, empty, highlighted
+molecule in $\mathcal{T}$. lives inside space zone. display = glass membrane for content organelles
+
+## sizing
+
+fill × auto (content-determined)
+
+$s_{min} = (10g, 4g)$
+
+## structure
+
+```
+glass [fill × auto, depth midground, optional emotion tint]
+  saber [vertical, g/4, left edge] — accent
+  stack vertical [gap g, padding 2g]
+    content organelles
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 30g$): saber accent + full content + padding
+- $l_2$ ($w_{min} = 10g$): content only, reduced padding $g$
 
 ## variants
 
-- empty — shows a placeholder message and percentage (e.g. 0.62% filled). signals that content can be added
-- highlight — emphasized glass pane with [[emotion]] tint. used for featured content, important numbers, and call-to-action regions
-- highlight 2-lines — two-line highlighted block for titles with subtitles
-- sized text — content with explicit font size override for emphasis
+| variant | visual | use |
+|---------|--------|-----|
+| empty | dim text "0.62%" or placeholder | content can be added |
+| highlight | emotion tint on glass | featured content |
+| highlight 2-line | emotion tint + title + subtitle | headers with emphasis |
 
-## composition
+## emotion
 
-- display composed of [[prysm/glass]] + [[prysm/text]] + [[prysm/saber]] border
-- display inside [[prysm/oracle-cell]] = featured search result
-- display inside [[prysm/portal-cell]] = onboarding highlight
-- display wraps [[prysm/content]], [[prysm/counter]], or [[prysm/indicator]] for visual emphasis
+glass tint = [[emotion]] of the content inside. default: no tint (neutral)
+
+## states
+
+| state | visual | trigger |
+|-------|--------|---------|
+| default | neutral glass | — |
+| highlighted | emotion tint | content is featured |
+| empty | dim placeholder | no content |
+
+## 3D
+
+renders at membrane's $p_z$
+
+## ECS
+
+- Entity: display organelle
+- Components:
+  - `Sizing { width: Fill, height: auto }`
+  - `DisplayVariant { empty | highlight | highlight_2line }`
+  - `Tint { emotion: Option<Color> }`
+  - `FoldSet { conformations }`
+- System: `DisplaySystem` manages variant and tint based on content state

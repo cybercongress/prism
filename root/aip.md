@@ -4,32 +4,78 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-aip card molecule in [[prysm]]
+entity card molecule in [[prysm]]
 
-the universal card for any entity in the [[cybergraph]] — a [[particle]], [[neuron]], [[cyb/avatar]], or [[aip]]. the aip card shows identity, metadata, and available actions in a compact rectangular format
+the universal card for any entity in the [[cybergraph]] — a [[particle]], [[neuron]], or [[aip]]. shows identity, metadata, and available actions in a compact format
 
-## interface
+## protocol role
 
-- inputs
-	- entity: the item to display (type, name, description, icon, metrics)
-	- [[emotion]]: accent color based on entity state or relevance
-	- menu: list of available actions (optional)
-- outputs
-	- navigate event: open entity detail view
-	- action event: from menu items
-	- [[cyberlink]] event: link to this entity
-- states
-	- default, hover (show menu trigger), expanded (menu open)
+molecule in $\mathcal{T}$. lives inside space zone content, search results, [[prysm/oracle-cell]], feeds
 
-## variants
+## sizing
 
-- 2-line — icon + title + subtitle. compact, used in lists and feeds
-- 3-line — icon + title + subtitle + description. richer, used in search results
-- 3-line + menu — adds a context menu with actions (link, stake, share, report)
+fill × auto
 
-## composition
+$s_{min} = (10g, 4g)$
 
-- aip card composed of [[prysm/glass]] + [[prysm/ion]] + [[prysm/text]] + [[prysm/toggle]] (star favorite) + [[prysm/button]] (menu)
-- aip card inside [[prysm/oracle-cell]] = search result item
-- aip card inside [[prysm/table]] = rich row with entity details
-- aip card inside feeds = content stream item
+## structure
+
+2-line:
+```
+glass [fill × auto, depth midground]
+  stack horizontal [gap g]
+    ion [4g, entity icon]
+    stack vertical
+      text [body, title]
+      text [caption, subtitle]
+```
+
+3-line:
+```
+glass [fill × auto, depth midground]
+  stack horizontal [gap g]
+    ion [4g, entity icon]
+    stack vertical
+      text [body, title]
+      text [caption, subtitle]
+      text [micro, description]
+    toggle [star, favorite]
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 25g$): 3-line + star + context menu
+- $l_2$ ($w_{min} = 15g$): 2-line
+- $l_3$ ($w_{min} = 6g$): icon + title only
+
+## emotion
+
+glass accent from entity [[cyberank]]: high-confidence = green, low = neutral
+
+## states
+
+| state | visual | trigger |
+|-------|--------|---------|
+| default | card visible | — |
+| hover | glass opacity +0.1, menu trigger appears | pointer over |
+| expanded | context menu (link, stake, share) visible | tap menu trigger |
+| active | navigate to entity | tap card |
+
+state transitions: $150\text{ms}$ ease
+
+## 3D
+
+renders at membrane's $p_z$. gravity determines depth — high-focus entities are closer to neuron
+
+## ECS
+
+- Entity: aip card organelle
+- Components:
+  - `Sizing { width: Fill, height: auto }`
+  - `AipEntity { type, cid, title, subtitle, icon }`
+  - `FoldSet { conformations }`
+  - `Emotion { accent_color }` — from cyberank
+  - `ToggleStar { favorited }`
+  - `TapAction { navigate_to }`
+- System: `AipCardSystem` reads entity data, writes components

@@ -6,56 +6,96 @@ crystal-domain: cyber
 
 data grid molecule in [[prysm]]
 
-structured rows and columns for displaying lists, rankings, transactions, and delegation data. the table renders the [[cybergraph]] as ordered information — neurons sorted by [[karma]], particles sorted by [[cyberank]], tokens sorted by balance
+structured rows and columns. renders the [[cybergraph]] as ordered information — neurons by [[karma]], particles by [[cyberank]], tokens by balance. a grid IS a table (§6.2 of [[prysm/layout]])
 
-## interface
+## protocol role
 
-- inputs
-	- columns: list of (label, width, alignment, sortable)
-	- rows: list of cell values
-	- sort: active column and direction
-	- [[emotion]]: row-level accent (e.g. green for positive balance changes)
-- outputs
-	- sort event: emitted when user taps a sortable column header
-	- row select event: emitted on row tap
-	- navigate event: emitted when a linked cell is tapped
-- states
-	- default, sorted (ascending/descending), loading, empty
+molecule in $\mathcal{T}$. container type = grid (2D lattice). lives inside space zone. supports filter and sort operations before layout pass
 
-## variants
+## sizing
 
-### row molecules
-- line — minimal, single-line rows separated by [[prysm/saber]]. used for simple lists
-- row-L — icon/label on the left, value on the right. used for key-value displays
-- row-R — value on the left, action on the right. used for transaction lists
-- list-row-16gutter — list row with 16px gutter spacing
-- list-row-8gutter — compact list row with 8px gutter
-- list-row-8gutter-R — compact row, right-aligned values
+fill × auto (rows determine height)
 
-### cell-level table components (2-cells/tables)
-- table-header — column header row with sort controls
-- table-legend — column count variants: 2-col, 3-col, 4-col, 5-col
-- table-scroll — scrollable table body with fixed header
-- table-sub-group — grouped rows with avatar: 2-col through 5-col, token variant
-- table-sub-sub-group — nested row grouping
-- receipt-closed — collapsed transaction receipt row
-- receipt-open — expanded transaction receipt with full details
+$s_{min} = (15g, 6g)$ — header + one row
 
-### sort
-- sort — column headers with sort indicators
-- sort/dropdown — sortable headers with dropdown for additional options
+## structure
+
+```
+grid [fill × auto, col-gap g, row-gap 0]
+  --- header row ---
+  stack horizontal
+    text [caption, column 1 label]
+    text [caption, column 2 label, right-aligned if numeric]
+    ...
+  saber [horizontal, g/8, full width]
+  --- data rows ---
+  stack horizontal [per row]
+    text/ion/counter [cell values]
+  saber [horizontal, g/8] — row separator
+  ...
+```
+
+## fold
+
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 40g$): all columns visible
+- $l_2$ ($w_{min} = 20g$): primary + secondary columns
+- $l_3$ ($w_{min} = 10g$): primary column only, horizontal scroll for rest
 
 ## alignment rules
 
-- numeric columns: right-aligned. digits stack by place value so thousands, millions, decimals read as a visual column
+- numeric columns: right-aligned. digits stack by place value
 - text columns: left-aligned
-- icon/avatar columns: center-aligned
-- column headers inherit alignment from their data column
-- mixed columns (text + number): left-align, but monospace ensures digits still read consistently
+- icon columns: center-aligned
+- headers inherit alignment from data column
 
-## composition
+## filter and sort
 
-- table composed of [[prysm/text]] + [[prysm/saber]] (row dividers) + [[prysm/ion]] (cell content) + [[prysm/counter]] (numeric cells)
-- table inside [[prysm/cyberver-cell]] = learner rankings and faculty stats
-- table inside [[cyb/sigma]] = token balances and transaction history
-- table inside [[prysm/oracle-cell]] = structured search results
+from §6.2 of [[prysm/layout]]:
+
+filter: predicate $f: row \to \{\text{true}, \text{false}\}$. hidden rows get $s_h = 0$
+sort: ordering $\sigma$ on rows. changes placement, not sizing
+
+both applied before layout pass. ECS: `GridFilter`, `GridSort`, `FilterSortSystem`
+
+## variants
+
+| variant | structure | use |
+|---------|----------|-----|
+| line | single-line rows, saber separators | simple lists |
+| row-L | icon/label left, value right | key-value displays |
+| row-R | value left, action right | transaction lists |
+| row-8gutter | compact $g$ gutter | dense data |
+| row-16gutter | standard $2g$ gutter | normal data |
+
+## emotion
+
+row-level accent: green for positive balance changes, red for negative. header: neutral
+
+## states
+
+| state | visual | trigger |
+|-------|--------|---------|
+| default | data visible | — |
+| sorted | sort icon on active column | tap column header |
+| loading | skeleton rows | fetching |
+| empty | dim text "no data" | empty result set |
+
+## 3D
+
+renders at membrane's $p_z$
+
+## ECS
+
+- Entity: table organelle
+- Components:
+  - `Sizing { width: Fill, height: auto }`
+  - `Grid { cols, rows, areas, col_gap, row_gap }`
+  - `TableColumns { list of (label, width, align, sortable) }`
+  - `TableRows { list of row data }`
+  - `GridFilter { predicate }`
+  - `GridSort { ordering }`
+  - `FoldSet { conformations }`
+- Systems:
+  - `FilterSortSystem` applies filter + sort before layout
+  - `TableRenderSystem` spawns row organelles from data

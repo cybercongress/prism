@@ -4,65 +4,87 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-[[neuron]] address display molecule in [[prysm]]
+[[neuron]] identity display molecule in [[prysm]]
 
-renders the cryptographic identity of a [[neuron]]. the address is a bech32 string with a hash-bar visualization — a unique colorful waveform derived from the address bytes. text and bars flow together without gaps: `bostrom1|||||||||vug5`
+renders the cryptographic identity of a [[neuron]]. bech32 address with hash-bar visualization — a unique colorful waveform derived from the address bytes. text and bars flow together: `bostrom1|||||||||vug5`. click to hear the address melody
 
-## hash-bar visualization
+## protocol role
 
-each character of the address maps to a colored bar and a musical note. the address is both visible and audible — a unique waveform and a unique melody
+molecule in $\mathcal{T}$. lives inside [[prysm/neuron-card]], [[prysm/avatar]], [[prysm/table]], space zone content
 
-bars are 3px wide, arranged in two mirrored rows growing up and down from a center line. bar height encodes character frequency (common letters = tall, rare = short). text and bars flow together without gaps
+## sizing
 
-big variant: prefix + all address bars + suffix
-small variant: truncated prefix + subset of bars + truncated suffix
+| variant | sizing |
+|---------|--------|
+| big | fill × fix($2g$) |
+| small | auto × fix($2g$) |
 
-## character mapping
+$s_{min}$: big = $(15g, 2g)$. small = $(8g, 2g)$
 
-each bech32 character belongs to one of 7 color-note groups:
+## structure
 
-| color | note | characters | gain |
-|-------|------|------------|------|
-| #00fe00 green | E3 | a, g, l, m, s | 1.0 → 0.4 |
-| #00acff blue | G3 | b, h, n, t | 1.0 → 0.4 |
-| #304ffe indigo | A3 | c, i, o, u | 1.0 → 0.4 |
-| #00acff blue | B3 | d, f, j, p, r, v | 1.0 → 0.5 |
-| #d500f9 violet | D3 | e, k, q, w | 1.0 → 0.4 |
-| #fcf000 yellow | B2 | x, z | 0.7 → 0.6 |
-| #ff5b00 orange | F#3 | y | 0.7 |
-| #777777 gray | sustain (pause) | 0-9 | — |
+```
+stack horizontal [gap 0]
+  text [caption, prefix "bostrom1"]
+  --- hash bars (32 for big, 12 for small) ---
+  glass [fix(3) × fix(bar_height), emotion color] × n_bars — upper row
+  glass [fix(3) × fix(bar_height), emotion color] × n_bars — lower row (mirrored)
+  text [caption, suffix "vug5"]
+```
 
-gain decreases with bar height — tall bars are loud, short bars are quiet. digits produce no note (sustain), extending the previous note duration from 16th to quarter note — creating rhythmic pauses in the melody
+bars: 3 units wide, 1 unit gap. height 1-6 units per bar (encodes byte value). mirrored up/down from center line
+
+## character-color-note mapping
+
+each bech32 character maps to a color and a musical note:
+
+| color | note | characters |
+|-------|------|-----------|
+| #00fe00 green | E3 | a, g, l, m, s |
+| #00acff blue | G3, B3 | b, d, f, h, j, n, p, r, t, v |
+| #304ffe indigo | A3 | c, i, o, u |
+| #d500f9 violet | D3 | e, k, q, w |
+| #fcf000 yellow | B2 | x, z |
+| #ff5b00 orange | F#3 | y |
+| #777777 gray | sustain | 0-9 |
 
 ## sound
 
-click on an address to hear it. each character plays its note sequentially (0.2s per note) over a pad drone (E3). the melody is deterministic — the same address always sounds the same. neurons recognize familiar addresses by ear
+click address → each character plays its note sequentially ($0.2\text{s}$ per note) over a pad drone (E3). the melody is deterministic — same address always sounds the same
 
-the sound is synthesized with Tone.js using sampled lead and pad instruments
+## fold
 
-## interface
+$\mathcal{F}$:
+- $l_1$ ($w_{min} = 25g$): big — full address + 32 bar pairs
+- $l_2$ ($w_{min} = 8g$): small — truncated prefix + 12 bar pairs + truncated suffix
 
-- inputs
-	- address: bech32 string (e.g. bostrom1...)
-	- [[emotion]]: border accent — green for own address, neutral for others
-	- copyable: whether tap copies to clipboard
-- outputs
-	- copy event: emitted on tap when copyable
-	- navigate event: open neuron profile
-- states
-	- default, hover (copy icon revealed), active
+## emotion
 
-## variants
+address border: green for own address, white for others
 
-- big — full address: prefix (e.g. "bostrom1") + 32 hash-bar pairs + suffix (e.g. "vug5"). used in [[prysm/neuron-card]] and profile headers
-- big-hover — copy icon appears on hover
-- big-play — action indicator for interactive contexts
-- small — truncated: short prefix (e.g. "bos1q") + 12 hash-bar pairs + short suffix (e.g. "8kp"). used inline in [[prysm/aip]], [[prysm/table]], and feeds
-- small-hover — copy icon on hover
+## states
 
-## composition
+| state | visual | trigger |
+|-------|--------|---------|
+| default | bars + text visible | — |
+| hover | copy icon appears, bars blink sequentially | pointer over |
+| playing | bars animate with notes | click |
 
-- address inside [[prysm/neuron-card]] = identity anchor
-- address inside [[prysm/avatar]] = compact identity reference
-- address inside [[prysm/table]] = row identifier for neuron lists
-- the hash-bar pattern is the visual signature of identity across [[cyb]] — when a neuron sees a familiar waveform, recognition is instant
+state transitions: $150\text{ms}$ ease. sound: $0.2\text{s}$ per note
+
+## 3D
+
+renders at membrane's $p_z$. faces neuron (billboard)
+
+## ECS
+
+- Entity: address organelle
+- Components:
+  - `Sizing { width, height: Fix(2) }`
+  - `AddressVariant { big | small }`
+  - `AddressValue { bech32_string }`
+  - `AddressBars { list of (color, height) }` — computed from characters
+  - `FoldSet { conformations }`
+- Systems:
+  - `AddressBarSystem` computes bar colors and heights from address string
+  - `AddressSoundSystem` plays melody on click
