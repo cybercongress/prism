@@ -54,7 +54,7 @@ content carries [[emotion]] from [[cyberank]] of the particle: high-confidence r
 | loading | skeleton placeholder | fetching particle |
 | rendered | content visible | loaded |
 | error | red adviser message | load failed |
-| empty | dim text "no content" | particle has no data |
+| seed | particle CID visible as [[prysm/address]] hash bars | no cyberlinks to this particle yet — it exists as a seed |
 
 ## 3D
 
