@@ -614,7 +614,7 @@ ECS: `Gravity { focus: f64 }` component. `GravitateSystem` reads `Gravity`, writ
 
 ---
 
-## 12a. system execution order
+## 13. system execution order
 
 the layout protocol maps to a directed acyclic graph of ECS systems. the DAG defines the exact execution order — no system runs before its dependencies complete
 
@@ -644,7 +644,7 @@ FilterSortSystem ──► ConstrainSystem ──► OccupySystem ──► Fold
                                                ┌─────────────┼─────────────┐
                                                ▼             ▼             ▼
                                         CssRenderSystem  BevyUiRender  Ren3dRender
-                                           (§13)          (§13)         (§13)
+                                           (§14)          (§14)         (§14)
 ```
 
 | stage | systems | reads | writes |
@@ -664,7 +664,7 @@ stages 1-1 (EmotionSystem and FilterSortSystem) run in parallel — no data depe
 
 ---
 
-## 13. renderers
+## 14. renderers
 
 the layout function outputs $\{(e_i, p_{x_i}, p_{y_i}, s_{w_i}, s_{h_i}, z_i)\}$. renderers consume coordinates:
 
@@ -677,7 +677,7 @@ the layout function outputs $\{(e_i, p_{x_i}, p_{y_i}, s_{w_i}, s_{h_i}, z_i)\}$
 
 ---
 
-## 14. validation
+## 15. validation
 
 the protocol is validated by [[cyb]] at cyb.ai — the live interface to the [[cybergraph]]
 
@@ -697,7 +697,7 @@ every screen in [[cyb]] is an element tree computed by this protocol. invariants
 
 ---
 
-## 15. motion
+## 16. motion
 
 motion is convention, not axiom. the protocol computes static coordinates — motion is how the renderer transitions between two successive layout computations
 
@@ -729,7 +729,7 @@ ECS: `MotionState { s_0, s_1, t_start }` component. `MotionSystem` reads `Positi
 
 ---
 
-## 16. accessibility
+## 17. accessibility
 
 the protocol outputs spatial coordinates. accessibility requires semantic annotation: what each organelle means, not where it is
 
@@ -773,7 +773,7 @@ $$\forall e_i:\; \text{role}(e_i) \in \{\text{navigation}, \text{action}, \text{
 
 ---
 
-## 17. open problems
+## 18. open problems
 
 1. **completeness proof for {stack, grid, layer}.** can grid-with-spans express all non-overlapping rectangular partitions? Kozminski & Kinnen (1988) proved that pure slicing (recursive horizontal/vertical cuts) cannot produce all rectangular partitions — some require T-junctions that slicing cannot create. grid-with-spans handles T-junctions by allowing cells to span multiple rows/columns. the conjecture: grid-with-spans is complete for the class of rectangular partitions that arise in UI layout (where cells are axis-aligned and non-overlapping). a proof would require showing that every rectangular dual graph has a valid grid assignment with integer spans. Felsner & Nathenson (2022) show existence of area-universal representations for all rectangular layouts — the gap is connecting their representation to grid-with-spans specifically
 
@@ -787,12 +787,13 @@ $$\forall e_i:\; \text{role}(e_i) \in \{\text{navigation}, \text{action}, \text{
 
 ---
 
-## 18. scope and catalog
+## 19. scope and catalog
 
 this paper defines spatial placement: how elements are sized and positioned. it depends on nothing above it. everything visible depends on it
 
 companion specifications:
 - [[prysm/emotion]] — the emotion function: how protocol state maps to color
-- [[prysm]] component catalog — atoms, molecules, cells, fold sets, visual parameters, interaction rules
+- [[prysm/interaction]] — the interaction protocol: how input events produce state transitions
+- [[prysm]] component catalog — atoms, molecules, cells, fold sets, visual parameters
 
 this paper does not define what elements exist, how they look, or how they behave. those definitions live in the companion specifications above
