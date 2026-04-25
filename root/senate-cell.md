@@ -81,6 +81,22 @@ $\mathcal{F}$:
 | proposal detail | expanded proposal with full description + vote buttons | tap on card |
 | voting | vote options in commander (Yes, No, Abstain, NoWithVeto) | tap vote on active proposal |
 | loading | skeleton cards | fetching proposals |
+| creating | proposal creation form | tap "Create proposal" |
+
+### create proposal
+
+```
+glass [fill × fill, depth background]
+  stack vertical [gap 2g, padding 3g]
+    text [h2, "Create proposal"]
+    input [text, placeholder "title", with saber underline]
+    input [text, placeholder "description", multiline, with saber underline]
+    glass [fill × auto, depth midground, padding 2g]
+      text [body, "only text proposals are supported at the moment"]
+      text [body, "if need different, "] + text [body, green, "contact devs"] + text [body, " or "] + text [body, green, "use CLI"]
+```
+
+commander: "Submit" button
 
 ### proposal detail (on tap card)
 
