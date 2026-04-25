@@ -116,6 +116,7 @@ testable constraints. the layout is not ready until all pass
 | I6 | z monotonicity | $\mathcal{U}(a) > \mathcal{U}(b) \;\Rightarrow\; z(a) > z(b)$ |
 | I7 | fold legibility | $\forall$ molecule $m$ with fold set $\mathcal{F}_m$: $l_k$ renders legibly at $w_{min}(l_k)$ |
 | I8 | renderer independence | output identical across all target renderers |
+| I9 | semantic completeness | $\forall e_i:\; \text{role}(e_i) \in \{\text{interactive}\} \;\Rightarrow\; \text{label}(e_i) \neq \emptyset$ |
 
 ---
 
@@ -613,6 +614,56 @@ ECS: `Gravity { focus: f64 }` component. `GravitateSystem` reads `Gravity`, writ
 
 ---
 
+## 12a. system execution order
+
+the layout protocol maps to a directed acyclic graph of ECS systems. the DAG defines the exact execution order — no system runs before its dependencies complete
+
+```
+DataFetchSystems ─────────────────────────────┐
+  (chain state, cyberank, karma, balances)     │
+                                               ▼
+                                        EmotionSystem
+                                        (§ emotion.md)
+                                               │
+                                               ▼
+FilterSortSystem ──► ConstrainSystem ──► OccupySystem ──► FoldSystem
+   (§6.2)               (§4.1)            (§4.2)          (§4.3)
+                                                             │
+                                                             ▼
+                                                      GravitateSystem
+                                                         (§11.1)
+                                                             │
+                                                             ▼
+                                                       PlaceSystem
+                                                         (§4.4)
+                                                             │
+                                                             ▼
+                                                  EmotionPropagateSystem
+                                                    (cell → molecule → atom)
+                                                             │
+                                               ┌─────────────┼─────────────┐
+                                               ▼             ▼             ▼
+                                        CssRenderSystem  BevyUiRender  Ren3dRender
+                                           (§13)          (§13)         (§13)
+```
+
+| stage | systems | reads | writes |
+|-------|---------|-------|--------|
+| 0 | DataFetchSystems | chain RPC, IPFS | `TokenBalances`, `ValidatorSet`, `CyberankMap`, `KarmaMap` |
+| 1 | EmotionSystem | `EmotionSource` | `Emotion` |
+| 1 | FilterSortSystem | `GridFilter`, `GridSort` | row visibility, row order |
+| 2 | ConstrainSystem | parent `OccupiedSize`, `Stack`/`Grid`/`Layer` params | `Constraint { c_w, c_h }` |
+| 3 | OccupySystem | `Sizing`, `Constraint` | `OccupiedSize { s_w, s_h }` |
+| 4 | FoldSystem | `FoldSet`, `Constraint` | `ActiveFold { index }` |
+| 5 | GravitateSystem | `Gravity { focus }` | `Position { z }` |
+| 6 | PlaceSystem | `OccupiedSize`, container params | `Position { x, y }` |
+| 7 | EmotionPropagateSystem | `Emotion`, element tree | `Emotion` on descendant entities |
+| 8 | RenderSystems | `Position`, `OccupiedSize`, `Emotion`, leaf data | frame buffer |
+
+stages 1-1 (EmotionSystem and FilterSortSystem) run in parallel — no data dependency between them. all other stages are sequential. total: 9 stages, $\mathcal{O}(n)$ per stage, $\mathcal{O}(n)$ total
+
+---
+
 ## 13. renderers
 
 the layout function outputs $\{(e_i, p_{x_i}, p_{y_i}, s_{w_i}, s_{h_i}, z_i)\}$. renderers consume coordinates:
@@ -640,25 +691,108 @@ every screen in [[cyb]] is an element tree computed by this protocol. invariants
 - I6 (z monotonicity): modal above adviser above commander above space
 - I7 (fold legibility): every molecule tested at $s_{min}$ on mobile viewport
 - I8 (renderer independence): same coordinates across Leptos and Bevy UI
+- I9 (semantic completeness): every interactive organelle has a non-empty label. CI check against component catalog
 
 [[cyb]] is the proof. the paper is the specification
 
 ---
 
-## 15. open problems
+## 15. motion
 
-1. **completeness proof for {stack, grid, layer}.** can grid-with-spans express all non-overlapping rectangular partitions? the connection to Felsner & Nathenson (2022) area-universal layouts is suggestive but unproven
+motion is convention, not axiom. the protocol computes static coordinates — motion is how the renderer transitions between two successive layout computations
 
-2. **fold set derivation.** each molecule defines $\mathcal{F}$ manually. can optimal fold sets be computed automatically from a molecule's organelle subtree?
+### 15.1 the motion function
 
-3. **3D invariant verification.** the 3D extension (§11) preserves protocol structure but invariant proofs under perspective coupling are not yet verified
+$$\mu(e,\; s_0,\; s_1,\; t) = s_0 + (s_1 - s_0) \cdot \alpha(t)$$
 
-4. **layout algebra.** can membrane composition be formalized as an algebra with operations and identities? this would enable algebraic simplification of element trees
+$s_0$ — previous state (position + size). $s_1$ — target state (new layout output). $t$ — time elapsed since layout change. $\alpha(t)$ — easing function, $\alpha: [0, T] \to [0, 1]$, $\alpha(0) = 0$, $\alpha(T) = 1$
+
+### 15.2 conventions
+
+| parameter | value | rationale |
+|-----------|-------|-----------|
+| $T$ (duration) | $150\text{ms}$ | below perception threshold for causality (200ms). fast enough to feel instant, slow enough to track |
+| $\alpha$ | ease (cubic-bezier 0.25, 0.1, 0.25, 1.0) | matches natural deceleration |
+| fold transition | $150\text{ms}$ ease | conformation change — same as all other transitions |
+| menu slide | $150\text{ms}$ ease | overlay entrance/exit |
+| emotion change | $150\text{ms}$ ease | color transition |
+
+all motion in prysm uses the same $T$ and $\alpha$. one duration, one curve. uniformity is legibility — the neuron learns one rhythm
+
+### 15.3 when motion applies
+
+motion applies only when $s_0 \neq s_1$ for the same entity $e$. the protocol guarantees: if the element tree and viewport have not changed, $s_0 = s_1$ (Theorem 2, determinism). motion is triggered by: viewport resize, fold transition, data update changing element tree, emotion change
+
+motion does not affect layout computation. the protocol always outputs $s_1$ (target). the renderer interpolates the visual representation. this separation preserves I2 (single-pass) and I1 (determinism)
+
+ECS: `MotionState { s_0, s_1, t_start }` component. `MotionSystem` reads `Position`, `OccupiedSize`, `Emotion`, writes interpolated values to render components. runs after layout, before render
 
 ---
 
-## 16. scope and catalog
+## 16. accessibility
+
+the protocol outputs spatial coordinates. accessibility requires semantic annotation: what each organelle means, not where it is
+
+### 16.1 the semantic layer
+
+every organelle carries an optional semantic role:
+
+| role | meaning | examples |
+|------|---------|----------|
+| navigation | moves the neuron to a different location in the [[cybergraph]] | commander input, menu items, tabs, stars |
+| action | triggers a state change | buttons (sign, delegate, send), toggles |
+| display | presents data (read-only) | counters, address, pill, content render |
+| input | accepts data from the neuron | text input, slider, token amount |
+| landmark | structural anchor for orientation | context, avatar, commander, adviser |
+| group | semantically related organelles | validator list, token table, filter bar |
+
+### 16.2 annotation in ECS
+
+- Component: `Semantic { role: Role, label: String, description: Option<String> }`
+- Component: `NavigationOrder { index: u32 }` — tab order within a membrane
+- Component: `LiveRegion { politeness: Polite | Assertive }` — for dynamic content (adviser messages, counter updates)
+
+`NavigationOrder` follows the element tree: depth-first, same order as layout traversal. within a membrane, order matches placement direction (left-to-right for horizontal stack, top-to-bottom for vertical). this means navigation order is derived from the element tree — no manual assignment
+
+### 16.3 renderer mapping
+
+| renderer | semantic output |
+|----------|----------------|
+| Portal (Leptos) | ARIA roles, aria-label, aria-live, tabindex |
+| Terminal (Sugarloaf) | focus ring, screen reader text |
+| Bevy UI | AccessibilityNode (bevy_a11y) |
+| 3D (Ren) | spatial audio cues for proximity, haptic feedback for focus |
+
+the semantic layer is renderer-independent — same `Semantic` component, different output per renderer. the protocol does not define how accessibility is rendered, only what information each organelle carries
+
+### 16.4 invariant
+
+I9 (semantic completeness): every interactive organelle (role = navigation, action, or input) has a non-empty `label`
+
+$$\forall e_i:\; \text{role}(e_i) \in \{\text{navigation}, \text{action}, \text{input}\} \;\Rightarrow\; \text{label}(e_i) \neq \emptyset$$
+
+---
+
+## 17. open problems
+
+1. **completeness proof for {stack, grid, layer}.** can grid-with-spans express all non-overlapping rectangular partitions? Kozminski & Kinnen (1988) proved that pure slicing (recursive horizontal/vertical cuts) cannot produce all rectangular partitions — some require T-junctions that slicing cannot create. grid-with-spans handles T-junctions by allowing cells to span multiple rows/columns. the conjecture: grid-with-spans is complete for the class of rectangular partitions that arise in UI layout (where cells are axis-aligned and non-overlapping). a proof would require showing that every rectangular dual graph has a valid grid assignment with integer spans. Felsner & Nathenson (2022) show existence of area-universal representations for all rectangular layouts — the gap is connecting their representation to grid-with-spans specifically
+
+2. **fold set derivation.** each molecule defines $\mathcal{F}$ manually. algorithm sketch for automatic derivation: (a) enumerate all subsets of a molecule's organelles, (b) for each subset, compute $s_{min}$ of the remaining organelles in the active container type, (c) order by $w_{min}$ descending, (d) prune dominated conformations (where a wider conformation shows strictly less information than a narrower one). complexity: $\mathcal{O}(2^m)$ where $m$ = organelle count per molecule. acceptable for specification-time computation (molecules have $m \leq 10$), not for runtime. the open question: can this be reduced to $\mathcal{O}(m \log m)$ by exploiting the lattice structure of organelle subsets?
+
+3. **3D invariant verification.** I1-I3, I5, I7, I8 are verified in §11.4. remaining: I4 (constraint respect) is intentionally relaxed for $p_z$ — gravity determines depth independently of membrane constraint. this is a design choice, not a gap. I6 (z monotonicity) is replaced by gravity monotonicity — the replacement is well-defined. the genuine open problem: when $\mathcal{U}$ (urgency) and gravity disagree — a modal ($\mathcal{U} = 50$) for a low-focus entity — how exactly do they compose? current answer: $p_z = \min(p_{z,gravity},\; p_{z,urgency})$ — urgency can pull closer but not push farther. formal verification of this composition rule under all combinations is pending
+
+4. **layout algebra.** can membrane composition be formalized as an algebra with operations and identities? candidates: membrane union (combining two membranes into one), membrane product (nesting), membrane quotient (extracting a sub-tree). if such an algebra exists, element trees could be simplified before layout computation — algebraic optimization
+
+5. **multimodal extension.** the protocol addresses visual layout. a Type I civilization requires spatial audio (sound positioned at $p_z$), haptic feedback (touch intensity from focus), and neural interfaces. the question: can $\Pi$ (constrain → occupy → place) generalize to non-spatial channels where "constraint" and "position" have different physical meaning?
+
+---
+
+## 18. scope and catalog
 
 this paper defines spatial placement: how elements are sized and positioned. it depends on nothing above it. everything visible depends on it
 
-this paper does not define what elements exist, how they look, or how they behave. those definitions live in the [[prysm]] component catalog: atoms, molecules, cells, fold sets, visual parameters, interaction rules
+companion specifications:
+- [[prysm/emotion]] — the emotion function: how protocol state maps to color
+- [[prysm]] component catalog — atoms, molecules, cells, fold sets, visual parameters, interaction rules
+
+this paper does not define what elements exist, how they look, or how they behave. those definitions live in the companion specifications above
