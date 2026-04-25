@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 search and network explorer cell in [[prysm]]
 
-the primary interface of [[cyb/oracle]]. search the [[cybergraph]], explore network state, browse blocks and transactions. contains 8 sub-pages accessible through the brain menu (left sidebar)
+the primary interface of [[cyb/oracle]]. search the [[cybergraph]], explore network state, browse blocks and transactions. contains 9 sub-pages accessible through the brain menu (left sidebar)
 
 ## protocol role
 
@@ -35,6 +35,52 @@ stack vertical [fix(25g) × auto, gap g/2]
 tap item → switches sub-page in space zone. active item highlighted
 
 ## sub-pages
+
+### particle-page
+
+page of a single [[particle]] — renders its content and all [[cyberlink]] connections. this is what opens when a neuron navigates to a specific CID
+
+```
+glass [fill × fill, depth background, overflow scroll]
+  stack vertical [gap 2g, padding 3g]
+    --- content render ---
+    display [fill × auto, particle content — text, image, video, etc.]
+    --- cyberlink filter bar ---
+    glass [fill × fix(5g), depth midground]
+      stack horizontal [gap 2g, align center]
+        --- left: type filters ---
+        text [body, green, "all"]
+        ion [2g, file type]
+        saber [vertical]
+        ion [2g, star] + ion [2g, type icon]
+        saber [vertical]
+        --- neuron avatars ---
+        stack horizontal [gap -g/2, overlap]
+          ion [3g, avatar 1, circle]
+          ion [3g, avatar 2, circle]
+          ion [3g, avatar 3, circle]
+        saber [vertical]
+        --- link direction counters ---
+        counter [body, outgoing count] + text [caption, "→"]
+        ion [2g, particle icon, green]
+        text [caption, "→"] + counter [body, incoming count]
+        --- total ---
+        counter [body, total] + text [caption, "particles"]
+    --- linked particles list ---
+    stack vertical [gap 0]
+      glass [fill × auto, depth midground] — per linked particle
+        stack horizontal [gap g]
+          text [body, particle name or CID]
+          pill [progress, emotion, rank weight] — right-aligned, vertical fill
+      saber [horizontal, g/8]
+      ...
+```
+
+filter bar allows filtering cyberlinks by: content type (all, file, star), authoring neuron (avatar icons), direction (outgoing → / → incoming). counters show `1617 →` outgoing and `→ 1109` incoming cyberlinks, total particle count
+
+each linked particle row has a rank indicator (pill with fill level) on the right — [[cyberank]] weight of that link
+
+commander: "add keywords, hash or file" + "Cyberlink" + "edit in studio"
 
 ### main
 
@@ -163,6 +209,7 @@ $\mathcal{F}$ per sub-page:
 
 | sub-page | $l_1$ ($w_{min}$) | $l_2$ | $l_3$ (mobile) |
 |----------|-----|------|-------|
+| particle-page | $40g$: content + filter bar + full list | $20g$: content + filter (hide avatars) + list | $10g$: content + list (filter collapsed) |
 | main | $40g$: full hero | $20g$: compact hero | $10g$: search only |
 | Particles | $25g$: name + type icon | $10g$: name only | same |
 | brain | $30g$: full graph | $15g$: reduced node limit | same |
@@ -176,6 +223,9 @@ $\mathcal{F}$ per sub-page:
 
 | element | emotion |
 |---------|---------|
+| particle rank pill | emotion from [[cyberank]] weight — higher rank = greener fill |
+| "all" filter text | #00fe00 green — active filter |
+| link direction counters | neutral, green particle icon between them |
 | hero text "find" "deliver" | #00fe00 green — action words |
 | particle count "growing" | #00fe00 green — positive growth |
 | block height links | #00fe00 green — navigable |
@@ -207,12 +257,13 @@ renders at ambient $p_z$. brain graph visualization is inherently 3D-ready — p
   - `Sizing { width: Fill, height: Fill }`
   - `Overflow { scroll }`
   - `FoldSet { conformations }`
-  - `ActiveSubPage { main | particles | brain | stats | blocks | txs | contracts | libs }`
+  - `ActiveSubPage { main | particle_page | particles | brain | stats | blocks | txs | contracts | libs }`
   - `SearchQuery { cid }` — for main/search
   - `BrainMenuVisible { bool }`
 - Systems:
   - `OracleMenuSystem` handles brain menu navigation
   - `OracleSearchSystem` handles search from commander
+  - `OracleParticleSystem` fetches particle content + cyberlinks (incoming/outgoing), computes rank pills
   - `OracleStatsSystem` fetches network stats
   - `OracleBlocksSystem` fetches live blocks
   - `OracleTxsSystem` fetches live transactions
