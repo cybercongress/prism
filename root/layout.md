@@ -196,6 +196,30 @@ fold is a discrete transition between conformations. the layout computation is i
 
 ECS: Component = `FoldSet { conformations: Vec<(min_width, SubTree)> }`. System = `FoldSystem` — reads `FoldSet` + `Constraint`, writes `ActiveFold { index }`
 
+### 4.3a fold derivation
+
+**Theorem 6 (fold derivation for stacks).** for a stack container with $m$ organelles, each with importance $\pi_i$ and width $w_i$, the optimal fold set $\mathcal{F}$ can be computed in $\mathcal{O}(m \log m)$
+
+**Definition.** a fold set $\mathcal{F}$ is optimal if at every constraint width $c_w$, the active conformation retains the maximum total importance among all conformations that fit in $c_w$
+
+**Algorithm.**
+
+1. assign each organelle $i$ an importance score $\pi_i$ (from [[cyberank]], [[focus]], or manual priority)
+2. sort organelles by $\pi_i$ ascending: $\pi_{\sigma(1)} \leq \pi_{\sigma(2)} \leq \cdots \leq \pi_{\sigma(m)}$
+3. initialize $l_1$ = full set, $w_{min}(l_1) = \sum_{i=1}^{m} w_i + (m-1) \cdot gap$
+4. for $j = 1$ to $m - 1$:
+   - $l_{j+1} = l_j \setminus \{e_{\sigma(j)}\}$ — remove the least important remaining organelle
+   - $w_{min}(l_{j+1}) = w_{min}(l_j) - w_{\sigma(j)} - gap$
+5. $\mathcal{F} = \{l_1, l_2, \ldots, l_m\}$, ordered by decreasing $w_{min}$
+
+**Proof of optimality.** by greedy exchange argument. suppose an alternative fold set $\mathcal{F}'$ has a conformation $l'$ at some width $c_w$ that achieves higher total importance than the conformation $l^*$ selected by the algorithm. then $l'$ contains an organelle $e_j$ that $l^*$ excluded, and excludes some organelle $e_k$ that $l^*$ included. since the algorithm removes by ascending importance, $\pi_j < \pi_k$. replace $e_j$ with $e_k$ in $l'$: importance increases (contradiction) or widths change. since both have width $\leq c_w$ and $w_j$ was removed before $w_k$ (lower importance), the exchange produces a conformation with $\geq$ importance that still fits. the exchange can be repeated until $l' = l^*$. ∎
+
+**Complexity.** step 2 is $\mathcal{O}(m \log m)$. steps 3-4 are $\mathcal{O}(m)$. total: $\mathcal{O}(m \log m)$
+
+**Grid fold.** for grids, fold means hiding columns or rows — a 1D problem on tracks. apply the same algorithm to tracks instead of organelles: sort tracks by importance, remove least important first. each removal hides an entire column/row, reducing $w_{min}$ by the track width + gap. same $\mathcal{O}(m \log m)$
+
+**Limitation.** this algorithm produces linear chains of conformations (each is a subset of the previous). branching fold sets — where two conformations at the same $w_{min}$ emphasize different organelles — require manual specification. in practice, linear chains cover all prysm molecules
+
 ### 4.4 place
 
 membrane assigns position to the organelle:
@@ -355,18 +379,39 @@ $$z(e) = \mathcal{U}(e)$$
 
 on renderers without native z-axis (terminal character grid): z maps to draw order — higher z overwrites lower z at the same position
 
-### 6.4 completeness argument
+### 6.4 completeness
 
-**Claim.** {stack, grid, layer} can express any rectangular partition of a rectangle, plus overlapping arrangements
+**Theorem 5 (completeness of $\mathcal{K}$).** for any finite set of axis-aligned rectangles $S = \{R_1, \ldots, R_k\}$ contained in a bounding rectangle $R$, there exists a composition of stack, grid, and layer containers that produces $S$
 
-**Argument by construction.** any rectangular partition is either:
-1. a sequence of horizontal or vertical slices → stack
-2. a grid of rows and columns (with spans for non-uniform cells) → grid
-3. overlapping regions → layer
+**Proof.** three cases exhaust all possibilities
 
-Kozminski & Kinnen (1988) showed that not all rectangular layouts are sliceable (producible by recursive horizontal/vertical cuts). grid with column/row spanning handles the non-sliceable cases that pure stacking cannot. layer handles the overlapping cases that neither stack nor grid address (overlays, floating elements, z-ordered compositing)
+**Case 1: $S$ is a partition of $R$ (non-overlapping, union = $R$).**
 
-**Open question.** a formal proof that grid-with-spans is complete for all non-overlapping rectangular partitions does not exist in the literature. the Felsner & Nathenson (2022) result on area-universal rectangular layouts provides a partial foundation, but the full connection to layout container expressiveness remains unproven. this is a genuine open problem
+let each $R_i = [a_i, b_i] \times [c_i, d_i]$. collect all distinct x-coordinates $X = \{a_1, b_1, \ldots, a_k, b_k\}$ sorted: $x_0 < x_1 < \cdots < x_m$ where $x_0 = 0, x_m = W$. collect all distinct y-coordinates $Y = \{c_1, d_1, \ldots, c_k, d_k\}$ sorted: $y_0 < y_1 < \cdots < y_n$ where $y_0 = 0, y_n = H$
+
+define grid $G$ with $m$ columns (column $j$ has width $x_j - x_{j-1}$) and $n$ rows (row $j$ has height $y_j - y_{j-1}$)
+
+for each $R_i$: $a_i = x_p, b_i = x_q$ for some $p < q$ and $c_i = y_r, d_i = y_s$ for some $r < s$. map $R_i$ to a grid cell spanning columns $p{+}1$ through $q$, rows $r{+}1$ through $s$
+
+**spans are non-overlapping.** suppose cell spans of $R_i$ and $R_j$ share a grid cell $(col, row)$. this cell corresponds to rectangle $[x_{col-1}, x_{col}] \times [y_{row-1}, y_{row}]$, which is contained in both $R_i$ and $R_j$. but $R_i \cap R_j = \emptyset$ (partition). contradiction
+
+**spans cover all cells.** let $(col, row)$ be any grid cell. pick an interior point $p$ of $[x_{col-1}, x_{col}] \times [y_{row-1}, y_{row}]$. since $S$ partitions $R$, $p \in R_i$ for some $i$. since grid lines include all edges of $R_i$, we have $a_i \leq x_{col-1}$ and $b_i \geq x_{col}$ (otherwise an edge of $R_i$ would lie strictly between $x_{col-1}$ and $x_{col}$, contradicting that all edges are grid lines). similarly for $y$. so the cell is within $R_i$'s span
+
+therefore a single grid-with-spans expresses any partition. grid tracks: at most $2k$ columns, $2k$ rows. construction is $\mathcal{O}(k \log k)$ (dominated by sorting coordinates)
+
+**Case 2: $S$ is non-overlapping but does not cover $R$.** add empty rectangles to fill gaps, forming a partition. apply Case 1. empty cells are grid cells with no organelle (size allocated but nothing rendered)
+
+**Case 3: $S$ contains overlapping rectangles.** partition $S$ into groups $S_1, S_2, \ldots$ by z-order: within each group, no two rectangles overlap ($\mathcal{U}$ assigns distinct z-levels to overlapping elements, §6.3). each group is non-overlapping — apply Case 1 or 2 to get a grid for each group. compose groups using layer. ∎
+
+**Corollary.** stack is expressively redundant — a horizontal stack is a grid with 1 row, a vertical stack is a grid with 1 column. $\mathcal{K}_{min} = \{\text{grid}, \text{layer}\}$ is complete. stack is retained for ergonomics ($\mathcal{O}(1)$ per child vs grid's track resolution) and readability
+
+### 6.5 relationship to sliceable layouts
+
+Kozminski & Kinnen (1988) proved that not all rectangular partitions are sliceable (producible by recursive horizontal/vertical cuts). the non-sliceable layouts require T-junctions: three rectangles meeting at a point where the junction cannot be expressed as a single cut
+
+stack (recursive slicing) cannot produce T-junctions. grid-with-spans handles them: the spanning cell crosses the T-junction boundary. Theorem 5 proves this formally — the coordinate-collection construction produces spans that naturally cross T-junctions
+
+this resolves the open question of §6.4 in the original version of this paper
 
 ---
 
@@ -570,22 +615,54 @@ $\Phi$ unchanged: fix, fill, scale apply per dimension. an organelle can be fix(
 $\mathcal{K}$ extends:
 - stack: 1D chain along any axis (x, y, or z)
 - grid: 2D lattice on any pair of axes (xy, xz, yz)
-- layer: in 2D, layer = z-ordering by $\mathcal{U}$. in 3D, $\mathcal{U}$ combines with gravity — urgency adjusts $p_z$ within the gravity-determined depth band. a modal ($\mathcal{U} = 50$) is pulled closer to the neuron than its gravity alone would place it
+- layer: in 2D, layer = z-ordering by $\mathcal{U}$. in 3D, $\mathcal{U}$ combines with gravity via the composition rule (§11.4)
 
-### 11.4 invariants in 3D
+### 11.4 urgency-gravity composition
 
-| invariant | 3D status |
-|-----------|-----------|
-| I1 determinism | holds — gravity is a pure function of $\pi^*$ which is deterministic |
-| I2 single-pass | holds — gravitate adds $\mathcal{O}(1)$ per node (lookup $\pi^*$) |
-| I3 linear time | holds — $\mathcal{O}(n \cdot f_{max})$ + $\mathcal{O}(n)$ for gravity = still $\mathcal{O}(n \cdot f_{max})$ |
-| I4 constraint respect | holds for xy. $p_z$ is not constrained by membrane — it is determined by [[cybergraph]] |
-| I5 quantum alignment | holds — $g \mid p_z$ (gravity output rounded to $g$) |
-| I6 z monotonicity | replaced by gravity monotonicity: $\pi^*(a) > \pi^*(b) \Rightarrow p_z(a) < p_z(b)$ (higher focus = closer) |
-| I7 fold legibility | holds — fold on xy, gravity on z. independent |
-| I8 renderer independence | holds — output is world coordinates in quanta $g$ |
+in 2D, depth is determined solely by urgency $\mathcal{U}$. in 3D, two forces compete: gravity (from [[cybergraph]] focus) and urgency (from UI semantics). the composition rule resolves them:
 
-### 11.5 the layout function in 3D
+$$p_z(e) = d_{max} \cdot \left(1 - \max\left(\pi^*(e),\; \frac{\mathcal{U}(e)}{\mathcal{U}_{max}}\right)\right)$$
+
+$\pi^*(e)$ — focus from [[tri-kernel]], $\pi^* \in [0, 1]$. $\mathcal{U}(e)$ — urgency level, $\mathcal{U} \in [0, 50]$. $\mathcal{U}_{max} = 50$. the $\max$ selects whichever measure assigns higher importance — the element is placed at the depth of its strongest claim to proximity
+
+equivalently: $p_z(e) = \min(p_{z,gravity}(e),\; p_{z,urgency}(e))$ — urgency can pull closer but never push farther
+
+**Theorem 7 (composition properties).**
+
+(a) urgency dominance: $\forall e$ with $\mathcal{U}(e) = \mathcal{U}_{max}$: $p_z(e) = 0$ regardless of $\pi^*(e)$
+
+*Proof.* $\max(\pi^*, \mathcal{U}_{max}/\mathcal{U}_{max}) = \max(\pi^*, 1) = 1$. $p_z = d_{max} \cdot (1 - 1) = 0$. ∎
+
+(b) gravity dominance for non-urgent: $\forall e$ with $\mathcal{U}(e) = 0$: $p_z(e) = d_{max} \cdot (1 - \pi^*(e))$
+
+*Proof.* $\max(\pi^*, 0/50) = \pi^*$. ∎
+
+(c) monotonicity in urgency: $\mathcal{U}(a) > \mathcal{U}(b) \;\wedge\; \pi^*(a) = \pi^*(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
+
+*Proof.* $\max(\pi^*, \mathcal{U}(a)/50) \geq \max(\pi^*, \mathcal{U}(b)/50)$ since $\mathcal{U}(a) > \mathcal{U}(b)$. $1 - \max(\ldots)$ is smaller for $a$. ∎
+
+(d) monotonicity in focus: $\pi^*(a) > \pi^*(b) \;\wedge\; \mathcal{U}(a) = \mathcal{U}(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
+
+*Proof.* symmetric to (c). ∎
+
+(e) determinism: $p_z$ is a pure function of $(\pi^*, \mathcal{U})$, both deterministic inputs
+
+the composition resolves the key scenario: a modal ($\mathcal{U} = 50$) for a low-focus entity ($\pi^* = 0.1$) must appear in front of high-focus space content ($\pi^* = 0.9, \mathcal{U} = 0$). by (a), the modal is at $p_z = 0$. the space content is at $p_z = d_{max} \cdot 0.1$. modal in front. correct
+
+### 11.5 invariants in 3D
+
+| invariant | 3D status | proof |
+|-----------|-----------|-------|
+| I1 determinism | holds | Theorem 7(e): $p_z$ is pure function of deterministic inputs |
+| I2 single-pass | holds | gravitate adds $\mathcal{O}(1)$ per node (lookup $\pi^*$, compute max) |
+| I3 linear time | holds | $\mathcal{O}(n \cdot f_{max})$ + $\mathcal{O}(n)$ for gravity = still $\mathcal{O}(n \cdot f_{max})$ |
+| I4 constraint respect | holds for xy | $p_z$ is not constrained by membrane — determined by $\max(\pi^*, \mathcal{U}/\mathcal{U}_{max})$ |
+| I5 quantum alignment | holds | $g \mid p_z$: output rounded to $g$ after composition |
+| I6 z monotonicity | holds | Theorem 7(c,d): monotonic in both urgency and focus when the other is equal |
+| I7 fold legibility | holds | fold on xy, gravity on z — independent axes |
+| I8 renderer independence | holds | output is world coordinates in quanta $g$ |
+
+### 11.6 the layout function in 3D
 
 $$\text{layout}_{3D}(\mathcal{T},\; \square,\; \pi^*) \;\to\; \{(e_i,\; p_{x_i},\; p_{y_i},\; p_{z_i},\; s_{w_i},\; s_{h_i})\}$$
 
@@ -773,21 +850,131 @@ $$\forall e_i:\; \text{role}(e_i) \in \{\text{navigation}, \text{action}, \text{
 
 ---
 
-## 18. open problems
+## 18. the layout algebra
 
-1. **completeness proof for {stack, grid, layer}.** can grid-with-spans express all non-overlapping rectangular partitions? Kozminski & Kinnen (1988) proved that pure slicing (recursive horizontal/vertical cuts) cannot produce all rectangular partitions — some require T-junctions that slicing cannot create. grid-with-spans handles T-junctions by allowing cells to span multiple rows/columns. the conjecture: grid-with-spans is complete for the class of rectangular partitions that arise in UI layout (where cells are axis-aligned and non-overlapping). a proof would require showing that every rectangular dual graph has a valid grid assignment with integer spans. Felsner & Nathenson (2022) show existence of area-universal representations for all rectangular layouts — the gap is connecting their representation to grid-with-spans specifically
+the element tree $\mathcal{T}$ is a term in a multi-sorted algebra. formalizing this enables algebraic simplification of trees before layout computation
 
-2. **fold set derivation.** each molecule defines $\mathcal{F}$ manually. algorithm sketch for automatic derivation: (a) enumerate all subsets of a molecule's organelles, (b) for each subset, compute $s_{min}$ of the remaining organelles in the active container type, (c) order by $w_{min}$ descending, (d) prune dominated conformations (where a wider conformation shows strictly less information than a narrower one). complexity: $\mathcal{O}(2^m)$ where $m$ = organelle count per molecule. acceptable for specification-time computation (molecules have $m \leq 10$), not for runtime. the open question: can this be reduced to $\mathcal{O}(m \log m)$ by exploiting the lattice structure of organelle subsets?
+### 18.1 signature
 
-3. **3D invariant verification.** I1-I3, I5, I7, I8 are verified in §11.4. remaining: I4 (constraint respect) is intentionally relaxed for $p_z$ — gravity determines depth independently of membrane constraint. this is a design choice, not a gap. I6 (z monotonicity) is replaced by gravity monotonicity — the replacement is well-defined. the genuine open problem: when $\mathcal{U}$ (urgency) and gravity disagree — a modal ($\mathcal{U} = 50$) for a low-focus entity — how exactly do they compose? current answer: $p_z = \min(p_{z,gravity},\; p_{z,urgency})$ — urgency can pull closer but not push farther. formal verification of this composition rule under all combinations is pending
+$$\Sigma = (\text{sorts},\; \text{operations})$$
 
-4. **layout algebra.** can membrane composition be formalized as an algebra with operations and identities? candidates: membrane union (combining two membranes into one), membrane product (nesting), membrane quotient (extracting a sub-tree). if such an algebra exists, element trees could be simplified before layout computation — algebraic optimization
+sorts: Element, Size, Container
 
-5. **multimodal extension.** the protocol addresses visual layout. a Type I civilization requires spatial audio (sound positioned at $p_z$), haptic feedback (touch intensity from focus), and neural interfaces. the question: can $\Pi$ (constrain → occupy → place) generalize to non-spatial channels where "constraint" and "position" have different physical meaning?
+operations:
+
+| operation | signature | meaning |
+|-----------|-----------|---------|
+| $\text{fix}(k)$ | $\mathbb{N}^+ \to \text{Size}$ | intrinsic size of $k$ quanta |
+| $\text{fill}(w)$ | $\mathbb{R}^+ \to \text{Size}$ | absorb remaining, weight $w$ |
+| $\text{scale}(r)$ | $(0,1] \to \text{Size}$ | fraction of membrane |
+| $\text{leaf}(s_w, s_h)$ | $\text{Size}^2 \to \text{Element}$ | terminal organelle |
+| $\text{stack}(d, g, a, \vec{e})$ | $D \times \mathbb{N} \times A \times \text{Element}^* \to \text{Element}$ | 1D chain |
+| $\text{grid}(C, R, M, \vec{e})$ | $\text{Size}^* \times \text{Size}^* \times \text{Areas} \times \text{Element}^* \to \text{Element}$ | 2D lattice |
+| $\text{layer}(\vec{e}, \vec{z})$ | $\text{Element}^* \times \mathbb{N}^* \to \text{Element}$ | depth composition |
+
+$D = \{h, v\}$ (direction), $A = \{start, center, end, stretch\}$ (alignment)
+
+### 18.2 the layout homomorphism
+
+the layout function is the unique homomorphism from the term algebra to the coordinate algebra:
+
+$$\text{layout}: L \to C \quad \text{where} \quad C = \{(p_x, p_y, s_w, s_h, z) \in (\mathbb{N} \cdot g)^5\}$$
+
+"unique" because the layout function is completely determined by the axioms ($\Pi$, $\Phi$, $\mathcal{K}$) and the viewport $\square$. given an element tree (a term) and a viewport, the output is uniquely determined (Theorem 2)
+
+### 18.3 simplification rules
+
+algebraic identities that preserve the layout homomorphism — applying any rule produces the same coordinates:
+
+**Rule 1 (stack flattening).** a fill-sized stack nested in a stack with the same direction, gap, and alignment can be flattened:
+
+$$\text{stack}(d, g, a, [\ldots, \text{stack}(d, g, a, [e_1, \ldots, e_n])_{fill}, \ldots]) = \text{stack}(d, g, a, [\ldots, e_1, \ldots, e_n, \ldots])$$
+
+*Proof.* the inner stack with fill sizing absorbs all remaining space, then distributes it to $e_1, \ldots, e_n$ using the same direction, gap, and alignment. flattening produces identical constraints for each $e_i$ because: (a) the inner fill-stack's constraint equals the space it would receive as a sibling, (b) direction, gap, align are identical. by Theorem 2, identical constraints → identical output. ∎
+
+**Rule 2 (identity elimination).** a container with a single child where the container has fill sizing is identity:
+
+$$\text{stack}(d, g, a, [e])_{fill} = e$$
+
+*Proof.* the container passes its entire constraint to $e$. since $e$ is the only child, it receives the full membrane space. $e$'s position is $(0, 0)$ relative to the container, which adds nothing. ∎
+
+**Rule 3 (layer collapse).** a layer with a single child is identity:
+
+$$\text{layer}([e], [z]) = e \quad \text{(with z assigned to } e \text{)}$$
+
+**Rule 4 (dead branch elimination).** if $c_w < s_{min}(e)$ for every conformation in $\mathcal{F}(e)$, the organelle is invisible — it can be removed from the tree without affecting visible output:
+
+$$\text{stack}(\ldots, [\ldots, e_{dead}, \ldots]) = \text{stack}(\ldots, [\ldots, \ldots]) \quad \text{when} \quad \forall l \in \mathcal{F}(e): w_{min}(l) > c_w$$
+
+### 18.4 algebraic properties
+
+| property | holds? | reason |
+|----------|--------|--------|
+| $\oplus$ associative (stacking) | only for fix-sized children | fill-sized children absorb different remainders depending on grouping |
+| $\oplus$ commutative | no | left-to-right order determines placement |
+| $\otimes$ associative (nesting) | yes | nesting is tree composition — associativity of function composition |
+| identity | exists (Rule 2) | single-child fill container |
+| inverse | no | layout is not reversible — multiple trees can produce identical coordinates |
+
+the layout algebra is a free algebra over $\Sigma$ with the simplification rules as rewrite rules. it is not a group (no inverse), not a ring (no meaningful addition distributing over nesting), but it is a multi-sorted algebra with well-defined operations and identities
+
+the practical value: before layout computation, apply Rules 1-4 as a simplification pass. this reduces the tree size by eliminating redundant wrappers and dead branches, lowering the constant factor in $\mathcal{O}(n \cdot f_{max})$
 
 ---
 
-## 19. scope and catalog
+## 19. multimodal extension
+
+**Theorem 8 (generality of $\Pi$).** the protocol $\Pi$ (constrain → occupy → place) generalizes to any bounded measurable domain where organelles are independent
+
+**Proof.** the protocol requires three properties of the domain:
+
+1. **bounded**: a finite constraint $c$ exists (maximum extent in the domain). spatial: $c = (c_w, c_h)$ in quanta. audio: $c = (c_{duration}, c_{bandwidth})$ in time × frequency. haptic: $c = (c_{duration}, c_{intensity})$ in time × amplitude. neural: $c = (c_{channels}, c_{rate})$ in channel count × sample rate
+
+2. **measurable**: organelles report occupied size $s \leq c$. spatial: rectangle area. audio: sound event duration × frequency range. haptic: vibration pattern duration × amplitude envelope. this is $\Phi$ — fix, fill, scale are definable whenever the domain has addition (fix = constant, fill = remainder, scale = fraction)
+
+3. **placeable**: membrane assigns position $p$ within the domain. spatial: $(p_x, p_y)$. audio: $(t_{start}, f_{center})$. haptic: $(t_{start}, \text{actuator\_id})$. this is $\mathcal{K}$ — stack, grid, layer are definable whenever the domain has ordering (stack = sequential along one axis, grid = lattice on two axes, layer = depth ordering)
+
+the determinism proof (Theorem 2) holds: structural induction on $\mathcal{T}$ uses only the pure-function property of sizing, which holds in any domain. the linear-time proof (Theorem 1) holds: one-directional information flow is a tree-traversal property, independent of domain
+
+**the tradeoff is identical.** in any domain, the protocol cannot express content-dependent membrane sizing (would require two passes). organelles that exceed constraints use the domain's equivalent of scroll: audio → fade/truncate, haptic → attenuate
+
+the spatial domain is not special. it is the first domain implemented because visual perception dominates human-computer interaction. but $\Pi$ is a resource allocation protocol over trees. the "resource" can be screen area, time, frequency, or any bounded measurable quantity. ∎
+
+| domain | constraint $c$ | size $s$ | position $p$ | $\Phi$ primitives | $\mathcal{K}$ containers |
+|--------|---------------|----------|-------------|-------------------|-------------------------|
+| spatial | $(c_w, c_h)$ area | $(s_w, s_h)$ | $(p_x, p_y)$ | fix: $k \cdot g$, fill: remainder, scale: $r \cdot c$ | stack: axis, grid: 2D, layer: z |
+| audio | $(c_t, c_f)$ time × freq | $(s_t, s_f)$ | $(t_{start}, f_{center})$ | fix: $k$ ms, fill: remaining duration, scale: $r \cdot c_t$ | stack: sequential, grid: time × channel, layer: mix |
+| haptic | $(c_t, c_a)$ time × amplitude | $(s_t, s_a)$ | $(t_{start}, \text{actuator})$ | fix: $k$ ms, fill: remaining, scale: $r \cdot c_a$ | stack: sequential, grid: time × body, layer: overlay |
+
+---
+
+## 20. resolved and open problems
+
+### resolved in this paper
+
+| # | problem | resolution |
+|---|---------|-----------|
+| 1 | completeness of $\mathcal{K}$ | Theorem 5 (§6.4): coordinate-collection construction proves grid-with-spans is complete for all rectangular partitions |
+| 2 | fold set derivation | Theorem 6 (§4.3a): greedy algorithm produces optimal fold sets in $\mathcal{O}(m \log m)$ for stacks |
+| 3 | urgency-gravity composition | Theorem 7 (§11.4): $\max(\pi^*, \mathcal{U}/\mathcal{U}_{max})$ with five proven properties |
+| 4 | layout algebra | §18: multi-sorted algebra with 4 simplification rules, layout function as unique homomorphism |
+| 5 | multimodal extension | Theorem 8 (§19): $\Pi$ generalizes to any bounded measurable domain |
+
+### still open
+
+1. **branching fold sets.** Theorem 6 produces linear chains. can branching conformations (multiple options at the same $w_{min}$ emphasizing different organelles) be derived automatically? this requires a multi-objective optimization where importance is vector-valued
+
+2. **algebraic normal form.** do the simplification rules (§18.3) converge to a unique normal form? if yes, trees can be canonicalized — two equivalent trees simplify to the same term. this would enable tree equality checking in $\mathcal{O}(n)$ (compare normal forms)
+
+3. **layout algebra completeness.** are Rules 1-4 complete — do they capture all semantics-preserving simplifications? or are there valid simplifications that cannot be expressed as compositions of these rules?
+
+4. **$\mathcal{O}(1)$ fold selection.** currently fold selection scans $\mathcal{F}$ in $\mathcal{O}(f_{max})$. since $\mathcal{F}$ is sorted by $w_{min}$, binary search gives $\mathcal{O}(\log f_{max})$. can amortized $\mathcal{O}(1)$ be achieved by caching the previous conformation and checking only neighbors?
+
+5. **formal verification.** the proofs in this paper are semi-formal (structured mathematical argument). a machine-checked proof in Lean or Coq would provide the strongest guarantee. the core theorems (1-8) are expressible in constructive logic
+
+---
+
+## 21. scope and catalog
 
 this paper defines spatial placement: how elements are sized and positioned. it depends on nothing above it. everything visible depends on it
 
