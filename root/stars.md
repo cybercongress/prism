@@ -6,35 +6,39 @@ crystal-domain: cyber
 
 pinned items molecule in [[prysm]]
 
-a stack of [[prysm/ion]] icons representing [[aip]] applications or other items bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar — the neuron chooses what to pin
+a circular ring of [[prysm/ion]] icons arranged around the [[prysm/graph]] minimap. each icon = a pinned [[aip]] application or other item bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar
 
 ## protocol role
 
-stars is a molecule in the element tree $\mathcal{T}$. membrane = bottom-l zone of [[prysm/grid]]. stars occupies fix($25g$) × auto on desktop, auto × fix($6g$) on mobile
+molecule in the element tree $\mathcal{T}$. membrane = bottom-l zone of [[prysm/grid]]. stars + graph form a combined unit: graph in the center, star icons orbiting around it
 
 ## sizing
 
-| viewport | sizing | container | max items |
-|----------|--------|-----------|-----------|
-| desktop | fix($25g$) × auto | stack vertical, gap $g$ | unlimited |
-| mobile ($\square_w \leq 96g$) | auto × fix($6g$) | stack horizontal, gap $g/2$ | 4 |
+| viewport | sizing |
+|----------|--------|
+| desktop | fix($25g$) × auto — circular layout around graph |
+| mobile ($\square_w \leq 96g$) | auto × fix($6g$) — linear horizontal row, max 4 |
 
 $s_{min} = (4g, 4g)$ — one icon visible
 
 ## structure
 
-desktop:
+desktop — circular ring around graph:
 ```
-glass [fix(25g) × auto, depth midground]
-  stack vertical [gap g]
-    ion [4g, pinned aip 1]
-    text [caption, aip name 1]
-    ion [4g, pinned aip 2]
-    text [caption, aip name 2]
-    ...
+layer [fix(25g) × fix(25g)]
+  --- graph minimap at center ---
+  graph [fix(12g) × fix(12g), center]
+  --- star icons arranged in circle around graph ---
+  ion [4g, aip 1, position: angle 0°, radius 10g from center]
+  ion [4g, aip 2, position: angle 30°, radius 10g]
+  ion [4g, aip 3, position: angle 60°, radius 10g]
+  ion [4g, aip 4, position: angle 90°, radius 10g]
+  ...
 ```
 
-mobile:
+icons are distributed evenly around the circle. radius = distance from graph center to icon center. as more icons are pinned, they spread around the full 360°
+
+mobile — horizontal row:
 ```
 stack horizontal [auto × fix(6g), gap g/2]
   ion [4g, pinned 1]
@@ -46,26 +50,29 @@ stack horizontal [auto × fix(6g), gap g/2]
 ## fold
 
 $\mathcal{F}$:
-- $l_1$ ($w_{min} = 25g$): vertical stack, icons with labels (text caption)
-- $l_2$ ($w_{min} = 4g$): vertical stack, icons only
-- $l_3$ ($w_{min} = 0$, mobile): horizontal stack, max 4 icons, no labels
+- $l_1$ ($w_{min} = 25g$): circular ring around graph, all icons visible
+- $l_2$ ($w_{min} = 10g$): smaller circle, icons overlap at high count
+- $l_3$ ($w_{min} = 0$, mobile): horizontal stack, max 4 icons, no graph
 
 ## interaction
 
-tap on a pinned ion → navigates to that [[aip]] page. long-press → unpin (remove from stars). stars are ordered by the avatar — drag to reorder on desktop
+- tap star icon → navigates to that [[aip]] page
+- long-press → unpin (remove from stars)
+- drag to reorder on desktop (changes angle position in circle)
+- graph minimap in center is independently interactive (tap to navigate)
 
 ## emotion
 
-stars do not carry [[emotion]] by default — they are neutral bookmarks. an individual star icon inherits the [[emotion]] of the [[aip]] it represents if that aip has an active state (e.g. unread messages in sense, balance change in sigma)
+star icons inherit [[emotion]] from their [[aip]]: sense icon glows when unread messages, sigma when balance change. idle icons are neutral
 
 ## states
 
 | state | visual change | trigger |
 |-------|-------------|---------|
-| default | icon at standard color | — |
-| hover | icon scale 1.1×, label appears (if folded to icon-only) | pointer over star |
+| default | icons at standard color in circle | — |
+| hover | hovered icon scale 1.1×, label appears | pointer over star |
 | active | icon scale 0.95× | tap |
-| dragging | icon follows pointer, gap opens at new position | long-press + drag (desktop) |
+| dragging | icon follows pointer along circular track | long-press + drag (desktop) |
 
 state transitions: $150\text{ms}$ ease
 
@@ -73,19 +80,22 @@ state transitions: $150\text{ms}$ ease
 
 | viewport | grid zone | position |
 |----------|-----------|----------|
-| desktop | bottom-l (top half) | above [[prysm/graph]] |
-| mobile | stars area in bottom row | left of commander |
+| desktop | bottom-l | circular layout combining stars + graph |
+| mobile | stars area in bottom row | left of commander (linear) |
 
 ## 3D
 
-stars render at the same $p_z$ as the grid frame (persistent, $\mathcal{U} = 10$). icons face the neuron (billboard)
+stars render at frame $p_z$ ($\mathcal{U} = 10$). in 3D, star icons orbit the graph minimap as a ring in the xz-plane. icons face the neuron (billboard)
 
 ## ECS
 
 - Entity: stars organelle
 - Components:
   - `Sizing { width, height }`
-  - `Stack { direction, gap }`
+  - `CircularLayout { radius, center }` — desktop: positions icons in circle
+  - `Stack { direction, gap }` — mobile: linear fallback
   - `FoldSet { conformations }`
-  - `PinnedItems { list of (aip_id, icon_name, label) }`
-- System: `StarsSystem` reads avatar's pinned items, spawns ion + text children. `StarsDragSystem` handles reorder on desktop
+  - `PinnedItems { list of (aip_id, icon_name, label, angle) }`
+- Systems:
+  - `StarsSystem` reads avatar's pinned items, computes angle positions
+  - `StarsDragSystem` handles reorder on desktop (updates angle)
