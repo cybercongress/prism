@@ -4,62 +4,201 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-search cell in [[prysm]]
+search and network explorer cell in [[prysm]]
 
-the primary discovery interface of [[cyb/oracle]]. where a [[neuron]] asks questions and the [[cybergraph]] answers. the search query goes through [[prysm/mind]] (commander), results render in space zone as ranked [[prysm/aip]] cards and [[prysm/content]] particles ordered by [[cyberank]]
+the primary interface of [[cyb/oracle]]. search the [[cybergraph]], explore network state, browse blocks and transactions. contains 8 sub-pages accessible through the brain menu (left sidebar)
 
 ## protocol role
 
-cell in the element tree $\mathcal{T}$. renders inside space zone of [[prysm/grid]]. a cell is a membrane that composes molecules into a full [[aip]] experience
+cell in the element tree $\mathcal{T}$. renders inside space zone of [[prysm/grid]]. full page experience for [[cyb/oracle]]
 
 ## sizing
 
 fill × fill (occupies entire space zone)
 
-## structure
+## brain menu
+
+left sidebar navigation — present in oracle and robot contexts:
+
+```
+stack vertical [fix(25g) × auto, gap g/2]
+  ion + text [main]
+  ion + text [Particles]
+  ion + text [brain]
+  ion + text [Stats]
+  ion + text [Blocks]
+  ion + text [Txs]
+  ion + text [Contracts]
+  ion + text [Libs]
+```
+
+tap item → switches sub-page in space zone. active item highlighted
+
+## sub-pages
+
+### main
+
+hero landing page for search
+
+```
+glass [fill × fill, depth background]
+  stack vertical [gap 3g, align center]
+    tabs [search | ask | learn]
+    text [h1, "instantly and censorfree"]
+    text [h1, "find and deliver content"] — "find" and "deliver" in green
+    text [body, "decentralized ipfs search"]
+    text [body, "3 143 650 particles and growing"] — "particles" and "growing" in green
+    stack horizontal [gap 2g]
+      pill [green, "cyber"]
+      pill [green, "donut of knowledge"]
+      pill [green, "help"]
+```
+
+commander shows "Ask" input
+
+### Particles
+
+feed of all particles in the [[cybergraph]]
 
 ```
 glass [fill × fill, depth background, overflow scroll]
-  stack vertical [gap 2g, padding 3g]
-    filter [pill row: text, image, video, neuron]
-    --- results ---
-    aip [3-line, result 1, cyberank highest]
-    aip [3-line, result 2]
-    content [particle preview]
-    aip [2-line, result n]
-    ...
+  stack vertical [gap g]
+    glass [fill × fix(6g), depth midground] — per particle
+      text [body, particle name or CID]
+      ion [2g, particle type indicator] — optional, right side
 ```
+
+tap particle → navigate to particle detail (search results for that CID)
+
+### brain
+
+graph visualization — particles as circles, cyberlinks as lines
+
+```
+glass [fill × fill, depth background]
+  raster [graph render — particles (blue circles) + cyberlinks (green lines)]
+```
+
+in oracle: renders the global cybergraph neighborhood. in robot: renders the neuron's personal graph. commander shows "select 2 particles" + "Change limit" + fullscreen toggle
+
+### Stats
+
+network dashboard — grid of counters
+
+```
+glass [fill × fill, depth background]
+  grid [4 columns, 4 rows, gap 0]
+    counter [Negentropy, bits] | counter [GPU memory, MB] | counter [Transactions →] | counter [Blocks →]
+    counter [Cyberlinks] | counter [Particles →] | counter [Neurons] | counter [Inflation, %]
+    counter [Staked BOOT, %] | counter [Active heroes] | counter [Community pool] | counter [Proposals]
+    counter [Citizens] | counter [Gift claims] | counter [Contracts] | counter [Beta]
+```
+
+each counter in its own glass pane, separated by sabers. → indicates link to detail page. counters update in real-time
+
+### Blocks
+
+block explorer table
+
+```
+glass [fill × fill, depth background, overflow scroll]
+  table [sortable]
+    columns: hash ▲ | height ▲ (green, link) | tx ▲ | proposer address ▲ | timestamp UTC ▲
+    rows: live block feed, newest first
+```
+
+tap height → navigate to block detail. tap proposer → navigate to neuron profile
+
+### Txs
+
+transaction explorer table
+
+```
+glass [fill × fill, depth background, overflow scroll]
+  table
+    columns: status (✓/✗ icon) | tx (hash, green, link) | block height | type (icon + label)
+    rows: live tx feed
+```
+
+type column can have multiple stacked types per row (e.g. Withdraw Reward × 2). tap tx hash → transaction detail
+
+### Contracts
+
+smart contract explorer
+
+```
+glass [fill × fill, depth background, overflow scroll]
+  --- summary ---
+  stack horizontal [gap 0]
+    counter [Contracts count] | counter [Income, BOOT] | counter [Gas used] | counter [Total txs] | counter [Libs →]
+  --- table ---
+  table [sortable]
+    columns: Name | Address (green, link) | Owner (green, link) | Txs | Gas | Income
+    rows: sorted by Txs descending
+```
+
+tap address → contract detail. tap owner → neuron profile
+
+### Libs
+
+WASM code library (Codes)
+
+```
+glass [fill × fill, depth background, overflow scroll]
+  stack vertical [gap g]
+    glass [fill × auto, depth midground] — per code
+      stack horizontal [gap 2g]
+        text [h3, "#" + code_id]
+        stack vertical
+          text [caption, "Creator:"] + text [body, address]
+          text [caption, "Checksum:"] + text [body, hash]
+          text [caption, "Instances:"] + text [body, count]
+```
+
+commander shows "Select .wasm file" + "Upload" button
 
 ## fold
 
-$\mathcal{F}$:
-- $l_1$ ($w_{min} = 40g$): filter bar + 3-line result cards + content previews
-- $l_2$ ($w_{min} = 20g$): filter bar + 2-line result cards
-- $l_3$ ($w_{min} = 10g$, mobile): no filter bar, 2-line cards, compact padding $g$
+$\mathcal{F}$ per sub-page:
+
+| sub-page | $l_1$ ($w_{min}$) | $l_2$ | $l_3$ (mobile) |
+|----------|-----|------|-------|
+| main | $40g$: full hero | $20g$: compact hero | $10g$: search only |
+| Particles | $25g$: name + type icon | $10g$: name only | same |
+| brain | $30g$: full graph | $15g$: reduced node limit | same |
+| Stats | $40g$: 4×4 grid | $20g$: 2×4 grid | $10g$: 1×4 stack |
+| Blocks | $40g$: all columns | $20g$: hash + height + tx | $10g$: height + tx |
+| Txs | $40g$: all columns | $20g$: tx + height + type | $10g$: tx + type |
+| Contracts | $40g$: all columns | $20g$: name + txs + income | $10g$: name + txs |
+| Libs | $25g$: full card | $10g$: id + creator | same |
 
 ## emotion
 
-result cards carry [[emotion]] from [[cyberank]]: green accent for high-confidence results. the space zone itself tints based on result quality — green when results are strong, neutral when sparse
+| element | emotion |
+|---------|---------|
+| hero text "find" "deliver" | #00fe00 green — action words |
+| particle count "growing" | #00fe00 green — positive growth |
+| block height links | #00fe00 green — navigable |
+| tx status ✓ | #00fe00 green — success |
+| tx status ✗ | #ff0000 red — failed |
+| stats counters | neutral, → links in green |
 
 ## states
 
 | state | visual | trigger |
 |-------|--------|---------|
-| idle | last results visible or seed CID | no active search |
-| searching | skeleton cards loading | query submitted |
-| results | ranked cards appear | results arrived |
-| seed | seed CID hash bars of the query | no cyberlinks for this query yet |
+| main | hero page | default, no query |
+| searching | results loading in space | query submitted |
+| results | ranked particle cards | results arrived |
+| sub-page | active sub-page content | brain menu item tapped |
 
-## interaction
+## where in [[prysm/grid]]
 
-- query entered in commander → search results populate space
-- tap result card → navigate to particle
-- tap filter pill → narrow results by type
-- scroll → load more results
+space zone. brain menu occupies left part of space (overlay or inset depending on viewport). commander adapts per sub-page: "Ask" for main, "select 2 particles" for brain, "Select .wasm file" + "Upload" for Libs
 
 ## 3D
 
-oracle-cell renders at ambient $p_z$ ($\mathcal{U} = 0$). in 3D, result particles position by gravity — high-focus results closer to neuron
+renders at ambient $p_z$. brain graph visualization is inherently 3D-ready — particles and cyberlinks can extend into depth via gravity
 
 ## ECS
 
@@ -68,8 +207,14 @@ oracle-cell renders at ambient $p_z$ ($\mathcal{U} = 0$). in 3D, result particle
   - `Sizing { width: Fill, height: Fill }`
   - `Overflow { scroll }`
   - `FoldSet { conformations }`
-  - `SearchQuery { cid }` — current query particle
-  - `SearchResults { list of (particle_cid, cyberank, format) }`
+  - `ActiveSubPage { main | particles | brain | stats | blocks | txs | contracts | libs }`
+  - `SearchQuery { cid }` — for main/search
+  - `BrainMenuVisible { bool }`
 - Systems:
-  - `OracleSearchSystem` reads query from commander, fetches results from [[cybergraph]]
-  - `OracleRenderSystem` spawns aip cards and content organelles from results
+  - `OracleMenuSystem` handles brain menu navigation
+  - `OracleSearchSystem` handles search from commander
+  - `OracleStatsSystem` fetches network stats
+  - `OracleBlocksSystem` fetches live blocks
+  - `OracleTxsSystem` fetches live transactions
+  - `OracleContractsSystem` fetches contract list
+  - `OracleLibsSystem` fetches WASM codes + handles upload
