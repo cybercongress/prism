@@ -71,6 +71,37 @@ glass [fill × fill, depth background, overflow scroll]
       pill [emotion, "3232 Delegators"]
 ```
 
+### validator detail: rumors tab
+
+delegation/undelegation activity for this validator
+
+```
+table [sortable]
+  columns: status ▲ (✓/✗) | type ▲ (Delegate/Undelegate) | timestamp ▲ | tx (hash, green, link) | action
+  action expanded: delegator (neuron name, link) | validator (name) | amount (counter, green)
+```
+
+commander: "Bro_n_Bro" (validator name) | Unstake | Restake | Stake — action buttons for this validator
+
+### validator detail: leadership tab
+
+validator's own governance and leadership activity. same table structure as rumors but filtered to validator's own transactions
+
+### validator detail: search tab
+
+particles linked by this validator — validator's knowledge contributions
+
+```
+stack vertical
+  filter bar [all | star | delete | avatar icons | "0 → 1" | "1 particles"]
+  stack vertical [gap g]
+    glass [fill × auto, depth midground] — per particle
+      text [body, particle name]
+      content [particle preview]
+```
+
+commander: "add keywords, hash or file" + "Cyberlink" + "edit in studio"
+
 ## fold
 
 $\mathcal{F}$:
