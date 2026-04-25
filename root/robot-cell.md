@@ -167,6 +167,27 @@ raster [mushroom image]
 
 future: karma breakdown, history, rank position
 
+### Time
+
+full transaction history for this neuron
+
+```
+table [sortable]
+  columns: status ▲ (✓/✗) | type ▲ (icon + label) | timestamp ▲ | tx (hash, green, link) | action
+  rows:
+    ✓ | IBC Ack Packet | 24 days ago | BF4537...C8B976 | ibc.core.channel.v1.MsgAcknowledgement
+    ✓ | IBC Transfer | 24 days ago | 5D0656...3CF12A | from/to/channel/token/amount (expandable)
+    ✓ | Receive | 31 days ago | CA3867...7F8EF2 | from: mastercyb, to: cybergirl, amount: 42
+    ✓ | Send | 31 days ago | FB279E...5DB798 | from: cybergirl, to: mastercyb, amount: 1
+    ✗ | Cyberlink | 31 days ago | B125B9...E4F9AA | neuron: cybergirl, from: CID, to: CID
+```
+
+action column expands inline for IBC details (channel, timeout), send/receive (from/to/amount), cyberlinks (particle CIDs). differs from [[prysm/time-widget]]: widget = compact last events, this = full sortable history
+
+### Sigma (inside robot)
+
+personal token balances scoped to this neuron
+
 ### Soul
 
 cybscript editor — programmable neuron behavior
