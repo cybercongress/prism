@@ -147,18 +147,17 @@
   <rect x="40" y="480" width="720" height="1" fill="#1a1a1a"/>
   <text x="400" y="504" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">in context: commander (mind molecule)</text>
 
-  <!-- commander: glass(fill×6g) with spectrum saber top + ‹ › + input + two buttons -->
+  <!-- commander: glass(fill×6g) + spectrum saber underline + two buttons -->
   <!-- W=720, centered. offset=(800-720)/2=40 -->
   <g transform="translate(40, 516)">
     <rect x="0" y="0" width="720" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-    <!-- spectrum saber across top -->
-    <rect x="0" y="0" width="720" height="2" rx="1" fill="url(#spectrum)" opacity="0.6"/>
     <!-- arrows -->
     <text x="20" y="30" font-family="Play, sans-serif" font-size="16" fill="#555">‹</text>
     <text x="40" y="30" font-family="Play, sans-serif" font-size="16" fill="#555">›</text>
-    <!-- input area with underline -->
+    <!-- input area — NO separate underline, spectrum IS the underline -->
     <text x="64" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">add keywords, hash or file</text>
-    <rect x="64" y="46" width="380" height="1" fill="#fff" filter="url(#gw)"/>
+    <!-- spectrum saber underline at bottom of commander -->
+    <rect x="0" y="46" width="720" height="2" rx="1" fill="url(#spectrum)" opacity="0.7"/>
     <!-- button 1: Cyberlink (confirm) with saber frame -->
     <rect x="462" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
     <rect x="464" y="0" width="24" height="48" fill="url(#igr)"/>
