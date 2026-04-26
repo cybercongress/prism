@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <!-- glass atom: 4 depth levels on dark background -->
+  <!-- g=8, each glass 80×48 (10g×6g), padding g, corner-radius g/2 -->
+  <rect width="400" height="320" fill="#000000"/>
+
+  <!-- labels -->
+  <text x="200" y="24" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">glass depth levels</text>
+
+  <!-- foreground: opacity 0.70 -->
+  <g transform="translate(24, 48)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.70"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#d7d7d7" text-anchor="middle">foreground</text>
+    <text x="40" y="86" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">0.70</text>
+  </g>
+
+  <!-- midground: opacity 0.38 -->
+  <g transform="translate(128, 48)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#d7d7d7" text-anchor="middle">midground</text>
+    <text x="40" y="86" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">0.38</text>
+  </g>
+
+  <!-- background: opacity 0.15 -->
+  <g transform="translate(232, 48)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.15"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#d7d7d7" text-anchor="middle">background</text>
+    <text x="40" y="86" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">0.15</text>
+  </g>
+
+  <!-- subtle: opacity 0.07 -->
+  <g transform="translate(336, 48)">
+    <rect x="0" y="0" width="48" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.07"/>
+    <text x="24" y="72" font-family="Play, sans-serif" font-size="12" fill="#d7d7d7" text-anchor="middle">subtle</text>
+    <text x="24" y="86" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">0.07</text>
+  </g>
+
+  <!-- emotion tints on midground glass -->
+  <text x="200" y="128" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">emotion tint (15% on midground)</text>
+
+  <!-- joy/green tint -->
+  <g transform="translate(24, 144)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#00fe00" opacity="0.15"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">joy</text>
+  </g>
+
+  <!-- anger/red tint -->
+  <g transform="translate(128, 144)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ff0000" opacity="0.15"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#ff0000" text-anchor="middle">anger</text>
+  </g>
+
+  <!-- surprise/yellow tint -->
+  <g transform="translate(232, 144)">
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <rect x="0" y="0" width="80" height="48" rx="4" ry="4" fill="#fcf000" opacity="0.15"/>
+    <text x="40" y="72" font-family="Play, sans-serif" font-size="12" fill="#fcf000" text-anchor="middle">surprise</text>
+  </g>
+
+  <!-- interest/blue tint -->
+  <g transform="translate(336, 144)">
+    <rect x="0" y="0" width="48" height="48" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <rect x="0" y="0" width="48" height="48" rx="4" ry="4" fill="#00acff" opacity="0.15"/>
+    <text x="24" y="72" font-family="Play, sans-serif" font-size="12" fill="#00acff" text-anchor="middle">interest</text>
+  </g>
+
+  <!-- nesting example -->
+  <text x="200" y="240" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">nesting (max 3 deep)</text>
+  <g transform="translate(100, 256)">
+    <!-- outer: background -->
+    <rect x="0" y="0" width="200" height="56" rx="4" ry="4" fill="#ffffff" opacity="0.15"/>
+    <!-- middle: midground -->
+    <rect x="8" y="8" width="184" height="40" rx="4" ry="4" fill="#ffffff" opacity="0.38"/>
+    <!-- inner: foreground -->
+    <rect x="16" y="16" width="168" height="24" rx="4" ry="4" fill="#ffffff" opacity="0.70"/>
+    <text x="100" y="32" font-family="Play, sans-serif" font-size="12" fill="#000000" text-anchor="middle">3 levels</text>
+  </g>
+</svg>

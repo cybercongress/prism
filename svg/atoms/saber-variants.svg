@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <!-- saber atom: orientations, weights, glow -->
+  <!-- g=8 -->
+  <defs>
+    <filter id="glow-white" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#00fe00" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="colored-blur"/>
+      <feMerge><feMergeNode in="colored-blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#ff0000" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="colored-blur"/>
+      <feMerge><feMergeNode in="colored-blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-yellow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#fcf000" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="colored-blur"/>
+      <feMerge><feMergeNode in="colored-blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="400" height="320" fill="#000000"/>
+
+  <!-- row 1: weights and orientations -->
+  <text x="200" y="20" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">saber weights and orientations</text>
+
+  <!-- vertical g/8 -->
+  <g transform="translate(40, 40)">
+    <rect x="0" y="0" width="1" height="48" fill="#ffffff"/>
+    <text x="0" y="68" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">g/8</text>
+    <text x="0" y="80" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">vert</text>
+  </g>
+
+  <!-- vertical g/4 -->
+  <g transform="translate(80, 40)">
+    <rect x="0" y="0" width="2" height="48" fill="#ffffff"/>
+    <text x="1" y="68" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">g/4</text>
+    <text x="1" y="80" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">vert</text>
+  </g>
+
+  <!-- horizontal g/8 -->
+  <g transform="translate(120, 60)">
+    <rect x="0" y="0" width="80" height="1" fill="#ffffff"/>
+    <text x="40" y="20" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">g/8 horiz</text>
+  </g>
+
+  <!-- horizontal g/4 -->
+  <g transform="translate(220, 58)">
+    <rect x="0" y="0" width="80" height="2" fill="#ffffff"/>
+    <text x="40" y="22" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">g/4 horiz</text>
+  </g>
+
+  <!-- row 2: glow -->
+  <text x="200" y="116" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">saber glow (emotion colors)</text>
+
+  <!-- white glow -->
+  <g transform="translate(40, 136)">
+    <rect x="0" y="0" width="2" height="48" fill="#ffffff" filter="url(#glow-white)"/>
+    <text x="1" y="68" font-family="Play, sans-serif" font-size="10" fill="#d7d7d7" text-anchor="middle">neutral</text>
+  </g>
+
+  <!-- green glow (joy/confirm) -->
+  <g transform="translate(120, 136)">
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#glow-green)"/>
+    <text x="1" y="68" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">joy</text>
+  </g>
+
+  <!-- red glow (anger/danger) -->
+  <g transform="translate(200, 136)">
+    <rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#glow-red)"/>
+    <text x="1" y="68" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">anger</text>
+  </g>
+
+  <!-- yellow glow (surprise/caution) -->
+  <g transform="translate(280, 136)">
+    <rect x="0" y="0" width="2" height="48" fill="#fcf000" filter="url(#glow-yellow)"/>
+    <text x="1" y="68" font-family="Play, sans-serif" font-size="10" fill="#fcf000" text-anchor="middle">surprise</text>
+  </g>
+
+  <!-- row 3: saber in context (button frame) -->
+  <text x="200" y="232" font-family="Play, sans-serif" font-size="16" fill="#777777" text-anchor="middle">saber as button frame</text>
+
+  <g transform="translate(100, 248)">
+    <!-- left saber -->
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#glow-green)"/>
+    <!-- button area (transparent) -->
+    <text x="100" y="28" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Confirm</text>
+    <!-- right saber -->
+    <rect x="198" y="0" width="2" height="48" fill="#00fe00" filter="url(#glow-green)"/>
+  </g>
+</svg>
