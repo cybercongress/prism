@@ -21,26 +21,26 @@ button is a molecule in the element tree $\mathcal{T}$. its membrane is whatever
 
 ## sizing
 
-| variant | sizing |
-|---------|--------|
-| default | fix(auto, content) × fix($6g$) |
-| double | fix(auto) × fix($6g$) — two actions side by side |
-| triple | fix(auto) × fix($6g$) — three actions |
+height: fix($6g$)
 
-$s_{min} = (6g, 6g)$ — minimum for one saber + label + saber
+width computed from content:
+
+$$W = \underbrace{g/4}_{saber} + \underbrace{3g}_{glow} + \underbrace{2g}_{pad} + \text{text\_width} + \underbrace{2g}_{pad} + \underbrace{3g}_{glow} + \underbrace{g/4}_{saber}$$
+
+$W = 10.5g + \text{text\_width}$
+
+$s_{min} = (6g, 6g)$ — shortest label (one icon) still gets $2g$ padding each side
+
+padding from glow edge to text is always $2g$ regardless of text length. short text = narrow button. long text = wide button. breathing room is constant
 
 ## structure
 
-default:
 ```
 saber [vertical, g/4, glow inward 3g, emotion color]
+  — pad 2g —
 text [body, label, emotion color]
+  — pad 2g —
 saber [vertical, g/4, glow inward 3g, emotion color]
-```
-
-double:
-```
-saber | text action1 | saber | text action2 | saber
 ```
 
 no glass background — the button is transparent. sabers and glow define the boundaries
@@ -82,8 +82,8 @@ state transitions: $150\text{ms}$ ease
 - primary actions: inside [[prysm/mind]] (commander) — sign, send, confirm
 - secondary actions: inside [[prysm/bar]], [[prysm/display]], [[prysm/neuron-card]]
 - destructive actions: never first or leftmost — always require deliberate reach
-- double/triple: primary action on the left, secondary/cancel on the right
 - on mobile ($\square_w \leq 96g$): buttons stretch to fill when inside commander
+- composition of multiple buttons (side by side with shared sabers) is cell-level — not defined here
 
 ## 3D
 
@@ -94,7 +94,7 @@ button renders at the same $p_z$ as its membrane. in 3D, button sabers glow in t
 - Entity: button organelle
 - Components:
   - `Sizing { width, height: Fix(6) }`
-  - `ButtonVariant { default | double | triple }`
+  - `ButtonVariant { default }`
   - `ButtonLabel { text }`
   - `ButtonIcon { glyph: Option }`
   - `Emotion { color }` — determines text + saber glow
