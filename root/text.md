@@ -42,6 +42,36 @@ all values in spatial quanta $g$
 - no bold. no italic. no underline. no decoration
 - hierarchy only through size and weight
 
+### font metrics derivation
+
+the relationship between spatial quantum $g$ and font rendering:
+
+$$\text{font\_size}(token) = \text{size}(token) \cdot (g_{px} / g)$$
+
+$g_{px}$ — the renderer's interpretation of $g$ in pixels (convention: $g_{px} = 8\text{px}$). for body($2g$): $\text{font\_size} = 2 \cdot 8 = 16\text{px}$
+
+| token | size | font-size at $g_{px}=8$ | cap-height (Play) | line-height (computed) |
+|-------|------|------------------------|-------------------|----------------------|
+| h1 | $4g$ | 32px | ~23px | $4g \cdot 1.2 = 4.8g$ = 38.4px |
+| h2 | $3g$ | 24px | ~17px | $3g \cdot 1.2 = 3.6g$ = 28.8px |
+| h3 | $5g/2$ | 20px | ~14px | $2.5g \cdot 1.2 = 3g$ = 24px |
+| body | $2g$ | 16px | ~11px | $2g \cdot 1.4 = 2.8g$ = 22.4px |
+| caption | $7g/4$ | 14px | ~10px | $1.75g \cdot 1.4 = 2.45g$ = 19.6px |
+| micro | $3g/2$ | 12px | ~8px | $1.5g \cdot 1.0 = 1.5g$ = 12px |
+
+character width for Play at body(16px): average ~8.7px for Latin, ~9.2px for Cyrillic. since Play is not strictly monospace, text width computation uses the renderer's font shaping — this is why text glyph metrics are the exception to quantum alignment (I5)
+
+the minimum legible size: micro($3g/2$) at $g_{px} = 8$ = 12px. below this, Play glyphs lose legibility on standard DPI (96-144). on high-DPI (288+), micro remains legible at smaller $g_{px}$
+
+**renderer independence.** the protocol outputs size in quanta ($2g$, $3g$). the renderer translates: $\text{font\_size} = \text{size\_quanta} \cdot g_{px}$. different renderers may use different $g_{px}$:
+
+| renderer | $g_{px}$ | body font-size |
+|----------|---------|---------------|
+| Portal (web) | 8px | 16px |
+| Terminal (Sugarloaf) | 1 cell height | 1 cell × 2 = 2 cells |
+| Bevy UI | 8 logical px | 16 logical px (scales with DPI) |
+| 3D (Ren) | 8 world units | 16 world units |
+
 ## occupy
 
 text occupies space based on content length and font size:
