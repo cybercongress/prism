@@ -70,11 +70,11 @@
   <g transform="translate(232, 248)">
     <!-- Delete key W=174 -->
     <rect x="2" y="0" width="24" height="48" fill="url(#irr)"/><rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="87" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🗑 Delete key</text>
+    <text x="87" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">Delete key 🗑</text>
     <rect x="148" y="0" width="24" height="48" fill="url(#irl)"/><rect x="172" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
     <!-- gap 24 → Burn at 198. W=138 -->
     <rect x="200" y="0" width="24" height="48" fill="url(#irr)"/><rect x="198" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="267" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🔥 Burn</text>
+    <text x="267" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">Burn 🔥</text>
     <rect x="310" y="0" width="24" height="48" fill="url(#irl)"/><rect x="334" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
   </g>
 
