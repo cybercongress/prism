@@ -1,9 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
   <defs>
     <filter id="gw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gb" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00acff" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gr" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#ff0000" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="igr"><stop offset="0%" stop-color="#00fe00" stop-opacity="0.12"/><stop offset="100%" stop-color="#00fe00" stop-opacity="0"/></linearGradient>
+    <linearGradient id="igl" x1="1" x2="0"><stop offset="0%" stop-color="#00fe00" stop-opacity="0.12"/><stop offset="100%" stop-color="#00fe00" stop-opacity="0"/></linearGradient>
   </defs>
 
   <rect width="800" height="480" fill="#000"/>
@@ -137,6 +139,34 @@
     <text x="16" y="22" font-family="Play, sans-serif" font-size="14" fill="#4b4b4d">compact input...</text>
     <rect x="16" y="30" width="208" height="1" fill="#fff" filter="url(#gw)"/>
     <text x="120" y="52" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">compact (4g)</text>
+  </g>
+
+  <!-- ═══ ROW 5: IN CONTEXT — COMMANDER ═══ -->
+  <rect x="40" y="488" width="720" height="1" fill="#1a1a1a"/>
+  <text x="400" y="512" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">in context: commander (mind molecule)</text>
+
+  <!-- commander: glass(fill×6g) with ‹ › + input(fill) + saber + button -->
+  <!-- W=720, centered. offset=(800-720)/2=40 -->
+  <g transform="translate(40, 528)">
+    <rect x="0" y="0" width="720" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <!-- arrows -->
+    <text x="20" y="30" font-family="Play, sans-serif" font-size="16" fill="#555">‹</text>
+    <text x="40" y="30" font-family="Play, sans-serif" font-size="16" fill="#555">›</text>
+    <!-- input area with underline -->
+    <text x="64" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">add keywords, hash or file</text>
+    <rect x="64" y="46" width="400" height="1" fill="#fff" filter="url(#gw)"/>
+    <!-- saber separator -->
+    <rect x="480" y="8" width="1" height="32" fill="rgba(255,255,255,0.12)"/>
+    <!-- button: Cyberlink with saber frame -->
+    <rect x="498" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <rect x="500" y="0" width="24" height="48" fill="url(#igr)"/>
+    <text x="564" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Cyberlink</text>
+    <rect x="604" y="0" width="24" height="48" fill="url(#igl)"/>
+    <rect x="628" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <!-- saber separator -->
+    <rect x="646" y="8" width="1" height="32" fill="rgba(255,255,255,0.12)"/>
+    <!-- edit in studio button -->
+    <text x="680" y="30" font-family="Play, sans-serif" font-size="14" fill="#d7d7d7" text-anchor="middle">edit in studio</text>
   </g>
 
 </svg>
