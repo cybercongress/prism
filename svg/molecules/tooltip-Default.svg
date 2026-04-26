@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 188 118" width="188" height="118">
-  <!-- 1-molecules/tooltip/Default -->
-  <!-- prysm molecule, acid palette -->
-  <g id="1-molecules-tooltip-Default" >
-    <rect id="Rectangle-697" x="0.0" y="33.0" width="188.0" height="85.0" style="fill:#1c1c1c;fill-opacity:0.53" data-shape="path"/>
-    <text id="network-chooser-you-can-switch-to-another-network-by-clicking-on-its-name" x="9.0" y="55.0" font-family="monospace" font-size="12" fill="#ffffff">network chooser you can switch to another network by clicking on its name</text>
-    <rect id="image-94" x="72.0" y="0.0" width="16.0" height="21.0" style="fill:#d7d7d7"/>
-  </g>
-</svg>

@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 16" width="96" height="16">
-  <!-- 1-molecules/content/text+icon-LR -->
-  <!-- prysm molecule, acid palette -->
-  <g id="1-molecules-content-text+icon-LR" >
-    <text id="text-C" x="30.0" y="15.0" font-family="monospace" font-size="14" fill="#ffffff">text C</text>
-    <!-- use: atoms-icon-_16x16-icon--logo-cyb-16 at (80.0,0.0) 16.0x16.0 -->
-    <!-- use: atoms-icon-_16x16-icon--logo-cyb-16 at (0.0,0.0) 16.0x16.0 -->
-  </g>
-</svg>
