@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <defs>
+    <filter id="gw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gb" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00acff" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gr" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#ff0000" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="800" height="480" fill="#000"/>
+
+  <!-- input anatomy: glass(fill×6g) + text + saber underline(g/8) -->
+  <!-- W=240 (30g) for all examples. H=48 (6g). underline at bottom. -->
+  <!-- pad from glass edge to text = 2g = 16px -->
+
+  <!-- ═══ ROW 1: VARIANTS ═══ -->
+  <text x="400" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">variants</text>
+
+  <!-- 3 inputs × 240 + 2 × 24 = 768. offset = (800-768)/2 = 16 -->
+
+  <!-- text L: icon left + text -->
+  <g transform="translate(16, 40)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="24" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">🔍</text>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">search the cybergraph...</text>
+    <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">text L (idle)</text>
+  </g>
+
+  <!-- text R: text + icon right -->
+  <g transform="translate(280, 40)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">enter amount...</text>
+    <text x="212" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">⌄</text>
+    <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">text R (idle)</text>
+  </g>
+
+  <!-- text LR: icons both sides -->
+  <g transform="translate(544, 40)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="24" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">🔍</text>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">filter particles...</text>
+    <text x="212" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">⚙</text>
+    <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">text LR (idle)</text>
+  </g>
+
+  <!-- ═══ ROW 2: EMOTION STATES ═══ -->
+  <rect x="40" y="124" width="720" height="1" fill="#1a1a1a"/>
+  <text x="400" y="148" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">saber underline emotion</text>
+
+  <!-- 4 inputs × 170 + 3 × 24 = 752. offset = (800-752)/2 = 24 -->
+
+  <!-- idle: white underline -->
+  <g transform="translate(24, 164)">
+    <rect x="0" y="0" width="170" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">enter value...</text>
+    <rect x="16" y="46" width="138" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="85" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">idle</text>
+  </g>
+
+  <!-- focus: blue underline -->
+  <g transform="translate(218, 164)">
+    <rect x="0" y="0" width="170" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(0,172,255,0.2)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">cyber|</text>
+    <rect x="16" y="46" width="138" height="1" fill="#00acff" filter="url(#gb)"/>
+    <text x="85" y="68" font-family="Play, sans-serif" font-size="10" fill="#00acff" text-anchor="middle">focus</text>
+  </g>
+
+  <!-- valid: green underline -->
+  <g transform="translate(412, 164)">
+    <rect x="0" y="0" width="170" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(0,254,0,0.2)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">bostrom1abc...</text>
+    <rect x="16" y="46" width="138" height="1" fill="#00fe00" filter="url(#gg)"/>
+    <text x="85" y="68" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">valid</text>
+  </g>
+
+  <!-- error: red underline -->
+  <g transform="translate(606, 164)">
+    <rect x="0" y="0" width="170" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,0,0,0.2)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">invalid_addr</text>
+    <rect x="16" y="46" width="138" height="1" fill="#ff0000" filter="url(#gr)"/>
+    <text x="85" y="68" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">error</text>
+  </g>
+
+  <!-- ═══ ROW 3: SPECIAL VARIANTS ═══ -->
+  <rect x="40" y="248" width="720" height="1" fill="#1a1a1a"/>
+  <text x="400" y="272" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">special variants</text>
+
+  <!-- 3 inputs × 240 + 2 × 24 = 768. offset = 16 -->
+
+  <!-- dropdown -->
+  <g transform="translate(16, 288)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
+    <text x="216" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">⌄</text>
+    <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">dropdown</text>
+  </g>
+
+  <!-- neuron (bech32) -->
+  <g transform="translate(280, 288)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(0,254,0,0.2)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">bostrom1q7z...</text>
+    <rect x="16" y="46" width="208" height="1" fill="#00fe00" filter="url(#gg)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">neuron</text>
+  </g>
+
+  <!-- token + amount -->
+  <g transform="translate(544, 288)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <circle cx="28" cy="24" r="10" fill="none" stroke="#00fe00" stroke-width="1"/>
+    <text x="28" y="28" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">B</text>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">1 000 000</text>
+    <text x="216" y="30" font-family="Play, sans-serif" font-size="12" fill="#777">BOOT</text>
+    <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">token + amount</text>
+  </g>
+
+  <!-- ═══ ROW 4: DISABLED + COMPACT ═══ -->
+  <rect x="40" y="372" width="720" height="1" fill="#1a1a1a"/>
+  <text x="400" y="396" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">disabled · compact (4g height)</text>
+
+  <!-- 2 inputs × 240 + 1 × 24 = 504. offset = (800-504)/2 = 148 -->
+
+  <!-- disabled -->
+  <g transform="translate(148, 412)">
+    <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">not available</text>
+    <rect x="16" y="46" width="208" height="1" fill="#4b4b4d"/>
+    <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled</text>
+  </g>
+
+  <!-- compact 4g height -->
+  <g transform="translate(412, 420)">
+    <rect x="0" y="0" width="240" height="32" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="16" y="22" font-family="Play, sans-serif" font-size="14" fill="#4b4b4d">compact input...</text>
+    <rect x="16" y="30" width="208" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="120" y="52" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">compact (4g)</text>
+  </g>
+
+</svg>
