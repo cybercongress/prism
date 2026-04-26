@@ -105,9 +105,72 @@ emotion flows through the element tree $\mathcal{T}$:
 
 an atom never computes emotion. it receives and renders. a molecule may compute emotion for its sub-atoms (e.g. [[prysm/counter]] computes polarity from value delta). a cell computes emotion from the [[cybergraph]]
 
+## concrete thresholds
+
+threshold values for every component that uses $\varepsilon_{threshold}$:
+
+### karma (avatar border, neuron-card)
+
+| zone | condition | color |
+|------|-----------|-------|
+| high | karma $\geq \mu + \sigma$ | green (#00fe00) |
+| medium | $\mu - \sigma \leq$ karma $< \mu + \sigma$ | white (#ffffff) |
+| low | karma $< \mu - \sigma$ | red (#ff0000) |
+
+$\mu$ — network mean karma, $\sigma$ — network standard deviation. thresholds are relative to network distribution, not absolute
+
+### validator pills (sphere-cell)
+
+each metric (APR, power, commission, self-stake) evaluated independently:
+
+| zone | condition | color |
+|------|-----------|-------|
+| above average | $v \geq \mu_{network}$ | green (#00fe00) |
+| around average | $\mu_{network} \cdot 0.8 \leq v < \mu_{network}$ | yellow (#fcf000) |
+| below average | $v < \mu_{network} \cdot 0.8$ | red (#ff0000) |
+
+### E-Ratio (hfr-cell)
+
+| zone | condition | color |
+|------|-----------|-------|
+| healthy | $e \geq 0.5$ | green (#00fe00) |
+| low | $0.2 \leq e < 0.5$ | yellow (#fcf000) |
+| depleted | $e < 0.2$ | red (#ff0000) |
+
+$e = \text{available energy} / \text{max energy}$, range $[0, 1]$
+
+### transaction status
+
+| state | color |
+|-------|-------|
+| complete | green (#00fe00) |
+| pending | yellow (#fcf000) |
+| failed | red (#ff0000) |
+
+categorical, not threshold — included here because it follows the green/yellow/red pattern
+
+### cyberank (content, pill, oracle-cell particle rank)
+
+uses $\varepsilon_{continuous}$: $v = \log_{10}(\text{rank})$, $v_{min} = 0$, $v_{max} = \log_{10}(\text{max\_rank})$. higher rank → greener. the logarithmic scale prevents a few high-rank particles from compressing the entire spectrum
+
 ## default
 
 when no signal drives emotion: $\varepsilon = \text{neutral}$ (white). when a component is disabled: $\varepsilon = \text{inactive}$ (gray)
+
+## fallback
+
+when `EmotionSource` data is unavailable (chain offline, RPC timeout, fetching):
+
+| condition | emotion | rationale |
+|-----------|---------|-----------|
+| data fetching (loading) | neutral (white) | no information — no signal |
+| chain unreachable | neutral (white) | no data to evaluate — show absence of signal, not false signal |
+| stale data (> 60s old) | last computed emotion, opacity 50% | fade indicates staleness — the neuron sees that information is aging |
+| error in computation | neutral (white) + adviser red message | emotion system fails gracefully — never show wrong color |
+
+the rule: emotion must never lie. if the system cannot compute a truthful signal, it shows no signal (neutral). showing a false green on stale data is worse than showing white
+
+ECS: `EmotionSource` includes `freshness: Instant`. `EmotionSystem` checks freshness: if $t_{now} - t_{fresh} > 60s$, apply 50% opacity to `Emotion`. if source is `None`, emit neutral
 
 ## ECS
 
