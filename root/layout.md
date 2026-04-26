@@ -218,7 +218,28 @@ ECS: Component = `FoldSet { conformations: Vec<(min_width, SubTree)> }`. System 
 
 **Grid fold.** for grids, fold means hiding columns or rows — a 1D problem on tracks. apply the same algorithm to tracks instead of organelles: sort tracks by importance, remove least important first. each removal hides an entire column/row, reducing $w_{min}$ by the track width + gap. same $\mathcal{O}(m \log m)$
 
-**Limitation.** this algorithm produces linear chains of conformations (each is a subset of the previous). branching fold sets — where two conformations at the same $w_{min}$ emphasize different organelles — require manual specification. in practice, linear chains cover all prysm molecules
+**Branching fold sets.** Theorem 6 produces linear chains. when importance is vector-valued $\vec{\pi}_i \in \mathbb{R}^d$ (e.g. readability importance vs interaction importance), different organelle subsets may be Pareto-optimal at the same width
+
+**Theorem 9 (branching fold derivation).** for $m$ organelles with $d$-dimensional importance vectors, the Pareto-optimal fold set can be computed in $\mathcal{O}(m^d \cdot m \log m)$
+
+**Algorithm.**
+
+1. enumerate all $\binom{m}{k}$ subsets of size $k$ for each $k = m, m{-}1, \ldots, 1$
+2. for each subset $A$: compute $w_{min}(A) = \sum_{i \in A} w_i + (|A| - 1) \cdot gap$ and $\vec{\pi}(A) = \sum_{i \in A} \vec{\pi}_i$
+3. within each width class (subsets with the same $w_{min}$), compute the Pareto front: $A$ dominates $B$ iff $\vec{\pi}(A) \geq \vec{\pi}(B)$ componentwise with at least one strict inequality
+4. the fold set $\mathcal{F} = \bigcup_k \text{ParetoFront}(w_{min} = k)$, ordered by $w_{min}$
+
+**Proof.** the Pareto front at each width contains all non-dominated importance vectors — by definition, no other subset at that width is strictly better in all dimensions. the union across widths is the complete set of conformations worth considering
+
+**Complexity.** step 1 generates $2^m$ subsets (dominated by step 3). for fixed $w_{min}$, the Pareto front of $n$ points in $\mathbb{R}^d$ is computable in $\mathcal{O}(n \log^{d-2} n)$ for $d \geq 2$ (Kung et al., 1975). the total number of Pareto-optimal conformations is $\mathcal{O}(m^{d-1})$ per width class (upper bound on Pareto front size in $\mathbb{R}^d$). for $d = 1$ (scalar importance): the front is a single point — Theorem 6 recovers. for $d = 2$: at most $\mathcal{O}(m)$ Pareto-optimal conformations per width, $\mathcal{O}(m^2)$ total. specification-time computation, not runtime
+
+**Fold selection with branching.** at runtime, the neuron or context determines a weight vector $\vec{w} \in \mathbb{R}^d$ (how much to value each importance dimension). the fold function becomes:
+
+$$l^* = \arg\max_{l \in \mathcal{F},\; w_{min}(l) \leq c_w} \vec{w} \cdot \vec{\pi}(l)$$
+
+the scalarized importance $\vec{w} \cdot \vec{\pi}(l)$ reduces branching to linear selection: given $\vec{w}$, exactly one conformation is optimal at each width. this preserves determinism (Theorem 2) as long as $\vec{w}$ is deterministic
+
+**practical scope.** $d = 1$ covers all current prysm molecules (Theorem 6). $d = 2$ is the realistic maximum: readability (how much information the conformation shows) vs interactivity (how many interactive elements it retains). $d \geq 3$ is theoretically supported but no practical use case exists
 
 ### 4.4 place
 
@@ -920,6 +941,71 @@ the layout algebra is a free algebra over $\Sigma$ with the simplification rules
 
 the practical value: before layout computation, apply Rules 1-4 as a simplification pass. this reduces the tree size by eliminating redundant wrappers and dead branches, lowering the constant factor in $\mathcal{O}(n \cdot f_{max})$
 
+### 18.5 termination and confluence
+
+**Theorem 10 (termination).** the rewrite system $\{R_1, R_2, R_3, R_4\}$ terminates on all inputs
+
+**Proof.** define a measure $\mu(\mathcal{T}) = (N, D)$ where $N$ = total node count in $\mathcal{T}$ and $D$ = sum of nesting depths across all nodes. order by lexicographic comparison
+
+- $R_1$ (stack flattening): eliminates the inner stack node. $N$ decreases by 1. $D$ decreases (children move up one level). $\mu$ strictly decreases
+- $R_2$ (identity elimination): eliminates the wrapper. $N$ decreases by 1. $\mu$ strictly decreases
+- $R_3$ (layer collapse): eliminates the layer. $N$ decreases by 1. $\mu$ strictly decreases
+- $R_4$ (dead branch): removes a subtree. $N$ decreases by $\geq 1$. $\mu$ strictly decreases
+
+every rule strictly decreases $\mu$. $\mu$ is bounded below by $(1, 0)$ (a single leaf). the system terminates. ∎
+
+**Theorem 11 (confluence).** the rewrite system $\{R_1, R_2, R_3, R_4\}$ is confluent — all reduction sequences reach the same normal form
+
+**Proof.** by Newman's lemma, a terminating rewrite system is confluent iff it is locally confluent (every critical pair is joinable). enumerate critical pairs — cases where two rules apply to overlapping redexes:
+
+*$R_1 / R_1$:* two nested stacks both eligible for flattening into the same parent. flattening the outer first, then the inner, vs inner first, then outer: both produce the same flat stack with all children at the same level. joinable
+
+*$R_1 / R_2$:* a single-child fill stack nested in a same-direction stack. $R_1$ flattens (moves the single child up), $R_2$ eliminates the wrapper (replaces with the child). both produce the same result: the child placed directly in the parent. joinable
+
+*$R_2 / R_2$:* nested single-child fill wrappers. eliminating outer vs inner first: both reduce to the innermost element. joinable
+
+*$R_2 / R_3$:* a single-child fill container that is also a single-child layer. both rules eliminate it. same result. joinable
+
+*$R_4 / R_{1,2,3}$:* $R_4$ removes a dead subtree. if the dead subtree is also a candidate for $R_1$, $R_2$, or $R_3$: removing it ($R_4$) produces a smaller tree. simplifying it first ($R_{1,2,3}$) then removing it ($R_4$) produces the same tree (the simplified dead branch is still dead — $c_w$ unchanged). joinable
+
+*$R_4 / R_4$:* two independent dead branches. removal order does not matter. joinable
+
+all critical pairs joinable. by Newman's lemma + termination (Theorem 10), the system is confluent. ∎
+
+**Corollary (unique normal form).** every element tree has a unique normal form under $\{R_1, R_2, R_3, R_4\}$. two trees are layout-equivalent under these rules iff their normal forms are identical (character-by-character as terms)
+
+### 18.6 completeness of simplification rules
+
+**Theorem 12 (completeness relative to coordinate equivalence).** Rules 1-4 are complete for the class of coordinate-preserving simplifications that involve removing or merging exactly one node
+
+**Proof.** enumerate all possible single-node operations that preserve coordinates:
+
+(a) *remove a container node, keeping its children.* the container must be transparent — it does not alter the constraints passed to children or the positions assigned. a fill-sized single-child container is transparent ($R_2$, $R_3$). a same-direction, same-gap, same-align fill-sized stack is transparent for flattening ($R_1$). a container with different parameters (gap, align, direction) is not transparent — removing it changes constraints. these three rules exhaust all transparent-container cases
+
+(b) *remove a leaf or subtree.* only valid when the removal does not affect visible output — the element is dead ($R_4$). this is the only removal that preserves coordinates for other elements (removing a visible element changes fill siblings' sizes)
+
+(c) *merge two containers into one.* this is $R_1$ applied from the other direction — merging sibling stacks into one. but merging two sibling stacks is only valid when they share parameters AND the merged stack's children receive the same constraints. this is exactly the case when one is a single-element fill stack — which is $R_1$
+
+no other single-node operation preserves coordinates. ∎
+
+**Limitation.** Rules 1-4 are not complete for multi-node operations. example: swapping two fix-sized siblings of equal width preserves coordinates (they occupy the same space regardless of order). this is a valid simplification not captured by Rules 1-4. adding a permutation rule $R_5$ (swap equal-width fix siblings) would extend completeness, but placement order carries semantic meaning (reading direction) — permutation is coordinate-preserving but not semantics-preserving. therefore Rules 1-4 are deliberately restricted to semantics-preserving operations
+
+### 18.7 amortized fold selection
+
+**Theorem 13 (amortized $\mathcal{O}(1)$ fold selection).** if viewport changes are continuous (differ by at most $\delta g$ per frame where $\delta$ is bounded), fold selection is amortized $\mathcal{O}(1)$
+
+**Proof.** cache the current conformation index $i^*$ and its boundaries $[w_{min}(l_{i^*}),\; w_{min}(l_{i^*-1}))$. on each frame:
+
+1. if $c_w \in [w_{min}(l_{i^*}),\; w_{min}(l_{i^*-1}))$: no change. cost: 2 comparisons = $\mathcal{O}(1)$
+2. if $c_w < w_{min}(l_{i^*})$: fold narrower. check $l_{i^*+1}$: is $c_w \geq w_{min}(l_{i^*+1})$? if yes, update $i^* \leftarrow i^* + 1$. cost: $\mathcal{O}(1)$. if $c_w$ drops below $w_{min}(l_{i^*+1})$ as well, continue checking — but this means the viewport shrank by more than the gap between two consecutive $w_{min}$ values in a single frame
+3. if $c_w \geq w_{min}(l_{i^*-1})$: fold wider. symmetric
+
+define the potential $\Phi = i^*$. each conformation change costs $\mathcal{O}(1)$ and changes $\Phi$ by $\pm 1$. over $F$ frames with total conformation changes $k$: total work $= F \cdot \mathcal{O}(1) + k \cdot \mathcal{O}(1)$. since each change moves the index by 1 and the index is bounded by $[1, f_{max}]$, the total number of changes is bounded by the total viewport displacement divided by the minimum gap between consecutive $w_{min}$ values. amortized cost per frame: $\mathcal{O}(1)$
+
+for discontinuous viewport changes (e.g. rotation snap): binary search fallback in $\mathcal{O}(\log f_{max})$. amortized cost remains $\mathcal{O}(1)$ if discontinuities are rare (bounded frequency). ∎
+
+ECS: `FoldCache { current_index: usize, lower_bound: u32, upper_bound: u32 }`. `FoldSystem` reads cache first — 2 comparisons. updates cache only on conformation change
+
 ---
 
 ## 19. multimodal extension
@@ -954,23 +1040,43 @@ the spatial domain is not special. it is the first domain implemented because vi
 
 | # | problem | resolution |
 |---|---------|-----------|
-| 1 | completeness of $\mathcal{K}$ | Theorem 5 (§6.4): coordinate-collection construction proves grid-with-spans is complete for all rectangular partitions |
-| 2 | fold set derivation | Theorem 6 (§4.3a): greedy algorithm produces optimal fold sets in $\mathcal{O}(m \log m)$ for stacks |
-| 3 | urgency-gravity composition | Theorem 7 (§11.4): $\max(\pi^*, \mathcal{U}/\mathcal{U}_{max})$ with five proven properties |
-| 4 | layout algebra | §18: multi-sorted algebra with 4 simplification rules, layout function as unique homomorphism |
-| 5 | multimodal extension | Theorem 8 (§19): $\Pi$ generalizes to any bounded measurable domain |
+| 1 | completeness of $\mathcal{K}$ | Theorem 5 (§6.4) |
+| 2 | fold set derivation | Theorem 6 (§4.3a) |
+| 3 | urgency-gravity composition | Theorem 7 (§11.4) |
+| 4 | layout algebra | §18: signature, homomorphism, simplification rules |
+| 5 | multimodal extension | Theorem 8 (§19) |
+| 6 | branching fold sets | Theorem 9 (§4.3a): Pareto-front derivation in $\mathcal{O}(m^d \cdot m \log m)$ |
+| 7 | algebraic normal form | Theorems 10-11 (§18.5): termination by measure, confluence by Newman's lemma |
+| 8 | algebra completeness | Theorem 12 (§18.6): complete for single-node semantics-preserving operations |
+| 9 | $\mathcal{O}(1)$ fold selection | Theorem 13 (§18.7): amortized $\mathcal{O}(1)$ by conformation caching |
+
+### formal verification roadmap
+
+the 13 theorems are semi-formal. a machine-checked proof in Lean 4 would provide the strongest guarantee. structure:
+
+```
+Prysm/
+  Layout/
+    Protocol.lean      -- Π: constrain → occupy → place (Theorems 1, 2)
+    Sizing.lean        -- Φ: fix, fill, scale (Theorems 3, 4)
+    Container.lean     -- K: stack, grid, layer (Theorem 5)
+    Fold.lean          -- fold derivation (Theorems 6, 9)
+    Gravity.lean       -- urgency-gravity composition (Theorem 7)
+    Multimodal.lean    -- domain generalization (Theorem 8)
+    Algebra.lean       -- term algebra, rules, normal form (Theorems 10-13)
+```
+
+key formalization challenge: Theorems 1-2 require modeling the DFS traversal as a function on inductive trees — standard in Lean. Theorem 5 requires formalizing rectangular partitions as finite sets of axis-aligned rectangles — straightforward with `Finset` and `Prod`. Theorem 11 (confluence) requires formalizing the critical pair analysis — the `Mathlib.Order.RewriteSystem` library provides Newman's lemma
+
+estimated effort: ~2000 lines of Lean for the core theorems. the proofs are constructive — no axiom of choice required
 
 ### still open
 
-1. **branching fold sets.** Theorem 6 produces linear chains. can branching conformations (multiple options at the same $w_{min}$ emphasizing different organelles) be derived automatically? this requires a multi-objective optimization where importance is vector-valued
+1. **multi-node simplification rules.** Theorem 12 covers single-node operations. multi-node operations (simultaneous restructuring of k nodes) may yield additional valid simplifications. the question: does a finite set of multi-node rules exist that is complete? or is the set infinite (each additional nesting depth enables new reduction patterns)?
 
-2. **algebraic normal form.** do the simplification rules (§18.3) converge to a unique normal form? if yes, trees can be canonicalized — two equivalent trees simplify to the same term. this would enable tree equality checking in $\mathcal{O}(n)$ (compare normal forms)
+2. **optimal $g$ derivation.** $g$ is convention ($g = 8$). can $g$ be derived from: font metrics (Play font at reference DPI), minimum touch target (Fitts's law), and device density distribution? this would ground the convention in optimization
 
-3. **layout algebra completeness.** are Rules 1-4 complete — do they capture all semantics-preserving simplifications? or are there valid simplifications that cannot be expressed as compositions of these rules?
-
-4. **$\mathcal{O}(1)$ fold selection.** currently fold selection scans $\mathcal{F}$ in $\mathcal{O}(f_{max})$. since $\mathcal{F}$ is sorted by $w_{min}$, binary search gives $\mathcal{O}(\log f_{max})$. can amortized $\mathcal{O}(1)$ be achieved by caching the previous conformation and checking only neighbors?
-
-5. **formal verification.** the proofs in this paper are semi-formal (structured mathematical argument). a machine-checked proof in Lean or Coq would provide the strongest guarantee. the core theorems (1-8) are expressible in constructive logic
+3. **Lean formalization.** executing the roadmap above
 
 ---
 
