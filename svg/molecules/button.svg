@@ -64,17 +64,18 @@
   </g>
 
   <!-- ═══ ROW 3: DANGER ═══ -->
-  <!-- 2 × 160 + 1 × 24 = 344. offset = (800-344)/2 = 228 -->
+  <!-- Delete key: ~10ch=90 → W=90+84=174. Burn: ~6ch=54 → W=54+84=138. total=174+24+138=336. offset=(800-336)/2=232 -->
   <rect x="40" y="208" width="720" height="1" fill="#1a1a1a"/>
   <text x="400" y="232" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">danger</text>
-  <g transform="translate(228, 248)">
+  <g transform="translate(232, 248)">
+    <!-- Delete key W=174 -->
     <rect x="2" y="0" width="24" height="48" fill="url(#irr)"/><rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="80" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🗑 Delete key</text>
-    <rect x="134" y="0" width="24" height="48" fill="url(#irl)"/><rect x="158" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-
-    <rect x="186" y="0" width="24" height="48" fill="url(#irr)"/><rect x="184" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="264" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🔥 Burn</text>
-    <rect x="318" y="0" width="24" height="48" fill="url(#irl)"/><rect x="342" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="87" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🗑 Delete key</text>
+    <rect x="148" y="0" width="24" height="48" fill="url(#irl)"/><rect x="172" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <!-- gap 24 → Burn at 198. W=138 -->
+    <rect x="200" y="0" width="24" height="48" fill="url(#irr)"/><rect x="198" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="267" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🔥 Burn</text>
+    <rect x="310" y="0" width="24" height="48" fill="url(#irl)"/><rect x="334" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
   </g>
 
   <!-- ═══ ROW 4: CAUTION ═══ -->
