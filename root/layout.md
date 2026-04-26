@@ -117,6 +117,7 @@ testable constraints. the layout is not ready until all pass
 | I7 | fold legibility | $\forall$ molecule $m$ with fold set $\mathcal{F}_m$: $l_k$ renders legibly at $w_{min}(l_k)$ |
 | I8 | renderer independence | output identical across all target renderers |
 | I9 | semantic completeness | $\forall e_i:\; \text{role}(e_i) \in \{\text{interactive}\} \;\Rightarrow\; \text{label}(e_i) \neq \emptyset$ |
+| I10 | frame budget | $t_{layout}(\mathcal{T}) \leq 2\text{ms}$ for $|\mathcal{T}| \leq 10{,}000$ |
 
 ---
 
@@ -791,6 +792,20 @@ every screen in [[cyb]] is an element tree computed by this protocol. invariants
 - I8 (renderer independence): same coordinates across Leptos and Bevy UI
 - I9 (semantic completeness): every interactive organelle has a non-empty label. CI check against component catalog
 
+### performance invariant
+
+**I10 (frame budget).** layout computation completes within 2ms per frame on target hardware
+
+$$t_{layout}(\mathcal{T}) \leq 2\text{ms} \quad \text{for} \quad |\mathcal{T}| \leq n_{max}$$
+
+$n_{max}$ — maximum organelle count per frame. target: $n_{max} = 10{,}000$
+
+derivation: frame budget at 60fps = 16.67ms. layout receives 2ms (12% of frame). remaining: data fetch (2ms), emotion (0.5ms), interaction (0.5ms), render (10ms), overhead (1.67ms)
+
+from Theorem 1: $t_{layout} = k \cdot n \cdot f_{max}$. from Theorem 13: amortized fold is $\mathcal{O}(1)$, so effectively $t_{layout} = k \cdot n$. to hit 2ms at $n = 10{,}000$: $k \leq 200\text{ns}$ per organelle. this is achievable — each organelle operation is arithmetic (comparisons, additions) on cache-local ECS data. Bevy's archetype-based ECS processes millions of entities per frame
+
+at $n > 10{,}000$: viewport culling reduces visible organelles. only organelles within the visible scroll region + one screen-height of buffer participate in layout. the protocol's single-pass structure means culled subtrees are skipped entirely (their constraint is computed but they are not placed)
+
 [[cyb]] is the proof. the paper is the specification
 
 ---
@@ -799,13 +814,13 @@ every screen in [[cyb]] is an element tree computed by this protocol. invariants
 
 motion is convention, not axiom. the protocol computes static coordinates — motion is how the renderer transitions between two successive layout computations
 
-### 15.1 the motion function
+### 16.1 the motion function
 
 $$\mu(e,\; s_0,\; s_1,\; t) = s_0 + (s_1 - s_0) \cdot \alpha(t)$$
 
 $s_0$ — previous state (position + size). $s_1$ — target state (new layout output). $t$ — time elapsed since layout change. $\alpha(t)$ — easing function, $\alpha: [0, T] \to [0, 1]$, $\alpha(0) = 0$, $\alpha(T) = 1$
 
-### 15.2 conventions
+### 16.2 conventions
 
 | parameter | value | rationale |
 |-----------|-------|-----------|
@@ -817,13 +832,33 @@ $s_0$ — previous state (position + size). $s_1$ — target state (new layout o
 
 all motion in prysm uses the same $T$ and $\alpha$. one duration, one curve. uniformity is legibility — the neuron learns one rhythm
 
-### 15.3 when motion applies
+### 16.3 when motion applies
 
 motion applies only when $s_0 \neq s_1$ for the same entity $e$. the protocol guarantees: if the element tree and viewport have not changed, $s_0 = s_1$ (Theorem 2, determinism). motion is triggered by: viewport resize, fold transition, data update changing element tree, emotion change
 
 motion does not affect layout computation. the protocol always outputs $s_1$ (target). the renderer interpolates the visual representation. this separation preserves I2 (single-pass) and I1 (determinism)
 
 ECS: `MotionState { s_0, s_1, t_start }` component. `MotionSystem` reads `Position`, `OccupiedSize`, `Emotion`, writes interpolated values to render components. runs after layout, before render
+
+### 16.4 choreography
+
+when multiple properties change simultaneously (fold + emotion + position), they transition in parallel with the same $T$ and $\alpha$. no sequencing, no stagger, no delay between properties
+
+$$\mu_{total}(e, t) = (\mu_{pos}(e, t),\; \mu_{size}(e, t),\; \mu_{color}(e, t))$$
+
+all three interpolations start at $t_{start}$ and end at $t_{start} + T$. this is a deliberate choice: synchronized transitions feel like one change, not three. the neuron perceives "the interface adapted" — not "first it moved, then it resized, then it recolored"
+
+exception: entrance and exit of overlay elements (menu, adviser popup). these use a two-phase choreography:
+
+**entrance:** element fades in ($\alpha_{opacity}: 0 \to 1$, $T/2$) then slides to position ($\mu_{pos}$, $T/2$). total: $T$
+
+$$\mu_{entrance}(e, t) = \begin{cases} (\text{target pos},\; \text{target size},\; \alpha_{opacity}(2t/T)) & 0 \leq t < T/2 \\ (\mu_{pos}(e, t - T/2),\; \text{target size},\; 1.0) & T/2 \leq t \leq T \end{cases}$$
+
+**exit:** reverse — slide out ($T/2$) then fade ($T/2$). total: $T$
+
+rationale: overlays appear at $z > 20$ (interrupting or higher). they cross the neuron's attention — a single simultaneous transition at high z is visually jarring. the two-phase softens the interruption
+
+for all non-overlay elements: parallel, synchronized, $150\text{ms}$, one curve. no exceptions
 
 ---
 
