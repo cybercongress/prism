@@ -16,117 +16,130 @@
 
   <rect width="600" height="560" fill="#000"/>
 
-  <!-- ═══ BUTTON TEMPLATE: fixed width per row ═══ -->
-  <!-- W = button width, H = 48 (6g) -->
-  <!-- saber at x=0, glow rect x=2 w=20 -->
-  <!-- text at x=W/2 (centered) -->
-  <!-- right glow at x=W-22, right saber at x=W-2 -->
+  <!-- ═══ BUTTON ANATOMY ═══ -->
+  <!-- saber(2) + glow(20) + pad(16) + TEXT + pad(16) + glow(20) + saber(2) -->
+  <!-- pad = 2g = 16px from glow edge to text start -->
+  <!-- text at x = 2 + 20 + 16 + textWidth/2 = 38 + textWidth/2 -->
+  <!-- right saber at x = 38 + textWidth + 16 + 20 = 74 + textWidth -->
+  <!-- Play 16px: ~9px per char average -->
 
-  <!-- ═══ ROW 1: NEUTRAL — W=96, gap=24, 3 buttons ═══ -->
-  <!-- total = 3×96 + 2×24 = 336, offset = (600-336)/2 = 132 -->
+  <!-- Cancel: 6ch×9=54, W=54+76=130, center text at 38+27=65, right saber at 128 -->
+  <!-- Close:  5ch×9=45, W=45+76=121, center text at 38+22=60, right saber at 119 -->
+  <!-- Back:   4ch×9=36, W=36+76=112, center text at 38+18=56, right saber at 110 -->
+  <!-- Sign:   4ch×9=36, W=112 -->
+  <!-- Stake:  5ch×9=45, W=121 -->
+  <!-- Claim:  5ch×9=45, W=121 -->
+  <!-- Send:   4ch×9=36, W=112 -->
+  <!-- Delegate: 8ch×9=72, W=148 -->
+
+  <!-- ═══ ROW 1: NEUTRAL ═══ -->
   <text x="300" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">neutral</text>
 
-  <g transform="translate(132, 40)">
+  <!-- Cancel W=130, Close W=121, Back W=112. total=363+2×24=411. offset=(600-411)/2=94 -->
+  <g transform="translate(94, 40)">
     <rect x="2" y="0" width="20" height="48" fill="url(#iwr)"/><rect x="0" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Cancel</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="94" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
+    <text x="65" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Cancel</text>
+    <rect x="108" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="128" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
   </g>
-  <g transform="translate(252, 40)">
+  <g transform="translate(248, 40)">
     <rect x="2" y="0" width="20" height="48" fill="url(#iwr)"/><rect x="0" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Close</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="94" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
+    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Close</text>
+    <rect x="98" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="118" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
   </g>
-  <g transform="translate(372, 40)">
+  <g transform="translate(393, 40)">
     <rect x="2" y="0" width="20" height="48" fill="url(#iwr)"/><rect x="0" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Back</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="94" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Back</text>
+    <rect x="90" y="0" width="20" height="48" fill="url(#iwl)"/><rect x="110" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
   </g>
 
-  <!-- ═══ ROW 2: CONFIRM — W=96, gap=16, 5 buttons ═══ -->
-  <!-- total = 5×96 + 4×16 = 544, offset = (600-544)/2 = 28 -->
+  <!-- ═══ ROW 2: CONFIRM ═══ -->
   <rect x="40" y="104" width="520" height="1" fill="#1a1a1a"/>
   <text x="300" y="128" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">confirm</text>
 
-  <g transform="translate(28, 144)">
+  <!-- Sign W=112, Stake W=121, Claim W=121, Send W=112, Delegate W=148. total=614+4×8=646 too wide -->
+  <!-- use gap=8. total=614+32=646. offset=(600-646)/2=-23. Shrink: use gap=4 → 614+16=630, offset=-15. Still tight. -->
+  <!-- Stack tighter: gap=6 -->
+  <!-- Just position them manually for clean fit -->
+  <g transform="translate(6, 144)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Sign</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Sign</text>
+    <rect x="90" y="0" width="20" height="48" fill="url(#igl)"/><rect x="110" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
   </g>
-  <g transform="translate(140, 144)">
+  <g transform="translate(120, 144)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Stake</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Stake</text>
+    <rect x="98" y="0" width="20" height="48" fill="url(#igl)"/><rect x="118" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
   </g>
-  <g transform="translate(252, 144)">
+  <g transform="translate(246, 144)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Claim</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Claim</text>
+    <rect x="98" y="0" width="20" height="48" fill="url(#igl)"/><rect x="118" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
   </g>
-  <g transform="translate(364, 144)">
+  <g transform="translate(372, 144)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Send</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Send</text>
+    <rect x="90" y="0" width="20" height="48" fill="url(#igl)"/><rect x="110" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
   </g>
-  <g transform="translate(476, 144)">
+  <g transform="translate(490, 144)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Delegate</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="52" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Delegate</text>
+    <rect x="82" y="0" width="20" height="48" fill="url(#igl)"/><rect x="102" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
   </g>
 
-  <!-- ═══ ROW 3: DANGER — W=120, gap=32, 2 buttons ═══ -->
-  <!-- total = 2×120 + 1×32 = 272, offset = (600-272)/2 = 164 -->
+  <!-- ═══ ROW 3: DANGER ═══ -->
   <rect x="40" y="208" width="520" height="1" fill="#1a1a1a"/>
   <text x="300" y="232" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">danger</text>
 
-  <g transform="translate(164, 248)">
+  <!-- Delete key: ~10ch=90, W=166. Burn: ~6ch(with emoji)=54, W=130. total=296+32=328. offset=136 -->
+  <g transform="translate(136, 248)">
     <rect x="2" y="0" width="20" height="48" fill="url(#irr)"/><rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🗑 Delete key</text>
-    <rect x="98" y="0" width="20" height="48" fill="url(#irl)"/><rect x="118" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="83" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🗑 Delete key</text>
+    <rect x="144" y="0" width="20" height="48" fill="url(#irl)"/><rect x="164" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
   </g>
-  <g transform="translate(316, 248)">
+  <g transform="translate(332, 248)">
     <rect x="2" y="0" width="20" height="48" fill="url(#irr)"/><rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
-    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🔥 Burn</text>
-    <rect x="98" y="0" width="20" height="48" fill="url(#irl)"/><rect x="118" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="65" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000" text-anchor="middle">🔥 Burn</text>
+    <rect x="108" y="0" width="20" height="48" fill="url(#irl)"/><rect x="128" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
   </g>
 
-  <!-- ═══ ROW 4: CAUTION — W=120, 1 button ═══ -->
-  <!-- offset = (600-120)/2 = 240 -->
+  <!-- ═══ ROW 4: CAUTION ═══ -->
   <rect x="40" y="312" width="520" height="1" fill="#1a1a1a"/>
   <text x="300" y="336" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">caution</text>
 
-  <g transform="translate(240, 352)">
+  <!-- Transfer: 8ch=72, W=148. offset=(600-148)/2=226 -->
+  <g transform="translate(226, 352)">
     <rect x="2" y="0" width="20" height="48" fill="url(#iyr)"/><rect x="0" y="0" width="2" height="48" fill="#fcf000" filter="url(#gy)"/>
-    <text x="60" y="30" font-family="Play, sans-serif" font-size="16" fill="#fcf000" text-anchor="middle">Transfer</text>
-    <rect x="98" y="0" width="20" height="48" fill="url(#iyl)"/><rect x="118" y="0" width="2" height="48" fill="#fcf000" filter="url(#gy)"/>
+    <text x="74" y="30" font-family="Play, sans-serif" font-size="16" fill="#fcf000" text-anchor="middle">Transfer</text>
+    <rect x="126" y="0" width="20" height="48" fill="url(#iyl)"/><rect x="146" y="0" width="2" height="48" fill="#fcf000" filter="url(#gy)"/>
   </g>
 
-  <!-- ═══ ROW 5: STATES — W=96, gap=48, 3 buttons ═══ -->
-  <!-- total = 3×96 + 2×48 = 384, offset = (600-384)/2 = 108 -->
+  <!-- ═══ ROW 5: STATES ═══ -->
   <rect x="40" y="416" width="520" height="1" fill="#1a1a1a"/>
   <text x="300" y="440" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states</text>
 
+  <!-- all Sign W=112, gap=48, total=336+96=432, offset=(600-432)/2=84 -->
   <!-- disabled -->
-  <g transform="translate(108, 456)">
+  <g transform="translate(84, 456)">
     <rect x="0" y="0" width="2" height="48" fill="#4b4b4d"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d" text-anchor="middle">Sign</text>
-    <rect x="94" y="0" width="2" height="48" fill="#4b4b4d"/>
-    <text x="48" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled</text>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d" text-anchor="middle">Sign</text>
+    <rect x="110" y="0" width="2" height="48" fill="#4b4b4d"/>
+    <text x="56" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled</text>
   </g>
 
-  <!-- hover: same W=96 but glow extends 4px wider each side -->
-  <g transform="translate(252, 456)">
+  <!-- hover: wider glow -->
+  <g transform="translate(244, 456)">
     <rect x="-2" y="0" width="24" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Sign</text>
-    <rect x="74" y="0" width="24" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
-    <text x="48" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle">Sign</text>
+    <rect x="90" y="0" width="24" height="48" fill="url(#igl)"/><rect x="110" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="56" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
   </g>
 
-  <!-- loading -->
-  <g transform="translate(396, 456)">
+  <!-- loading: dim -->
+  <g transform="translate(404, 456)">
     <rect x="2" y="0" width="20" height="48" fill="url(#igr)"/><rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)" opacity="0.5"/>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" opacity="0.5" text-anchor="middle">Sign</text>
-    <rect x="74" y="0" width="20" height="48" fill="url(#igl)"/><rect x="94" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)" opacity="0.5"/>
-    <text x="48" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
+    <text x="56" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00" opacity="0.5" text-anchor="middle">Sign</text>
+    <rect x="90" y="0" width="20" height="48" fill="url(#igl)"/><rect x="110" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)" opacity="0.5"/>
+    <text x="56" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
   </g>
 
 </svg>
