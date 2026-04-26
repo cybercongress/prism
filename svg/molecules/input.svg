@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 680" width="800" height="680">
   <defs>
     <filter id="gw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gb" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00acff" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -108,13 +108,12 @@
     <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">neuron</text>
   </g>
 
-  <!-- token + amount -->
+  <!-- token + amount: icon ticker + amount -->
   <g transform="translate(544, 288)">
     <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-    <circle cx="28" cy="24" r="10" fill="none" stroke="#00fe00" stroke-width="1"/>
-    <text x="28" y="28" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">B</text>
-    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">1 000 000</text>
-    <text x="216" y="30" font-family="Play, sans-serif" font-size="12" fill="#777">BOOT</text>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">🟢</text>
+    <text x="40" y="30" font-family="Play, sans-serif" font-size="14" fill="#00fe00">BOOT</text>
+    <text x="140" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">1 000 000</text>
     <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
     <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">token + amount</text>
   </g>
