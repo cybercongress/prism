@@ -94,10 +94,11 @@
 
   <!-- 3 inputs × 240 + 2 × 24 = 768. offset = 16 -->
 
-  <!-- dropdown -->
+  <!-- dropdown (token chooser with logo) -->
   <g transform="translate(16, 288)">
     <rect x="0" y="0" width="240" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
+    <text x="16" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">🟢</text>
+    <text x="40" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
     <text x="216" y="30" font-family="Play, sans-serif" font-size="16" fill="#777">⌄</text>
     <rect x="16" y="46" width="208" height="1" fill="#fff" filter="url(#gw)"/>
     <text x="120" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">dropdown</text>
