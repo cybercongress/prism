@@ -1,123 +1,122 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" width="480" height="400">
   <!-- ion atom: fixed square sizes, emotion colors, states -->
-  <rect width="480" height="360" fill="#000000"/>
+  <rect width="480" height="400" fill="#000000"/>
 
   <text x="240" y="24" font-family="Play, sans-serif" font-size="14" fill="#555555" text-anchor="middle">ion sizes (g = 8)</text>
 
-  <!-- sizes row: aligned to bottom baseline at y=112 -->
+  <!-- sizes row: all icons bottom-aligned at y=136, labels at y=152 -->
 
   <!-- 2g = 16px -->
-  <g transform="translate(24, 96)">
+  <g transform="translate(24, 120)">
     <rect x="0" y="0" width="16" height="16" rx="2" fill="none" stroke="#ffffff" stroke-width="1"/>
     <line x1="4" y1="4" x2="12" y2="12" stroke="#ffffff" stroke-width="1"/>
     <line x1="12" y1="4" x2="4" y2="12" stroke="#ffffff" stroke-width="1"/>
   </g>
-  <text x="32" y="128" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">2g</text>
+  <text x="32" y="152" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">2g</text>
 
   <!-- 5g/2 = 20px -->
-  <g transform="translate(72, 92)">
+  <g transform="translate(72, 116)">
     <rect x="0" y="0" width="20" height="20" rx="2" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="10" cy="10" r="4" fill="#ffffff"/>
   </g>
-  <text x="82" y="128" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">5g/2</text>
+  <text x="82" y="152" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">5g/2</text>
 
   <!-- 4g = 32px -->
-  <g transform="translate(120, 80)">
+  <g transform="translate(120, 104)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#ffffff" stroke-width="1"/>
     <polygon points="16,6 26,26 6,26" fill="none" stroke="#ffffff" stroke-width="1"/>
   </g>
-  <text x="136" y="128" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">4g</text>
+  <text x="136" y="152" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">4g</text>
 
   <!-- 6g = 48px -->
-  <g transform="translate(176, 64)">
+  <g transform="translate(184, 88)">
     <rect x="0" y="0" width="48" height="48" rx="4" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="24" cy="24" r="14" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="24" cy="24" r="4" fill="#ffffff"/>
   </g>
-  <text x="200" y="128" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">6g</text>
+  <text x="208" y="152" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">6g</text>
 
   <!-- 12g = 96px -->
-  <g transform="translate(256, 16)">
+  <g transform="translate(264, 40)">
     <rect x="0" y="0" width="96" height="96" rx="6" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="48" cy="48" r="30" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="48" cy="48" r="8" fill="#ffffff"/>
   </g>
-  <text x="304" y="128" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">12g</text>
+  <text x="312" y="152" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">12g</text>
 
   <!-- separator -->
-  <rect x="24" y="142" width="432" height="1" fill="#222222"/>
+  <rect x="24" y="166" width="432" height="1" fill="#222222"/>
 
   <!-- emotion colors -->
-  <text x="240" y="164" font-family="Play, sans-serif" font-size="14" fill="#555555" text-anchor="middle">ion emotion colors (4g)</text>
+  <text x="240" y="188" font-family="Play, sans-serif" font-size="14" fill="#555555" text-anchor="middle">ion emotion colors (4g)</text>
 
-  <!-- 7 colors, evenly spaced -->
-  <g transform="translate(20, 180)">
+  <g transform="translate(20, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#ffffff"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">neutral</text>
   </g>
 
-  <g transform="translate(84, 180)">
+  <g transform="translate(84, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#00fe00" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#00fe00"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">joy</text>
   </g>
 
-  <g transform="translate(148, 180)">
+  <g transform="translate(148, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#ff0000" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#ff0000"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">anger</text>
   </g>
 
-  <g transform="translate(212, 180)">
+  <g transform="translate(212, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#00acff" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#00acff"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#00acff" text-anchor="middle">interest</text>
   </g>
 
-  <g transform="translate(280, 180)">
+  <g transform="translate(280, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#fcf000" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#fcf000"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#fcf000" text-anchor="middle">surprise</text>
   </g>
 
-  <g transform="translate(348, 180)">
+  <g transform="translate(348, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#d500f9" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#d500f9"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#d500f9" text-anchor="middle">fear</text>
   </g>
 
-  <g transform="translate(416, 180)">
+  <g transform="translate(416, 204)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#ff5b00" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#ff5b00"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#ff5b00" text-anchor="middle">disgust</text>
   </g>
 
   <!-- separator -->
-  <rect x="24" y="248" width="432" height="1" fill="#222222"/>
+  <rect x="24" y="274" width="432" height="1" fill="#222222"/>
 
   <!-- states -->
-  <text x="240" y="272" font-family="Play, sans-serif" font-size="14" fill="#555555" text-anchor="middle">ion states</text>
+  <text x="240" y="298" font-family="Play, sans-serif" font-size="14" fill="#555555" text-anchor="middle">ion states</text>
 
-  <g transform="translate(56, 288)">
+  <g transform="translate(56, 314)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#ffffff" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#ffffff"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">default</text>
   </g>
 
-  <g transform="translate(152, 286)">
+  <g transform="translate(152, 312)">
     <rect x="-1" y="-1" width="34" height="34" rx="3" fill="none" stroke="#00fe00" stroke-width="1.5"/>
     <circle cx="16" cy="16" r="7" fill="#00fe00"/>
     <text x="16" y="52" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">hover 1.1x</text>
   </g>
 
-  <g transform="translate(256, 290)">
+  <g transform="translate(256, 316)">
     <rect x="1" y="1" width="30" height="30" rx="3" fill="none" stroke="#00fe00" stroke-width="1.5"/>
     <circle cx="16" cy="16" r="5" fill="#00fe00"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#777777" text-anchor="middle">active 0.95x</text>
   </g>
 
-  <g transform="translate(360, 288)">
+  <g transform="translate(360, 314)">
     <rect x="0" y="0" width="32" height="32" rx="3" fill="none" stroke="#4b4b4d" stroke-width="1"/>
     <circle cx="16" cy="16" r="6" fill="#4b4b4d"/>
     <text x="16" y="50" font-family="Play, sans-serif" font-size="10" fill="#4b4b4d" text-anchor="middle">disabled</text>
