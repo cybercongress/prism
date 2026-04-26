@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 420" width="480" height="420">
+  <defs>
+    <filter id="gw" x="-100%" y="-20%" width="300%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gg" x="-100%" y="-20%" width="300%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feFlood flood-color="#00fe00" flood-opacity="0.5" result="c"/>
+      <feComposite in="c" in2="b" operator="in" result="cb"/>
+      <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gr" x="-100%" y="-20%" width="300%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feFlood flood-color="#ff0000" flood-opacity="0.5" result="c"/>
+      <feComposite in="c" in2="b" operator="in" result="cb"/>
+      <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gy" x="-100%" y="-20%" width="300%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feFlood flood-color="#fcf000" flood-opacity="0.5" result="c"/>
+      <feComposite in="c" in2="b" operator="in" result="cb"/>
+      <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="iw-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fff" stop-opacity="0.12"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="iw-l" x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#fff" stop-opacity="0.12"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ig-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00fe00" stop-opacity="0.15"/><stop offset="100%" stop-color="#00fe00" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ig-l" x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#00fe00" stop-opacity="0.15"/><stop offset="100%" stop-color="#00fe00" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ir-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff0000" stop-opacity="0.15"/><stop offset="100%" stop-color="#ff0000" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ir-l" x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#ff0000" stop-opacity="0.15"/><stop offset="100%" stop-color="#ff0000" stop-opacity="0"/></linearGradient>
+    <linearGradient id="iy-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fcf000" stop-opacity="0.15"/><stop offset="100%" stop-color="#fcf000" stop-opacity="0"/></linearGradient>
+    <linearGradient id="iy-l" x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#fcf000" stop-opacity="0.15"/><stop offset="100%" stop-color="#fcf000" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <rect width="480" height="420" fill="#000"/>
+
+  <!-- ═══ EMOTION VARIANTS ═══ -->
+  <text x="240" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">button emotion variants</text>
+
+  <!-- neutral -->
+  <g transform="translate(24, 44)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#iw-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
+    <text x="52" y="30" font-family="Play, sans-serif" font-size="16" fill="#fff">Navigate</text>
+    <rect x="104" y="0" width="24" height="48" fill="url(#iw-l)"/>
+    <rect x="126" y="0" width="2" height="48" fill="#fff" filter="url(#gw)"/>
+    <text x="64" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">neutral</text>
+  </g>
+
+  <!-- confirm -->
+  <g transform="translate(176, 44)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#ig-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">Confirm</text>
+    <rect x="96" y="0" width="24" height="48" fill="url(#ig-l)"/>
+    <rect x="118" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="60" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">confirm</text>
+  </g>
+
+  <!-- danger -->
+  <g transform="translate(324, 44)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#ir-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="44" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000">Delete</text>
+    <rect x="84" y="0" width="24" height="48" fill="url(#ir-l)"/>
+    <rect x="106" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="54" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">danger</text>
+  </g>
+
+  <!-- caution -->
+  <g transform="translate(24, 140)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#iy-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#fcf000" filter="url(#gy)"/>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#fcf000">Transfer</text>
+    <rect x="104" y="0" width="24" height="48" fill="url(#iy-l)"/>
+    <rect x="126" y="0" width="2" height="48" fill="#fcf000" filter="url(#gy)"/>
+    <text x="64" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">caution</text>
+  </g>
+
+  <!-- disabled -->
+  <g transform="translate(176, 140)">
+    <rect x="0" y="0" width="2" height="48" fill="#4b4b4d"/>
+    <text x="48" y="30" font-family="Play, sans-serif" font-size="16" fill="#4b4b4d">Disabled</text>
+    <rect x="112" y="0" width="2" height="48" fill="#4b4b4d"/>
+    <text x="56" y="68" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled</text>
+  </g>
+
+  <!-- separator -->
+  <rect x="24" y="228" width="432" height="1" fill="#222"/>
+
+  <!-- ═══ DOUBLE ═══ -->
+  <text x="240" y="252" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">double (destructive never leftmost)</text>
+
+  <g transform="translate(100, 268)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#ig-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="40" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">Stake</text>
+    <rect x="80" y="0" width="24" height="48" fill="url(#ig-l)"/>
+    <rect x="102" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <rect x="116" y="0" width="24" height="48" fill="url(#ir-r)"/>
+    <rect x="114" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+    <text x="148" y="30" font-family="Play, sans-serif" font-size="16" fill="#ff0000">Unstake</text>
+    <rect x="204" y="0" width="24" height="48" fill="url(#ir-l)"/>
+    <rect x="226" y="0" width="2" height="48" fill="#ff0000" filter="url(#gr)"/>
+  </g>
+
+  <!-- separator -->
+  <rect x="24" y="336" width="432" height="1" fill="#222"/>
+
+  <!-- ═══ FOLD ═══ -->
+  <text x="240" y="360" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">fold: l1 (icon + label) → l2 (icon only)</text>
+
+  <!-- l1 -->
+  <g transform="translate(100, 376)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#ig-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="36" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">⚡ Cyberlink</text>
+    <rect x="148" y="0" width="24" height="48" fill="url(#ig-l)"/>
+    <rect x="170" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+  </g>
+
+  <!-- l2 -->
+  <g transform="translate(320, 376)">
+    <rect x="2" y="0" width="24" height="48" fill="url(#ig-r)"/>
+    <rect x="0" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+    <text x="32" y="30" font-family="Play, sans-serif" font-size="16" fill="#00fe00">⚡</text>
+    <rect x="46" y="0" width="24" height="48" fill="url(#ig-l)"/>
+    <rect x="68" y="0" width="2" height="48" fill="#00fe00" filter="url(#gg)"/>
+  </g>
+
+</svg>
