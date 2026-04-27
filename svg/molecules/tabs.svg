@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 310" width="640" height="310">
   <defs>
     <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
-  <rect width="640" height="260" fill="#000"/>
+  <rect width="640" height="310" fill="#000"/>
 
   <!-- tabs: fill×fix(6g)=48px. icon+label per tab. saber underline on active. -->
 
