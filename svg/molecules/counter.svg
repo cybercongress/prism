@@ -48,12 +48,12 @@
   <rect x="40" y="100" width="560" height="1" fill="#1a1a1a"/>
   <text x="320" y="124" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">counter with symbol</text>
 
-  <!-- 🟢 18 800 BOOT — token name same size + white as number -->
+  <!-- 18 800 🟢BOOT — number then icon+ticker -->
   <g transform="translate(40, 140)">
-    <text x="0" y="18" font-family="Play, sans-serif" font-size="14" fill="#00fe00">🟢</text>
-    <text x="24" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" style="font-variant-numeric:tabular-nums">18 800</text>
-    <text x="92" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
-    <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + symbol</text>
+    <text x="0" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" style="font-variant-numeric:tabular-nums">18 800</text>
+    <text x="62" y="18" font-family="Play, sans-serif" font-size="14" fill="#00fe00">🟢</text>
+    <text x="80" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
+    <text x="56" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + symbol</text>
   </g>
 
   <!-- ⚡ 42 V — icon + count + label -->
