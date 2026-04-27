@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" width="720" height="380">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" width="720" height="480">
   <defs>
     <radialGradient id="av" cx="40%" cy="35%"><stop offset="0%" stop-color="#5a8a6a"/><stop offset="50%" stop-color="#2a5a3a"/><stop offset="100%" stop-color="#1a2a1a"/></radialGradient>
   </defs>
-  <rect width="720" height="380" fill="#000"/>
+  <rect width="720" height="480" fill="#000"/>
 
   <!-- ═══ ROW 1: TAG VARIANTS ═══ -->
   <text x="360" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">tag variants</text>
@@ -66,44 +66,60 @@
     <text x="50" y="44" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">inactive</text>
   </g>
 
-  <!-- ═══ ROW 3: PROGRESS MODE ═══ -->
+  <!-- ═══ ROW 3: LOADING SKELETON ═══ -->
   <rect x="40" y="176" width="640" height="1" fill="#1a1a1a"/>
-  <text x="360" y="200" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">progress mode</text>
+  <text x="360" y="200" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">loading skeleton</text>
 
-  <!-- 4 bars × 120 + 3 × 24 = 552. offset = (720-552)/2 = 84 -->
-  <g transform="translate(84, 216)">
+  <!-- 3 skeleton sizes in one row. gap=40 -->
+  <g transform="translate(160, 216)">
+    <rect x="0" y="0" width="80" height="24" rx="12" fill="#fff" opacity="0.3"/>
+    <text x="40" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">short</text>
+  </g>
+  <g transform="translate(280, 216)">
+    <rect x="0" y="0" width="120" height="24" rx="12" fill="#fff" opacity="0.3"/>
+    <text x="60" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">medium</text>
+  </g>
+  <g transform="translate(440, 216)">
+    <rect x="0" y="0" width="160" height="24" rx="12" fill="#fff" opacity="0.3"/>
+    <text x="80" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">wide</text>
+  </g>
+
+  <!-- ═══ ROW 4: PROGRESS MODE ═══ -->
+  <rect x="40" y="276" width="640" height="1" fill="#1a1a1a"/>
+  <text x="360" y="300" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">progress mode</text>
+
+  <g transform="translate(84, 316)">
     <rect x="0" y="0" width="120" height="24" rx="12" fill="#333" opacity="0.15"/>
     <rect x="0" y="0" width="110" height="24" rx="12" fill="#00fe00" opacity="0.2"/>
     <text x="60" y="44" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">92%</text>
   </g>
-  <g transform="translate(228, 216)">
+  <g transform="translate(228, 316)">
     <rect x="0" y="0" width="120" height="24" rx="12" fill="#333" opacity="0.15"/>
     <rect x="0" y="0" width="78" height="24" rx="12" fill="#00fe00" opacity="0.15"/>
     <text x="60" y="44" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">65%</text>
   </g>
-  <g transform="translate(372, 216)">
+  <g transform="translate(372, 316)">
     <rect x="0" y="0" width="120" height="24" rx="12" fill="#333" opacity="0.15"/>
     <rect x="0" y="0" width="36" height="24" rx="12" fill="#fcf000" opacity="0.15"/>
     <text x="60" y="44" font-family="Play, sans-serif" font-size="10" fill="#fcf000" text-anchor="middle">30%</text>
   </g>
-  <g transform="translate(516, 216)">
+  <g transform="translate(516, 316)">
     <rect x="0" y="0" width="120" height="24" rx="12" fill="#333" opacity="0.15"/>
     <rect x="0" y="0" width="12" height="24" rx="12" fill="#ff0000" opacity="0.15"/>
     <text x="60" y="44" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">10%</text>
   </g>
 
-  <!-- ═══ ROW 4: STATES ═══ -->
-  <rect x="40" y="276" width="640" height="1" fill="#1a1a1a"/>
-  <text x="360" y="300" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states</text>
+  <!-- ═══ ROW 5: STATES ═══ -->
+  <rect x="40" y="376" width="640" height="1" fill="#1a1a1a"/>
+  <text x="360" y="400" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states</text>
 
-  <!-- 2 pills. gap=80. total=72+80+72=224. offset=(720-224)/2=248 -->
-  <g transform="translate(248, 316)">
+  <g transform="translate(248, 416)">
     <rect x="0" y="0" width="72" height="24" rx="12" fill="#00fe00" opacity="0.25"/>
     <rect x="0" y="0" width="72" height="24" rx="12" fill="none" stroke="#00fe00" stroke-width="1" opacity="0.5"/>
     <text x="36" y="16" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">verified</text>
     <text x="36" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
   </g>
-  <g transform="translate(400, 317)">
+  <g transform="translate(400, 417)">
     <rect x="1" y="1" width="70" height="22" rx="11" fill="#00fe00" opacity="0.2"/>
     <rect x="1" y="1" width="70" height="22" rx="11" fill="none" stroke="#00fe00" stroke-width="0.5" opacity="0.4"/>
     <text x="36" y="15" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">verified</text>
