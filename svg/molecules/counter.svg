@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 200" width="560" height="200">
+  <defs>
+    <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.4" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gr" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feFlood flood-color="#ff0000" flood-opacity="0.4" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="2"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="560" height="200" fill="#000"/>
+
+  <!-- counter: text(number) + saber(change indicator, g/8 tall, 3g wide) -->
+
+  <!-- ═══ ROW 1: EMOTION BY CHANGE ═══ -->
+  <text x="280" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">emotion by change direction</text>
+
+  <!-- 3 counters + 2 fold variants = 5 items. gap=40. W~80 each. total=5×80+4×40=560. offset=0 -->
+
+  <!-- growth (green) -->
+  <g transform="translate(24, 44)">
+    <text x="40" y="24" font-family="Play, sans-serif" font-size="20" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">124 736</text>
+    <rect x="16" y="30" width="48" height="1" fill="#00fe00" filter="url(#gg)"/>
+    <text x="40" y="56" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">growth</text>
+  </g>
+
+  <!-- decline (red) -->
+  <g transform="translate(144, 44)">
+    <text x="40" y="24" font-family="Play, sans-serif" font-size="20" fill="#ff0000" text-anchor="middle" style="font-variant-numeric:tabular-nums">18 042</text>
+    <rect x="20" y="30" width="40" height="1" fill="#ff0000" filter="url(#gr)"/>
+    <text x="40" y="56" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">decline</text>
+  </g>
+
+  <!-- stable (white) -->
+  <g transform="translate(264, 44)">
+    <text x="40" y="24" font-family="Play, sans-serif" font-size="20" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">5 040</text>
+    <rect x="20" y="30" width="40" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="40" y="56" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">stable</text>
+  </g>
+
+  <!-- fold l2: abbreviated -->
+  <g transform="translate(384, 44)">
+    <text x="24" y="24" font-family="Play, sans-serif" font-size="20" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">124k</text>
+    <text x="24" y="56" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">fold l2</text>
+  </g>
+
+  <!-- fold l2: large number -->
+  <g transform="translate(472, 44)">
+    <text x="24" y="24" font-family="Play, sans-serif" font-size="20" fill="#ff0000" text-anchor="middle" style="font-variant-numeric:tabular-nums">3.4M</text>
+    <text x="24" y="56" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">fold l2</text>
+  </g>
+
+  <!-- ═══ ROW 2: STATES + SIZES ═══ -->
+  <rect x="40" y="112" width="480" height="1" fill="#1a1a1a"/>
+  <text x="280" y="136" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states · sizes</text>
+
+  <!-- loading skeleton -->
+  <g transform="translate(40, 152)">
+    <rect x="0" y="6" width="64" height="14" rx="2" fill="#222"/>
+    <rect x="8" y="26" width="40" height="1" fill="#222"/>
+    <text x="32" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
+  </g>
+
+  <!-- h3 size (big counter) -->
+  <g transform="translate(160, 148)">
+    <text x="48" y="28" font-family="Play, sans-serif" font-size="20" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">1 346 504</text>
+    <rect x="16" y="34" width="64" height="1" fill="#00fe00" filter="url(#gg)"/>
+    <text x="48" y="56" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">h3</text>
+  </g>
+
+  <!-- body size (inline counter) -->
+  <g transform="translate(320, 152)">
+    <text x="32" y="20" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
+    <rect x="12" y="26" width="40" height="1" fill="#fff" filter="url(#gw)"/>
+    <text x="32" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">body</text>
+  </g>
+
+  <!-- counter in context: "particles" label -->
+  <g transform="translate(424, 152)">
+    <text x="32" y="20" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
+    <text x="80" y="20" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
+    <text x="56" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">with label</text>
+  </g>
+
+</svg>
