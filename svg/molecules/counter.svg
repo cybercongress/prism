@@ -53,10 +53,12 @@
 
   <!-- 4 items, gap=40. each ~100px. total=4×100+3×40=520. offset=(640-520)/2=60 -->
 
-  <!-- loading skeleton -->
+  <!-- loading skeleton: pulsing placeholder -->
   <g transform="translate(60, 152)">
-    <rect x="10" y="6" width="60" height="14" rx="2" fill="#222"/>
-    <text x="40" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
+    <rect x="4" y="4" width="72" height="16" rx="3" fill="#333"/>
+    <rect x="4" y="4" width="72" height="16" rx="3" fill="#444" opacity="0.5"/>
+    <rect x="20" y="26" width="40" height="1" fill="#333"/>
+    <text x="40" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
   </g>
 
   <!-- h3 size -->
@@ -72,11 +74,11 @@
     <text x="40" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">body</text>
   </g>
 
-  <!-- with label -->
-  <g transform="translate(460, 152)">
-    <text x="40" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
-    <text x="80" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
-    <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">with label</text>
+  <!-- counter + label: "2 726 particles" as used in filter bar -->
+  <g transform="translate(440, 152)">
+    <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
+    <text x="76" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
+    <text x="56" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + label</text>
   </g>
 
 </svg>
