@@ -54,14 +54,8 @@
   <rect x="40" y="112" width="560" height="1" fill="#1a1a1a"/>
   <text x="320" y="136" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states and sizes</text>
 
-  <!-- loading: white skeleton, NO indicator bar -->
-  <g transform="translate(60, 152)">
-    <rect x="4" y="4" width="72" height="16" rx="3" fill="#fff" opacity="0.3"/>
-    <text x="40" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
-  </g>
-
   <!-- large counter with indicator (+50%) -->
-  <g transform="translate(190, 148)">
+  <g transform="translate(80, 148)">
     <text x="56" y="24" font-family="Play, sans-serif" font-size="20" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">1 346 504</text>
     <rect x="4" y="30" width="104" height="1" fill="#333"/>
     <rect x="4" y="30" width="52" height="1" fill="#00fe00" filter="url(#gg)"/>
@@ -69,13 +63,13 @@
   </g>
 
   <!-- inline counter (no change, no indicator) -->
-  <g transform="translate(360, 152)">
+  <g transform="translate(280, 152)">
     <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
     <text x="32" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">inline</text>
   </g>
 
   <!-- counter + label (as used in filter bar) -->
-  <g transform="translate(460, 152)">
+  <g transform="translate(400, 152)">
     <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
     <text x="76" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
     <text x="56" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + label</text>
