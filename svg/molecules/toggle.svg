@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" width="480" height="200">
+  <rect width="480" height="200" fill="#000"/>
+
+  <!-- toggle: fix(5g)×fix(3g) = 40×24. track corner-radius 3g/2=12. thumb 2g×2g=16×16 circle -->
+
+  <!-- ═══ ROW 1: ON / OFF ═══ -->
+  <text x="240" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">switch variants</text>
+
+  <!-- 4 items: on, off, star active, star inactive. each ~60px wide, gap=48. total=4×60+3×48=384. offset=(480-384)/2=48 -->
+
+  <!-- on: thumb right, green track -->
+  <g transform="translate(48, 44)">
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="#00fe00" opacity="0.25"/>
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="none" stroke="#00fe00" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="26" cy="12" r="8" fill="#00fe00"/>
+    <text x="20" y="52" font-family="Play, sans-serif" font-size="10" fill="#00fe00" text-anchor="middle">on</text>
+  </g>
+
+  <!-- off: thumb left, gray track -->
+  <g transform="translate(156, 44)">
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="#4b4b4d" opacity="0.25"/>
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="none" stroke="#4b4b4d" stroke-width="0.5"/>
+    <circle cx="14" cy="12" r="8" fill="#4b4b4d"/>
+    <text x="20" y="52" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">off</text>
+  </g>
+
+  <!-- star active: yellow -->
+  <g transform="translate(264, 44)">
+    <text x="12" y="20" font-family="Play, sans-serif" font-size="24" fill="#fcf000" text-anchor="middle">★</text>
+    <text x="12" y="52" font-family="Play, sans-serif" font-size="10" fill="#fcf000" text-anchor="middle">star on</text>
+  </g>
+
+  <!-- star inactive: dim -->
+  <g transform="translate(372, 44)">
+    <text x="12" y="20" font-family="Play, sans-serif" font-size="24" fill="#777" text-anchor="middle">☆</text>
+    <text x="12" y="52" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">star off</text>
+  </g>
+
+  <!-- ═══ ROW 2: STATES ═══ -->
+  <rect x="40" y="112" width="400" height="1" fill="#1a1a1a"/>
+  <text x="240" y="136" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states</text>
+
+  <!-- 3 items: hover, disabled on, disabled off. gap=48. total=3×60+2×48=276. offset=(480-276)/2=102 -->
+
+  <!-- hover: track brighter -->
+  <g transform="translate(102, 152)">
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="#00fe00" opacity="0.35"/>
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="none" stroke="#00fe00" stroke-width="1" opacity="0.6"/>
+    <circle cx="26" cy="12" r="8" fill="#00fe00"/>
+    <text x="20" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
+  </g>
+
+  <!-- disabled on -->
+  <g transform="translate(210, 152)">
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="#00fe00" opacity="0.1"/>
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="none" stroke="#4b4b4d" stroke-width="0.5"/>
+    <circle cx="26" cy="12" r="8" fill="#4b4b4d"/>
+    <text x="20" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled on</text>
+  </g>
+
+  <!-- disabled off -->
+  <g transform="translate(318, 152)">
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="#333" opacity="0.15"/>
+    <rect x="0" y="0" width="40" height="24" rx="12" fill="none" stroke="#333" stroke-width="0.5"/>
+    <circle cx="14" cy="12" r="8" fill="#333"/>
+    <text x="20" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">disabled off</text>
+  </g>
+
+</svg>
