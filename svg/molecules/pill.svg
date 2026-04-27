@@ -114,19 +114,19 @@
   <text x="320" y="224" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states: hover · active</text>
 
   <!-- hover: brighter -->
-  <g transform="translate(180, 240)">
+  <g transform="translate(200, 236)">
     <rect x="0" y="0" width="72" height="24" rx="12" fill="#00fe00" opacity="0.25"/>
     <rect x="0" y="0" width="72" height="24" rx="12" fill="none" stroke="#00fe00" stroke-width="1" opacity="0.5"/>
     <text x="36" y="16" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">verified</text>
+    <text x="36" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
   </g>
-  <text x="216" y="52" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle" transform="translate(0, 208)">hover</text>
 
   <!-- active: scale 0.95 -->
-  <g transform="translate(340, 241)">
+  <g transform="translate(340, 237)">
     <rect x="1" y="1" width="70" height="22" rx="11" fill="#00fe00" opacity="0.2"/>
     <rect x="1" y="1" width="70" height="22" rx="11" fill="none" stroke="#00fe00" stroke-width="0.5" opacity="0.4"/>
     <text x="36" y="15" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">verified</text>
+    <text x="36" y="44" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">active (0.95×)</text>
   </g>
-  <text x="376" y="52" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle" transform="translate(0, 208)">active (0.95×)</text>
 
 </svg>
