@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260">
+  <defs>
+    <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="640" height="260" fill="#000"/>
+
+  <!-- tabs: fill×fix(6g)=48px. icon+label per tab. saber underline on active. -->
+
+  <!-- ═══ ROW 1: l1 — 5 tabs, icon + label ═══ -->
+  <text x="320" y="24" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">l1 — icon + label (5 tabs)</text>
+
+  <!-- glass container -->
+  <g transform="translate(70, 40)">
+    <rect x="0" y="0" width="500" height="48" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+    <!-- tab 1: active (power) -->
+    <text x="50" y="22" font-family="Play, sans-serif" font-size="14" fill="#fff" text-anchor="middle">⚡</text>
+    <text x="50" y="38" font-family="Play, sans-serif" font-size="10" fill="#fff" text-anchor="middle">power</text>
+    <rect x="24" y="46" width="52" height="2" fill="#00fe00" filter="url(#gg)"/>
+
+    <!-- tab 2: idle (apr) -->
+    <text x="150" y="22" font-family="Play, sans-serif" font-size="14" fill="#777" text-anchor="middle">📊</text>
+    <text x="150" y="38" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">apr</text>
+
+    <!-- tab 3: idle (my heroes) -->
+    <text x="250" y="22" font-family="Play, sans-serif" font-size="14" fill="#777" text-anchor="middle">🦸</text>
+    <text x="250" y="38" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">my heroes</text>
+
+    <!-- tab 4: idle (rumors) -->
+    <text x="350" y="22" font-family="Play, sans-serif" font-size="14" fill="#777" text-anchor="middle">💬</text>
+    <text x="350" y="38" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">rumors</text>
+
+    <!-- tab 5: idle (search) -->
+    <text x="450" y="22" font-family="Play, sans-serif" font-size="14" fill="#777" text-anchor="middle">🔍</text>
+    <text x="450" y="38" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">search</text>
+  </g>
+
+  <!-- ═══ ROW 2: l2 — 3 tabs, icon only ═══ -->
+  <rect x="40" y="104" width="560" height="1" fill="#1a1a1a"/>
+  <text x="320" y="128" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">l2 — icon only (3 tabs, fold)</text>
+
+  <g transform="translate(220, 144)">
+    <rect x="0" y="0" width="200" height="40" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+    <!-- tab 1: active -->
+    <text x="34" y="26" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle">⚡</text>
+    <rect x="14" y="38" width="40" height="2" fill="#00fe00" filter="url(#gg)"/>
+
+    <!-- tab 2: idle -->
+    <text x="100" y="26" font-family="Play, sans-serif" font-size="16" fill="#777" text-anchor="middle">📊</text>
+
+    <!-- tab 3: idle -->
+    <text x="166" y="26" font-family="Play, sans-serif" font-size="16" fill="#777" text-anchor="middle">🦸</text>
+  </g>
+
+  <!-- ═══ ROW 3: STATES ═══ -->
+  <rect x="40" y="200" width="560" height="1" fill="#1a1a1a"/>
+  <text x="320" y="224" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">states: idle · hover · active (saber slides 150ms)</text>
+
+  <!-- 3 individual tabs showing states -->
+  <!-- gap=56. each ~80px. total=240+112=352. offset=(640-352)/2=144 -->
+  <g transform="translate(144, 236)">
+    <!-- idle -->
+    <text x="40" y="14" font-family="Play, sans-serif" font-size="14" fill="#777" text-anchor="middle">📊</text>
+    <text x="40" y="28" font-family="Play, sans-serif" font-size="10" fill="#777" text-anchor="middle">apr</text>
+    <text x="40" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">idle</text>
+
+    <!-- hover -->
+    <text x="176" y="14" font-family="Play, sans-serif" font-size="14" fill="#d7d7d7" text-anchor="middle">📊</text>
+    <text x="176" y="28" font-family="Play, sans-serif" font-size="10" fill="#d7d7d7" text-anchor="middle">apr</text>
+    <text x="176" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">hover</text>
+
+    <!-- active -->
+    <text x="312" y="14" font-family="Play, sans-serif" font-size="14" fill="#fff" text-anchor="middle">📊</text>
+    <text x="312" y="28" font-family="Play, sans-serif" font-size="10" fill="#fff" text-anchor="middle">apr</text>
+    <rect x="286" y="32" width="52" height="2" fill="#00fe00" filter="url(#gg)"/>
+    <text x="312" y="48" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">active</text>
+  </g>
+
+</svg>
