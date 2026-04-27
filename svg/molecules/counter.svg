@@ -56,23 +56,23 @@
     <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + symbol</text>
   </g>
 
-  <!-- ⚡ 42 W — icon + count + label -->
+  <!-- ⚡ 42 V — icon + count + label -->
   <g transform="translate(200, 140)">
     <text x="0" y="18" font-family="Play, sans-serif" font-size="14" fill="#fcf000">⚡</text>
     <text x="20" y="18" font-family="Play, sans-serif" font-size="16" fill="#fcf000" style="font-variant-numeric:tabular-nums">42</text>
-    <text x="44" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">W</text>
+    <text x="44" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">V</text>
     <text x="28" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + label</text>
   </g>
 
   <!-- 2 726 particles — count + text -->
-  <g transform="translate(340, 140)">
+  <g transform="translate(300, 140)">
     <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
     <text x="72" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
     <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + text</text>
   </g>
 
   <!-- 15.43% -->
-  <g transform="translate(500, 140)">
+  <g transform="translate(460, 140)">
     <text x="36" y="18" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">15.43%</text>
     <text x="36" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">percentage</text>
   </g>
