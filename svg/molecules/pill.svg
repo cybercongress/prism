@@ -39,28 +39,13 @@
     <text x="24" y="16" font-family="Play, sans-serif" font-size="12" fill="#4b4b4d" text-anchor="middle">off</text>
   </g>
 
-  <!-- icon + text pills -->
-  <g transform="translate(136, 80)">
-    <rect x="0" y="0" width="84" height="24" rx="12" fill="#00fe00" opacity="0.15"/><rect x="0" y="0" width="84" height="24" rx="12" fill="none" stroke="#00fe00" stroke-width="0.5" opacity="0.3"/>
-    <text x="12" y="17" font-family="Play, sans-serif" font-size="13">⚡</text>
-    <text x="52" y="16" font-family="Play, sans-serif" font-size="12" fill="#00fe00" text-anchor="middle">staked</text>
-  </g>
-  <g transform="translate(236, 80)">
+  <!-- icon + text pill -->
+  <g transform="translate(310, 80)">
     <rect x="0" y="0" width="76" height="24" rx="12" fill="#00acff" opacity="0.15"/><rect x="0" y="0" width="76" height="24" rx="12" fill="none" stroke="#00acff" stroke-width="0.5" opacity="0.3"/>
     <text x="12" y="17" font-family="Play, sans-serif" font-size="13">🔗</text>
     <text x="48" y="16" font-family="Play, sans-serif" font-size="12" fill="#00acff" text-anchor="middle">linked</text>
   </g>
-  <g transform="translate(328, 80)">
-    <rect x="0" y="0" width="68" height="24" rx="12" fill="#fcf000" opacity="0.15"/><rect x="0" y="0" width="68" height="24" rx="12" fill="none" stroke="#fcf000" stroke-width="0.5" opacity="0.3"/>
-    <text x="12" y="17" font-family="Play, sans-serif" font-size="13">⏳</text>
-    <text x="44" y="16" font-family="Play, sans-serif" font-size="12" fill="#fcf000" text-anchor="middle">21 d</text>
-  </g>
-  <g transform="translate(412, 80)">
-    <rect x="0" y="0" width="92" height="24" rx="12" fill="#ff0000" opacity="0.15"/><rect x="0" y="0" width="92" height="24" rx="12" fill="none" stroke="#ff0000" stroke-width="0.5" opacity="0.3"/>
-    <text x="12" y="17" font-family="Play, sans-serif" font-size="13">🔥</text>
-    <text x="56" y="16" font-family="Play, sans-serif" font-size="12" fill="#ff0000" text-anchor="middle">flagged</text>
-  </g>
-  <text x="360" y="120" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">icon + text</text>
+  <text x="348" y="120" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">icon + text</text>
 
   <!-- ═══ ROW 3: LOADING SKELETON ═══ -->
   <rect x="40" y="136" width="640" height="1" fill="#1a1a1a"/>
