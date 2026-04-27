@@ -22,7 +22,7 @@
     <text x="44" y="22" font-family="Play, sans-serif" font-size="20" fill="#ff0000" text-anchor="middle" style="font-variant-numeric:tabular-nums">18 042</text>
     <rect x="8" y="28" width="72" height="1" fill="#333"/>
     <rect x="8" y="28" width="6" height="1" fill="#ff0000" filter="url(#gr)"/>
-    <text x="44" y="46" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">decline -8%</text>
+    <text x="44" y="46" font-family="Play, sans-serif" font-size="10" fill="#ff0000" text-anchor="middle">drop -8%</text>
   </g>
 
   <!-- stable white 0% -->
