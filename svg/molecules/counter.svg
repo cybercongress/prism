@@ -48,33 +48,36 @@
   <rect x="40" y="100" width="560" height="1" fill="#1a1a1a"/>
   <text x="320" y="124" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">counter with symbol</text>
 
-  <!-- 18 800 🟢BOOT — number then icon+ticker -->
-  <g transform="translate(40, 140)">
+  <!-- uniform gap = 48px between items. 4 items centered. -->
+  <!-- item widths: ~120, ~60, ~110, ~70 = 360. gaps: 3×48=144. total=504. offset=(640-504)/2=68 -->
+
+  <!-- 18 800 🟢BOOT -->
+  <g transform="translate(68, 140)">
     <text x="0" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" style="font-variant-numeric:tabular-nums">18 800</text>
     <text x="62" y="18" font-family="Play, sans-serif" font-size="14" fill="#00fe00">🟢</text>
     <text x="80" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
     <text x="56" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + symbol</text>
   </g>
 
-  <!-- ⚡ 42 V — icon + count + label -->
-  <g transform="translate(200, 140)">
+  <!-- ⚡ 42 V -->
+  <g transform="translate(236, 140)">
     <text x="0" y="18" font-family="Play, sans-serif" font-size="14" fill="#fcf000">⚡</text>
     <text x="20" y="18" font-family="Play, sans-serif" font-size="16" fill="#fcf000" style="font-variant-numeric:tabular-nums">42</text>
     <text x="44" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">V</text>
     <text x="28" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + label</text>
   </g>
 
-  <!-- 2 726 particles — count + text -->
-  <g transform="translate(270, 140)">
-    <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
-    <text x="60" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
-    <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + text</text>
+  <!-- 2 726 particles -->
+  <g transform="translate(344, 140)">
+    <text x="0" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" style="font-variant-numeric:tabular-nums">2 726</text>
+    <text x="52" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
+    <text x="52" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + text</text>
   </g>
 
   <!-- 15.43% -->
-  <g transform="translate(420, 140)">
-    <text x="36" y="18" font-family="Play, sans-serif" font-size="16" fill="#00fe00" text-anchor="middle" style="font-variant-numeric:tabular-nums">15.43%</text>
-    <text x="36" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">percentage</text>
+  <g transform="translate(500, 140)">
+    <text x="0" y="18" font-family="Play, sans-serif" font-size="16" fill="#00fe00" style="font-variant-numeric:tabular-nums">15.43%</text>
+    <text x="28" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">percentage</text>
   </g>
 
 </svg>
