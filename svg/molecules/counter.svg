@@ -48,27 +48,27 @@
   <rect x="40" y="100" width="560" height="1" fill="#1a1a1a"/>
   <text x="320" y="124" font-family="Play, sans-serif" font-size="14" fill="#555" text-anchor="middle">counter with symbol</text>
 
-  <!-- 🟢 18 800 BOOT -->
-  <g transform="translate(60, 140)">
+  <!-- 🟢 18 800 BOOT — token name same size + white as number -->
+  <g transform="translate(40, 140)">
     <text x="0" y="18" font-family="Play, sans-serif" font-size="14" fill="#00fe00">🟢</text>
     <text x="24" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" style="font-variant-numeric:tabular-nums">18 800</text>
-    <text x="88" y="18" font-family="Play, sans-serif" font-size="12" fill="#777">BOOT</text>
-    <text x="50" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">token balance</text>
+    <text x="92" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">BOOT</text>
+    <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + symbol</text>
   </g>
 
-  <!-- ⚡ 42 W -->
-  <g transform="translate(220, 140)">
+  <!-- ⚡ 42 W — icon + count + label -->
+  <g transform="translate(200, 140)">
     <text x="0" y="18" font-family="Play, sans-serif" font-size="14" fill="#fcf000">⚡</text>
     <text x="20" y="18" font-family="Play, sans-serif" font-size="16" fill="#fcf000" style="font-variant-numeric:tabular-nums">42</text>
-    <text x="44" y="18" font-family="Play, sans-serif" font-size="12" fill="#777">W</text>
-    <text x="28" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">energy</text>
+    <text x="44" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff">W</text>
+    <text x="28" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + label</text>
   </g>
 
-  <!-- 2 726 particles -->
+  <!-- 2 726 particles — count + text -->
   <g transform="translate(340, 140)">
     <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
-    <text x="72" y="18" font-family="Play, sans-serif" font-size="12" fill="#777">particles</text>
-    <text x="52" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">count + label</text>
+    <text x="72" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
+    <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + text</text>
   </g>
 
   <!-- 15.43% -->
