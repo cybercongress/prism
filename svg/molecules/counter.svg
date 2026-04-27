@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 200" width="560" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 220" width="560" height="220">
   <defs>
     <filter id="gg" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feFlood flood-color="#00fe00" flood-opacity="0.4" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gr" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feFlood flood-color="#ff0000" flood-opacity="0.4" result="c"/><feComposite in="c" in2="b" operator="in" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="gw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="2"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="560" height="200" fill="#000"/>
+  <rect width="560" height="220" fill="#000"/>
 
   <!-- counter: text(number) + saber(change indicator, g/8 tall, 3g wide) -->
 
