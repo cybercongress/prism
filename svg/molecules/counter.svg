@@ -56,7 +56,7 @@
 
   <!-- loading: white skeleton, NO indicator bar -->
   <g transform="translate(60, 152)">
-    <rect x="4" y="4" width="72" height="16" rx="3" fill="#fff" opacity="0.15"/>
+    <rect x="4" y="4" width="72" height="16" rx="3" fill="#fff" opacity="0.3"/>
     <text x="40" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">loading</text>
   </g>
 
