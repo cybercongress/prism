@@ -67,7 +67,7 @@
   <!-- 2 726 particles — count + text -->
   <g transform="translate(270, 140)">
     <text x="32" y="18" font-family="Play, sans-serif" font-size="16" fill="#fff" text-anchor="middle" style="font-variant-numeric:tabular-nums">2 726</text>
-    <text x="72" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
+    <text x="60" y="18" font-family="Play, sans-serif" font-size="14" fill="#777">particles</text>
     <text x="60" y="40" font-family="Play, sans-serif" font-size="10" fill="#555" text-anchor="middle">counter + text</text>
   </g>
 
