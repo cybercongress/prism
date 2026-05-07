@@ -2,13 +2,6 @@
 tags: prysm, cyb
 crystal-type: pattern
 crystal-domain: cyber
-stake: 16344441177307554
-diffusion: 0.00026497884593268834
-springs: 0.0005677933308875936
-heat: 0.0005027487276286586
-focus: 0.00040337716775836575
-gravity: 4
-density: 6.31
 ---
 
 numeric display molecule in [[prysm]]

@@ -2,13 +2,6 @@
 tags: prysm, cyb
 crystal-type: pattern
 crystal-domain: cyber
-stake: 17237820130547482
-diffusion: 0.00019031384281013565
-springs: 0.00038310934143964427
-heat: 0.00033715514250890567
-focus: 0.0002775207523387504
-gravity: 2
-density: 8.9
 ---
 
 icon library in [[prysm]]

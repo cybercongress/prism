@@ -2,13 +2,6 @@
 tags: prysm, cyb
 crystal-type: pattern
 crystal-domain: cyber
-stake: 17032782338000614
-diffusion: 0.00019031384281013565
-springs: 0.00029604029867803816
-heat: 0.0002799153101315369
-focus: 0.00023995207303479366
-gravity: 2
-density: 3.32
 ---
 
 the membrane atom in [[prysm]]
