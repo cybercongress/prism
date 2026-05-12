@@ -245,35 +245,35 @@ ECS: Component = `FoldSet { conformations: Vec<(min_width, SubTree)> }`. System 
 
 ### 4.3a fold derivation
 
-Theorem 6 (fold derivation for stacks). for a stack container with $m$ organelles, each with importance $\pi_i$ and width $w_i$, the optimal fold set $\mathcal{F}$ can be computed in $\mathcal{O}(m \log m)$
+Theorem 6 (fold derivation for stacks). for a stack container with $m$ organelles, each with importance $\phi^*_i$ and width $w_i$, the optimal fold set $\mathcal{F}$ can be computed in $\mathcal{O}(m \log m)$
 
 Definition. a fold set $\mathcal{F}$ is optimal if at every constraint width $c_w$, the active conformation retains the maximum total importance among all conformations that fit in $c_w$
 
 Algorithm.
 
-1. assign each organelle $i$ an importance score $\pi_i$ (from [[cyberank]], [[focus]], or manual priority)
-2. sort organelles by $\pi_i$ ascending: $\pi_{\sigma(1)} \leq \pi_{\sigma(2)} \leq \cdots \leq \pi_{\sigma(m)}$
+1. assign each organelle $i$ an importance score $\phi^*_i$ (from [[cyberank]], [[focus]], or manual priority)
+2. sort organelles by $\phi^*_i$ ascending: $\phi^*_{\sigma(1)} \leq \phi^*_{\sigma(2)} \leq \cdots \leq \phi^*_{\sigma(m)}$
 3. initialize $l_1$ = full set, $w_{min}(l_1) = \sum_{i=1}^{m} w_i + (m-1) \cdot gap$
 4. for $j = 1$ to $m - 1$:
    - $l_{j+1} = l_j \setminus \{e_{\sigma(j)}\}$ — remove the least important remaining organelle
    - $w_{min}(l_{j+1}) = w_{min}(l_j) - w_{\sigma(j)} - gap$
 5. $\mathcal{F} = \{l_1, l_2, \ldots, l_m\}$, ordered by decreasing $w_{min}$
 
-Proof of optimality. by greedy exchange argument. suppose an alternative fold set $\mathcal{F}'$ has a conformation $l'$ at some width $c_w$ that achieves higher total importance than the conformation $l^*$ selected by the algorithm. then $l'$ contains an organelle $e_j$ that $l^*$ excluded, and excludes some organelle $e_k$ that $l^*$ included. since the algorithm removes by ascending importance, $\pi_j < \pi_k$. replace $e_j$ with $e_k$ in $l'$: importance increases (contradiction) or widths change. since both have width $\leq c_w$ and $w_j$ was removed before $w_k$ (lower importance), the exchange produces a conformation with $\geq$ importance that still fits. the exchange can be repeated until $l' = l^*$. ∎
+Proof of optimality. by greedy exchange argument. suppose an alternative fold set $\mathcal{F}'$ has a conformation $l'$ at some width $c_w$ that achieves higher total importance than the conformation $l^*$ selected by the algorithm. then $l'$ contains an organelle $e_j$ that $l^*$ excluded, and excludes some organelle $e_k$ that $l^*$ included. since the algorithm removes by ascending importance, $\phi^*_j < \phi^*_k$. replace $e_j$ with $e_k$ in $l'$: importance increases (contradiction) or widths change. since both have width $\leq c_w$ and $w_j$ was removed before $w_k$ (lower importance), the exchange produces a conformation with $\geq$ importance that still fits. the exchange can be repeated until $l' = l^*$. ∎
 
 Complexity. step 2 is $\mathcal{O}(m \log m)$. steps 3-4 are $\mathcal{O}(m)$. total: $\mathcal{O}(m \log m)$
 
 Grid fold. for grids, fold means hiding columns or rows — a 1D problem on tracks. apply the same algorithm to tracks instead of organelles: sort tracks by importance, remove least important first. each removal hides an entire column/row, reducing $w_{min}$ by the track width + gap. same $\mathcal{O}(m \log m)$
 
-Branching fold sets. Theorem 6 produces linear chains. when importance is vector-valued $\vec{\pi}_i \in \mathbb{R}^d$ (e.g. readability importance vs interaction importance), different organelle subsets may be Pareto-optimal at the same width
+Branching fold sets. Theorem 6 produces linear chains. when importance is vector-valued $\vec{\phi^*}_i \in \mathbb{R}^d$ (e.g. readability importance vs interaction importance), different organelle subsets may be Pareto-optimal at the same width
 
 Theorem 9 (branching fold derivation). for $m$ organelles with $d$-dimensional importance vectors, the Pareto-optimal fold set can be computed in $\mathcal{O}(m^d \cdot m \log m)$
 
 Algorithm.
 
 1. enumerate all $\binom{m}{k}$ subsets of size $k$ for each $k = m, m{-}1, \ldots, 1$
-2. for each subset $A$: compute $w_{min}(A) = \sum_{i \in A} w_i + (|A| - 1) \cdot gap$ and $\vec{\pi}(A) = \sum_{i \in A} \vec{\pi}_i$
-3. within each width class (subsets with the same $w_{min}$), compute the Pareto front: $A$ dominates $B$ iff $\vec{\pi}(A) \geq \vec{\pi}(B)$ componentwise with at least one strict inequality
+2. for each subset $A$: compute $w_{min}(A) = \sum_{i \in A} w_i + (|A| - 1) \cdot gap$ and $\vec{\phi^*}(A) = \sum_{i \in A} \vec{\phi^*}_i$
+3. within each width class (subsets with the same $w_{min}$), compute the Pareto front: $A$ dominates $B$ iff $\vec{\phi^*}(A) \geq \vec{\phi^*}(B)$ componentwise with at least one strict inequality
 4. the fold set $\mathcal{F} = \bigcup_k \text{ParetoFront}(w_{min} = k)$, ordered by $w_{min}$
 
 Proof. the Pareto front at each width contains all non-dominated importance vectors — by definition, no other subset at that width is strictly better in all dimensions. the union across widths is the complete set of conformations worth considering
@@ -282,9 +282,9 @@ Complexity. step 1 generates $2^m$ subsets (dominated by step 3). for fixed $w_{
 
 Fold selection with branching. at runtime, the neuron or context determines a weight vector $\vec{w} \in \mathbb{R}^d$ (how much to value each importance dimension). the fold function becomes:
 
-$$l^* = \arg\max_{l \in \mathcal{F},\; w_{min}(l) \leq c_w} \vec{w} \cdot \vec{\pi}(l)$$
+$$l^* = \arg\max_{l \in \mathcal{F},\; w_{min}(l) \leq c_w} \vec{w} \cdot \vec{\phi^*}(l)$$
 
-the scalarized importance $\vec{w} \cdot \vec{\pi}(l)$ reduces branching to linear selection: given $\vec{w}$, exactly one conformation is optimal at each width. this preserves determinism (Theorem 2) as long as $\vec{w}$ is deterministic
+the scalarized importance $\vec{w} \cdot \vec{\phi^*}(l)$ reduces branching to linear selection: given $\vec{w}$, exactly one conformation is optimal at each width. this preserves determinism (Theorem 2) as long as $\vec{w}$ is deterministic
 
 practical scope. $d = 1$ covers all current prysm molecules (Theorem 6). $d = 2$ is the realistic maximum: readability (how much information the conformation shows) vs interactivity (how many interactive elements it retains). $d \geq 3$ is theoretically supported but no practical use case exists
 
@@ -574,7 +574,7 @@ ECS: `SpatialQuantum { g: u32 }` — set once at application init. currently har
 
 in 2D, layout has two participants: membrane and organelle. the membrane constrains, the organelle occupies, the membrane places. depth ($z$) is an integer ordering assigned by urgency $\mathcal{U}$
 
-in 3D, depth becomes a real spatial dimension and a third participant enters the protocol: the [[cybergraph]] itself. what is important must appear close to the [[neuron]]. what is peripheral must recede. importance is not decided by membrane or organelle — it is computed by the [[tri-kernel]] as [[focus]] ($\pi^*$) and [[gravity]]
+in 3D, depth becomes a real spatial dimension and a third participant enters the protocol: the [[cybergraph]] itself. what is important must appear close to the [[neuron]]. what is peripheral must recede. importance is not decided by membrane or organelle — it is computed by the [[tri-kernel]] as [[focus]] ($\phi^*$) and [[gravity]]
 
 ### 9.1 the gravity phase
 
@@ -586,14 +586,14 @@ constrain → occupy → gravitate → place
 |-------|----------|-------------|
 | constrain | membrane | imposes $(c_w, c_h)$ on xy-plane |
 | occupy | organelle | returns $(s_w, s_h)$ subject to constraint |
-| gravitate | [[cybergraph]] | computes $p_z$ from focus: $p_z = f(\pi^*(e))$ |
+| gravitate | [[cybergraph]] | computes $p_z$ from focus: $p_z = f(\phi^*(e))$ |
 | place | membrane | assigns $(p_x, p_y)$ on xy-plane |
 
 the gravity function:
 
-$$p_z(e) = d_{max} \cdot (1 - \pi^*(e))$$
+$$p_z(e) = d_{max} \cdot (1 - \phi^*(e))$$
 
-$\pi^*(e)$ — the focus of organelle $e$ in the [[cybergraph]], computed by the [[tri-kernel]]. $d_{max}$ — maximum depth of the 3D space (convention). when $\pi^* = 1$ (maximum focus): $p_z = 0$ — directly in front of the neuron. when $\pi^* = 0$ (no focus): $p_z = d_{max}$ — at the far edge of the space
+$\phi^*(e)$ — the focus of organelle $e$ in the [[cybergraph]], computed by the [[tri-kernel]]. $d_{max}$ — maximum depth of the 3D space (convention). when $\phi^* = 1$ (maximum focus): $p_z = 0$ — directly in front of the neuron. when $\phi^* = 0$ (no focus): $p_z = d_{max}$ — at the far edge of the space
 
 this mirrors physical gravity: massive objects (high focus) attract the observer's attention. the [[cybergraph]] is the gravitational field. focus is mass. distance is inversely proportional to importance
 
@@ -620,42 +620,42 @@ $\mathcal{K}$ extends:
 
 in 2D, depth is determined solely by urgency $\mathcal{U}$. in 3D, two forces compete: gravity (from [[cybergraph]] focus) and urgency (from UI semantics). the composition rule resolves them:
 
-$$p_z(e) = d_{max} \cdot \left(1 - \max\left(\pi^*(e),\; \frac{\mathcal{U}(e)}{\mathcal{U}_{max}}\right)\right)$$
+$$p_z(e) = d_{max} \cdot \left(1 - \max\left(\phi^*(e),\; \frac{\mathcal{U}(e)}{\mathcal{U}_{max}}\right)\right)$$
 
-$\pi^*(e)$ — focus from [[tri-kernel]], $\pi^* \in [0, 1]$. $\mathcal{U}(e)$ — urgency level, $\mathcal{U} \in [0, 50]$. $\mathcal{U}_{max} = 50$. the $\max$ selects whichever measure assigns higher importance — the element is placed at the depth of its strongest claim to proximity
+$\phi^*(e)$ — focus from [[tri-kernel]], $\phi^* \in [0, 1]$. $\mathcal{U}(e)$ — urgency level, $\mathcal{U} \in [0, 50]$. $\mathcal{U}_{max} = 50$. the $\max$ selects whichever measure assigns higher importance — the element is placed at the depth of its strongest claim to proximity
 
 equivalently: $p_z(e) = \min(p_{z,gravity}(e),\; p_{z,urgency}(e))$ — urgency can pull closer but never push farther
 
 Theorem 7 (composition properties).
 
-(a) urgency dominance: $\forall e$ with $\mathcal{U}(e) = \mathcal{U}_{max}$: $p_z(e) = 0$ regardless of $\pi^*(e)$
+(a) urgency dominance: $\forall e$ with $\mathcal{U}(e) = \mathcal{U}_{max}$: $p_z(e) = 0$ regardless of $\phi^*(e)$
 
-*Proof.* $\max(\pi^*, \mathcal{U}_{max}/\mathcal{U}_{max}) = \max(\pi^*, 1) = 1$. $p_z = d_{max} \cdot (1 - 1) = 0$. ∎
+*Proof.* $\max(\phi^*, \mathcal{U}_{max}/\mathcal{U}_{max}) = \max(\phi^*, 1) = 1$. $p_z = d_{max} \cdot (1 - 1) = 0$. ∎
 
-(b) gravity dominance for non-urgent: $\forall e$ with $\mathcal{U}(e) = 0$: $p_z(e) = d_{max} \cdot (1 - \pi^*(e))$
+(b) gravity dominance for non-urgent: $\forall e$ with $\mathcal{U}(e) = 0$: $p_z(e) = d_{max} \cdot (1 - \phi^*(e))$
 
-*Proof.* $\max(\pi^*, 0/50) = \pi^*$. ∎
+*Proof.* $\max(\phi^*, 0/50) = \phi^*$. ∎
 
-(c) monotonicity in urgency: $\mathcal{U}(a) > \mathcal{U}(b) \;\wedge\; \pi^*(a) = \pi^*(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
+(c) monotonicity in urgency: $\mathcal{U}(a) > \mathcal{U}(b) \;\wedge\; \phi^*(a) = \phi^*(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
 
-*Proof.* $\max(\pi^*, \mathcal{U}(a)/50) \geq \max(\pi^*, \mathcal{U}(b)/50)$ since $\mathcal{U}(a) > \mathcal{U}(b)$. $1 - \max(\ldots)$ is smaller for $a$. ∎
+*Proof.* $\max(\phi^*, \mathcal{U}(a)/50) \geq \max(\phi^*, \mathcal{U}(b)/50)$ since $\mathcal{U}(a) > \mathcal{U}(b)$. $1 - \max(\ldots)$ is smaller for $a$. ∎
 
-(d) monotonicity in focus: $\pi^*(a) > \pi^*(b) \;\wedge\; \mathcal{U}(a) = \mathcal{U}(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
+(d) monotonicity in focus: $\phi^*(a) > \phi^*(b) \;\wedge\; \mathcal{U}(a) = \mathcal{U}(b) \;\Rightarrow\; p_z(a) \leq p_z(b)$
 
 *Proof.* symmetric to (c). ∎
 
-(e) determinism: $p_z$ is a pure function of $(\pi^*, \mathcal{U})$, both deterministic inputs
+(e) determinism: $p_z$ is a pure function of $(\phi^*, \mathcal{U})$, both deterministic inputs
 
-the composition resolves the key scenario: a modal ($\mathcal{U} = 50$) for a low-focus entity ($\pi^* = 0.1$) must appear in front of high-focus space content ($\pi^* = 0.9, \mathcal{U} = 0$). by (a), the modal is at $p_z = 0$. the space content is at $p_z = d_{max} \cdot 0.1$. modal in front. correct
+the composition resolves the key scenario: a modal ($\mathcal{U} = 50$) for a low-focus entity ($\phi^* = 0.1$) must appear in front of high-focus space content ($\phi^* = 0.9, \mathcal{U} = 0$). by (a), the modal is at $p_z = 0$. the space content is at $p_z = d_{max} \cdot 0.1$. modal in front. correct
 
 ### 9.5 invariants in 3D
 
 | invariant | 3D status | proof |
 |-----------|-----------|-------|
 | I1 determinism | holds | Theorem 7(e): $p_z$ is pure function of deterministic inputs |
-| I2 single-pass | holds | gravitate adds $\mathcal{O}(1)$ per node (lookup $\pi^*$, compute max) |
+| I2 single-pass | holds | gravitate adds $\mathcal{O}(1)$ per node (lookup $\phi^*$, compute max) |
 | I3 linear time | holds | $\mathcal{O}(n \cdot f_{max})$ + $\mathcal{O}(n)$ for gravity = still $\mathcal{O}(n \cdot f_{max})$ |
-| I4 constraint respect | holds for xy | $p_z$ is not constrained by membrane — determined by $\max(\pi^*, \mathcal{U}/\mathcal{U}_{max})$ |
+| I4 constraint respect | holds for xy | $p_z$ is not constrained by membrane — determined by $\max(\phi^*, \mathcal{U}/\mathcal{U}_{max})$ |
 | I5 quantum alignment | holds | $g \mid p_z$: output rounded to $g$ after composition |
 | I6 z monotonicity | holds | Theorem 7(c,d): monotonic in both urgency and focus when the other is equal |
 | I7 fold legibility | holds | fold on xy, gravity on z — independent axes |
@@ -663,9 +663,9 @@ the composition resolves the key scenario: a modal ($\mathcal{U} = 50$) for a lo
 
 ### 9.6 the layout function in 3D
 
-$$\text{layout}_{3D}(\mathcal{T},\; \square,\; \pi^*) \;\to\; \{(e_i,\; p_{x_i},\; p_{y_i},\; p_{z_i},\; s_{w_i},\; s_{h_i})\}$$
+$$\text{layout}_{3D}(\mathcal{T},\; \square,\; \phi^*) \;\to\; \{(e_i,\; p_{x_i},\; p_{y_i},\; p_{z_i},\; s_{w_i},\; s_{h_i})\}$$
 
-note the third input: $\pi^*$ — the focus distribution from the [[cybergraph]]. in 2D, layout depends only on tree and viewport. in 3D, it depends on the state of knowledge itself
+note the third input: $\phi^*$ — the focus distribution from the [[cybergraph]]. in 2D, layout depends only on tree and viewport. in 3D, it depends on the state of knowledge itself
 
 ECS: `Gravity { focus: f64 }` component. `GravitateSystem` reads `Gravity`, writes `Position { z }`. runs between `OccupySystem` and `PlaceSystem`
 
