@@ -110,7 +110,7 @@ feed of all particles in the [[cybergraph]]
 glass [fill × fill, depth background, overflow scroll]
   stack vertical [gap g]
     glass [fill × fix(6g), depth midground] — per particle
-      text [body, particle name or CID]
+      text [body, particle]
       ion [2g, particle type indicator] — optional, right side
 ```
 
