@@ -85,7 +85,7 @@ stack vertical [gap g]
   stack horizontal
     text [micro, "13:40"]
     glass [auto × auto, corner-radius g, depth midground]
-      text [body, CID or message content]
+      text [body, particle or message content]
     counter [micro, "60", green]
   --- outgoing (right-aligned) ---
   stack horizontal [align right]

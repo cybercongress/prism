@@ -491,7 +491,7 @@ terminal organelle. no sub-organelles. contains rendered data
 |------|------|---------------|-----|
 | text | string at font size | [[prysm/text]] | `TextLeaf { content, size }` |
 | vector | path, shape, line | [[prysm/saber]], [[prysm/ion]], [[prysm/images]] | `VectorLeaf { path }` |
-| raster | bitmap, photo, video | image/video [[particle]] | `RasterLeaf { cid }` |
+| raster | bitmap, photo, video | image/video [[particle]] | `RasterLeaf { particle }` |
 
 ### coverage
 

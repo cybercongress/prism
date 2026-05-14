@@ -120,7 +120,7 @@ brain IS the 3D view. in 3d graph tab, particles render in actual 3D space with 
   - `BrainContext { oracle | robot }` — determines which graph to render
   - `RenderLimit { count }` — how many particles
   - `Fullscreen { bool }`
-  - `SelectedParticles { list of cid, max 2 }` — for cyberlink creation
+  - `SelectedParticles { list of particle, max 2 }` — for cyberlink creation
 - Systems:
   - `BrainFetchSystem` fetches graph data within limit
   - `BrainRender3dSystem` renders 3D scene (Bevy 3D)

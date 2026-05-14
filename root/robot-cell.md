@@ -179,7 +179,7 @@ table [sortable]
     ✓ | IBC Transfer | 24 days ago | 5D0656...3CF12A | from/to/channel/token/amount (expandable)
     ✓ | Receive | 31 days ago | CA3867...7F8EF2 | from: mastercyb, to: cybergirl, amount: 42
     ✓ | Send | 31 days ago | FB279E...5DB798 | from: cybergirl, to: mastercyb, amount: 1
-    ✗ | Cyberlink | 31 days ago | B125B9...E4F9AA | neuron: cybergirl, from: CID, to: CID
+    ✗ | Cyberlink | 31 days ago | B125B9...E4F9AA | neuron: cybergirl, from: particle, to: particle
 ```
 
 action column expands inline for IBC details (channel, timeout), send/receive (from/to/amount), cyberlinks (particle CIDs). differs from [[prysm/time-widget]]: widget = compact last events, this = full sortable history

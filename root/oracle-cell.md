@@ -38,7 +38,7 @@ tap item → switches sub-page in space zone. active item highlighted
 
 ### particle-page
 
-page of a single [[particle]] — renders its content and all [[cyberlink]] connections. this is what opens when a neuron navigates to a specific CID
+page of a single [[particle]] — renders its content and all [[cyberlink]] connections. this is what opens when a neuron navigates to a specific particle
 
 ```
 glass [fill × fill, depth background, overflow scroll]
@@ -70,7 +70,7 @@ glass [fill × fill, depth background, overflow scroll]
     stack vertical [gap 0]
       glass [fill × auto, depth midground] — per linked particle
         stack horizontal [gap g]
-          text [body, particle name or CID]
+          text [body, particle name or particle]
           pill [progress, emotion, rank weight] — right-aligned, vertical fill
       saber [horizontal, g/8]
       ...
@@ -114,7 +114,7 @@ glass [fill × fill, depth background, overflow scroll]
       ion [2g, particle type indicator] — optional, right side
 ```
 
-tap particle → navigate to particle detail (search results for that CID)
+tap particle → navigate to particle detail (search results for that particle)
 
 ### brain
 
@@ -258,7 +258,7 @@ renders at ambient $p_z$. brain graph visualization is inherently 3D-ready — p
   - `Overflow { scroll }`
   - `FoldSet { conformations }`
   - `ActiveSubPage { main | particle_page | particles | brain | stats | blocks | txs | contracts | libs }`
-  - `SearchQuery { cid }` — for main/search
+  - `SearchQuery { particle }` — for main/search
   - `BrainMenuVisible { bool }`
 - Systems:
   - `OracleMenuSystem` handles brain menu navigation

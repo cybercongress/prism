@@ -54,7 +54,7 @@ content carries [[emotion]] from [[cyberank]] of the particle: high-confidence r
 | loading | skeleton placeholder | fetching particle |
 | rendered | content visible | loaded |
 | error | red adviser message | load failed |
-| seed | particle CID visible as [[prysm/address]] hash bars | no cyberlinks to this particle yet — it exists as a seed |
+| seed | particle visible as [[prysm/address]] hash bars | no cyberlinks to this particle yet — it exists as a seed |
 
 ## 3D
 
@@ -65,8 +65,8 @@ renders at membrane's $p_z$. image/video particles face neuron (billboard)
 - Entity: content organelle
 - Components:
   - `Sizing { width: Fill, height: auto }`
-  - `ParticleCid { cid }` — content address
+  - `Particle { particle }` — content address
   - `ParticleFormat { heading | text | image | video | audio | ... }`
   - `FoldSet { conformations }`
   - `Emotion { color }` — from cyberank
-- System: `ContentRenderSystem` reads `ParticleCid`, determines format, spawns appropriate leaf organelles
+- System: `ContentRenderSystem` reads `Particle`, determines format, spawns appropriate leaf organelles
