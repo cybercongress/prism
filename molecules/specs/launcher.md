@@ -4,13 +4,13 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-application molecule in [[prysm]]
+cell launcher molecule in [[prysm]]
 
-the [[aip]] icon in the top-left corner of [[prysm/grid]] (inside [[prysm/context]] zone). by default shows the active application icon. tap opens a dropdown menu listing available applications — each item is an icon + text label. menu extends down from the icon, max length to the middle of the screen
+the [[cell]] icon in the top-left corner of [[prysm/grid]] (inside [[prysm/context]] zone). by default shows the active cell icon. tap opens a dropdown menu listing available cells — each item is an icon + text label. menu extends down from the icon, max length to the middle of the screen
 
 ## protocol role
 
-aip is a molecule in the element tree $\mathcal{T}$. lives inside [[prysm/context]] zone. the icon is always visible. the menu is an overlay at $\mathcal{U} = 30$ (interrupting)
+launcher is a molecule in the element tree $\mathcal{T}$. lives inside [[prysm/context]] zone. the icon is always visible. the menu is an overlay at $\mathcal{U} = 30$ (interrupting)
 
 ## sizing
 
@@ -25,7 +25,7 @@ $s_{min} = (4g, 4g)$ — icon only
 
 collapsed (default):
 ```
-ion [4g, active aip icon]
+ion [4g, active cell icon]
 ```
 
 expanded (on tap):
@@ -52,11 +52,11 @@ glass [fix(25g) × auto, depth foreground, max height square_h/2, overflow scrol
 
 ## fold
 
-aip does not fold — icon is always $4g$ × $4g$. menu appears/disappears, does not fold
+launcher does not fold — icon is always $4g$ × $4g$. menu appears/disappears, does not fold
 
 ## emotion
 
-active aip icon can carry [[emotion]] reflecting the aip's state (e.g. sense icon glows when unread messages). inactive items in menu are neutral
+active cell icon can carry [[emotion]] reflecting the cell's state (e.g. sense icon glows when unread messages). inactive items in menu are neutral
 
 ## states
 
@@ -65,16 +65,16 @@ active aip icon can carry [[emotion]] reflecting the aip's state (e.g. sense ico
 | collapsed | icon only | default |
 | expanded | menu drops down from icon | tap on icon |
 | hover (menu item) | item text brightens | pointer over item |
-| active (menu item) | navigate to selected aip | tap on item |
+| active (menu item) | navigate to selected cell | tap on item |
 
 state transitions: menu slide down $150\text{ms}$ ease
 
 ## interaction
 
 - tap icon → toggle menu (expand/collapse)
-- tap menu item → navigate to that [[aip]], menu closes
+- tap menu item → navigate to that [[cell]], menu closes
 - tap outside menu → close menu
-- active aip is highlighted in menu list
+- active cell is highlighted in menu list
 
 ## where in [[prysm/grid]]
 
@@ -86,13 +86,13 @@ icon renders at frame $p_z$ ($\mathcal{U} = 10$). menu renders at interrupting $
 
 ## ECS
 
-- Entity: aip organelle
+- Entity: launcher organelle
 - Components:
   - `Sizing { width: Fix(4), height: Fix(4) }` — icon
-  - `AipList { list of (aip_id, icon, label) }` — available applications
-  - `ActiveAip { aip_id }` — currently active
+  - `CellList { list of (cell_id, icon, label) }` — available cells
+  - `ActiveCell { cell_id }` — currently active
   - `Visibility { collapsed | expanded }` — menu state
-  - `Emotion { color }` — from active aip state
+  - `Emotion { color }` — from active cell state
 - Systems:
-  - `AipMenuSystem` handles tap to toggle, tap on item to navigate
-  - `AipEmotionSystem` reads aip states, writes icon emotion
+  - `LauncherSystem` handles tap to toggle, tap on item to navigate
+  - `LauncherEmotionSystem` reads cell states, writes icon emotion

@@ -43,8 +43,8 @@ $s_{min} = (4g, 4g)$ — icon only
 
 ```
 glass [fix(25g) × fix(6g), depth midground]
-  ion [4g, aip icon]
-  text [caption, aip name / particle title / world name]
+  ion [4g, cell icon]
+  text [caption, cell name / particle title / world name]
 ```
 
 breadcrumb trail shows: world → section → particle (if deep)
@@ -75,6 +75,6 @@ tap → opens menu context (slide-out from left edge, z: 30)
   - `Sizing { width, height }`
   - `GridArea { name: "context" }`
   - `FoldSet { conformations }`
-  - `ContextSubject { aip_id, particle_cid, label }`
+  - `ContextSubject { cell_id, particle_cid, label }`
   - `Trigger::Tap { opens: menu_context }`
 - System: `ContextSystem` reads current navigation state, writes `ContextSubject`

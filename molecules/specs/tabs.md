@@ -6,11 +6,11 @@ crystal-domain: cyber
 
 section navigation molecule in [[prysm]]
 
-a horizontal row of selectable items. one active, the rest idle. switches between sections within an [[aip]]. glass + ion (per tab) + saber (active underline)
+a horizontal row of selectable items. one active, the rest idle. switches between sections within an [[cell]]. glass + ion (per tab) + saber (active underline)
 
 ## protocol role
 
-molecule in $\mathcal{T}$. lives inside space zone, within [[aip]] content
+molecule in $\mathcal{T}$. lives inside space zone, within [[cell]] content
 
 ## sizing
 

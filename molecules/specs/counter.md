@@ -10,7 +10,7 @@ renders a number with [[emotion]] color. text (number) + saber (change indicator
 
 ## protocol role
 
-molecule in $\mathcal{T}$. lives inside [[prysm/neuron-card]], [[prysm/aip]], [[prysm/display]], [[prysm/widget]]
+molecule in $\mathcal{T}$. lives inside [[prysm/neuron-card]], [[prysm/launcher]], [[prysm/display]], [[prysm/widget]]
 
 ## sizing
 

@@ -164,7 +164,7 @@ the coordinate system of [[cyb]]. CSS Grid. every element has a grid address. re
 | avatar | 32 × 32 | icon only |
 | space | spans all 3 columns, 16px padding | same logic, tighter padding |
 | S, Σ | 32 × 32, fixed on edges | same |
-| stars | auto × 48, max 4 pinned aip icons | inline in bottom row, no graph |
+| stars | auto × 48, max 4 pinned cell icons | inline in bottom row, no graph |
 | commander | 1fr × 48 | shares bottom row with stars and time |
 | time | auto × 48 | compressed column |
 | graph | inside menu context | not visible on main grid |

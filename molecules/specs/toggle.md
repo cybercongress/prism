@@ -10,7 +10,7 @@ a two-state switch. tap to flip. glass track + glass thumb (circle). used for on
 
 ## protocol role
 
-molecule in $\mathcal{T}$. lives inside [[prysm/filter]], [[prysm/table]], [[prysm/aip]], and other molecules
+molecule in $\mathcal{T}$. lives inside [[prysm/filter]], [[prysm/table]], [[prysm/launcher]], and other molecules
 
 ## sizing
 
@@ -33,7 +33,7 @@ on: thumb at cx=26 (right), track #00fe00 at 25% opacity. off: thumb at cx=14 (l
 |---------|--------|-----|
 | on | thumb cx=26, track #00fe00 25% opacity | active state |
 | off | thumb cx=14, track #4b4b4d 25% opacity | inactive state |
-| star | ion(star-filled, #fcf000) vs ion(star-hollow, #777777) | bookmark/favorite in [[prysm/aip]] |
+| star | ion(star-filled, #fcf000) vs ion(star-hollow, #777777) | bookmark/favorite in [[prysm/launcher]] |
 
 ## emotion
 

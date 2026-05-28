@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 action timeline molecule in [[prysm]]
 
-a column of the [[neuron]]'s actions in the [[cybergraph]]: transitions between [[aip]] applications, conversations, transactions, [[cyberlink]] creations. newest at bottom, oldest at top. machine time counter at the very bottom
+a column of the [[neuron]]'s actions in the [[cybergraph]]: transitions between [[cell]] applications, conversations, transactions, [[cyberlink]] creations. newest at bottom, oldest at top. machine time counter at the very bottom
 
 ## protocol role
 
@@ -57,7 +57,7 @@ each event carries [[emotion]] from its action type:
 
 | event type | emotion | color |
 |-----------|---------|-------|
-| navigation (aip switch) | neutral | #ffffff |
+| navigation (cell switch) | neutral | #ffffff |
 | message received | [[emotion]] of message | varies |
 | transaction sent | green | #00fe00 |
 | transaction received | green | #00fe00 |

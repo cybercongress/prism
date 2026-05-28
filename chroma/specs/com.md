@@ -103,7 +103,7 @@ $\mathcal{F}$:
 
 ## contextual adaptation
 
-| active aip | placeholder | primary action |
+| active cell | placeholder | primary action |
 |------------|-------------|----------------|
 | oracle/search | "ask the cybergraph" | Search |
 | terminal | "enter command" | Run |
@@ -112,7 +112,7 @@ $\mathcal{F}$:
 | sigma/send | "enter recipient" | Send |
 | portal | "generate identity" | Confirm |
 
-content replacement within the same conformation — structure stays, labels and available actions change per aip
+content replacement within the same conformation — structure stays, labels and available actions change per cell
 
 ## emotion
 
@@ -149,10 +149,10 @@ commander renders at fixed $p_z$ ($\mathcal{U} = 20$) — does not recede with g
   - `Sizing { width: Fill, height: Fix(6) }`
   - `GridArea { name: "commander" }`
   - `FoldSet { conformations }`
-  - `ActiveAip { aip_id }`
+  - `ActiveCell { cell_id }`
   - `InputState { text, focused, emotion }`
   - `SaberGlow { color, spread }`
 - Systems:
-  - `MindContextSystem` reads `ActiveAip`, updates placeholder and available actions
+  - `MindContextSystem` reads `ActiveCell`, updates placeholder and available actions
   - `MindInputSystem` handles focus, typing, submission
   - `MindEmotionSystem` reads input state and action result, writes `SaberGlow`

@@ -10,7 +10,7 @@ a small rounded label. classifies, filters, marks. glass (rounded) + text (label
 
 ## protocol role
 
-molecule in $\mathcal{T}$. lives inside [[prysm/filter]], [[prysm/aip]], [[prysm/neuron-card]], [[prysm/content]], space zone content
+molecule in $\mathcal{T}$. lives inside [[prysm/filter]], [[prysm/launcher]], [[prysm/neuron-card]], [[prysm/content]], space zone content
 
 ## sizing
 

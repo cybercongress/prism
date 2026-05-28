@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 pinned items molecule in [[prysm]]
 
-a circular ring of [[prysm/ion]] icons arranged around the [[prysm/graph]] minimap. each icon = a pinned [[aip]] application or other item bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar
+a circular ring of [[prysm/ion]] icons arranged around the [[prysm/graph]] minimap. each icon = a pinned [[cell]] or other item bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar
 
 ## protocol role
 
@@ -29,10 +29,10 @@ layer [fix(25g) × fix(25g)]
   --- graph minimap at center ---
   graph [fix(12g) × fix(12g), center]
   --- star icons arranged in circle around graph ---
-  ion [4g, aip 1, position: angle 0°, radius 10g from center]
-  ion [4g, aip 2, position: angle 30°, radius 10g]
-  ion [4g, aip 3, position: angle 60°, radius 10g]
-  ion [4g, aip 4, position: angle 90°, radius 10g]
+  ion [4g, cell 1, position: angle 0°, radius 10g from center]
+  ion [4g, cell 2, position: angle 30°, radius 10g]
+  ion [4g, cell 3, position: angle 60°, radius 10g]
+  ion [4g, cell 4, position: angle 90°, radius 10g]
   ...
 ```
 
@@ -56,14 +56,14 @@ $\mathcal{F}$:
 
 ## interaction
 
-- tap star icon → navigates to that [[aip]] page
+- tap star icon → navigates to that [[cell]]
 - long-press → unpin (remove from stars)
 - drag to reorder on desktop (changes angle position in circle)
 - graph minimap in center is independently interactive (tap to navigate)
 
 ## emotion
 
-star icons inherit [[emotion]] from their [[aip]]: sense icon glows when unread messages, sigma when balance change. idle icons are neutral
+star icons inherit [[emotion]] from their [[cell]]: sense icon glows when unread messages, sigma when balance change. idle icons are neutral
 
 ## states
 
@@ -95,7 +95,7 @@ stars render at frame $p_z$ ($\mathcal{U} = 10$). in 3D, star icons orbit the gr
   - `CircularLayout { radius, center }` — desktop: positions icons in circle
   - `Stack { direction, gap }` — mobile: linear fallback
   - `FoldSet { conformations }`
-  - `PinnedItems { list of (aip_id, icon_name, label, angle) }`
+  - `PinnedItems { list of (cell_id, icon_name, label, angle) }`
 - Systems:
   - `StarsSystem` reads avatar's pinned items, computes angle positions
   - `StarsDragSystem` handles reorder on desktop (updates angle)

@@ -74,7 +74,7 @@ every molecule in the [[prysm]] catalog defines its fold set. see individual mol
 | R6 | no horizontal scroll | $s_w(\text{root}) = \square_w$ — root never exceeds viewport width |
 | R7 | minimum viable | $\square_w \geq 40g$ — below $40g$ the interface is not guaranteed legible |
 
-R1 is the strongest invariant: the commander is always at the bottom edge, regardless of viewport, orientation, or active [[aip]]. this guarantees the neuron always knows where to act
+R1 is the strongest invariant: the commander is always at the bottom edge, regardless of viewport, orientation, or active [[cell]]. this guarantees the neuron always knows where to act
 
 ## orientation
 

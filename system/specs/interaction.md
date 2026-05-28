@@ -73,7 +73,7 @@ three patterns recur across all [[prysm]] components:
 
 ### pattern 1: pressable
 
-used by: [[prysm/button]], [[prysm/tabs]], [[prysm/pill]], [[prysm/toggle]], [[prysm/aip]], [[prysm/menu]] items
+used by: [[prysm/button]], [[prysm/tabs]], [[prysm/pill]], [[prysm/toggle]], [[prysm/launcher]], [[prysm/menu]] items
 
 ```
 states: { default, hover, active, disabled }
@@ -127,7 +127,7 @@ state transitions produce actions — side effects outside the interaction proto
 
 | action | produced by | effect |
 |--------|-------------|--------|
-| navigate | tap on link, menu item, star, tab | router changes active [[aip]] / particle |
+| navigate | tap on link, menu item, star, tab | router changes active [[cell]] / particle |
 | submit | tap confirm button, enter key in input | commander sends cyberlink / search / tx |
 | toggle | tap on toggle, pill (on/off mode) | boolean state flips |
 | expand | tap on context, avatar, collapsible group | fold/unfold reveals/hides content |

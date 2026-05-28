@@ -17,7 +17,7 @@ molecule in the element tree $\mathcal{T}$. in chrome: bottom-left grid zone. as
 
 ## core function
 
-brain is the graph file manager. offline-first. core [[aip]] of [[cyb]].
+brain is the graph file manager. offline-first. core [[cell]] of [[cyb]].
 
 ## cyberlinks
 

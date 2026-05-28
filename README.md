@@ -16,10 +16,10 @@ every screen in [[cyb]] is a composition of prysm components. the system defines
 
 ## composition model
 
-four levels, each built from the previous:
+three levels, each built from the previous:
 
 ```
-atoms → molecules → cells → aips
+atoms → molecules → cells
 ```
 
 ---
@@ -73,7 +73,7 @@ molecules by role:
 `neuron-card` · `avatar` · `address` · `counter`
 
 **content display** — how you see data:
-`content` · `display` · `aip` · `adviser`
+`content` · `display` · `launcher` · `adviser`
 
 **input and refinement** — how you enter and filter:
 `input` · `filter`
@@ -91,15 +91,9 @@ molecules by role:
 
 ### cells
 
-a cell owns a region of the screen. it composes molecules into a coherent experience — the oracle-cell arranges a search input, content feed, and aip selector into a discovery flow. a cell manages layout, scroll behavior, and data flow between its molecules.
+a cell is a full-screen application — the top-level unit of the ecosystem. it composes molecules into a coherent experience with its own routing, state management, and connection to the [[cybergraph]]. oracle arranges a search input, content feed, and cell launcher into a discovery flow. brain arranges a graph navigator with a particle viewer. each cell is a complete, standalone experience.
 
-cells are the unit of screen real estate. an aip is one or more cells filling the viewport. cells live in [[aos/aips]].
-
----
-
-### aips
-
-the top level. an aip (autonomous intelligent program) is a full-screen application built from cells. each aip is a complete experience with its own routing, state management, and connection to the [[cybergraph]].
+cells live in [[aos]].
 
 [[cyb/oracle]] · [[cyb/brain]] · [[cyb/portal]] · [[cyberver]] · [[cyb/sense]] · [[cyb/sigma]] · [[teleport]] · [[sphere]] · [[warp]] · [[aos/hfr]]
 
@@ -167,7 +161,7 @@ atoms/
 
 molecules/
   specs/     button, toggle, slider, tabs, mind, neuron-card, avatar, address,
-             counter, content, display, aip, adviser, input, filter, table,
+             counter, content, display, launcher, adviser, input, filter, table,
              bar, pill, stars, widget, time-widget, graph, brain, menu
   rs/        button, input, mind, table, neuron, progress, log, action, status
 
@@ -185,7 +179,7 @@ components/  legacy Sketch PNG exports — source for spec migration
 
 ## status
 
-9 atoms (2 families). 24 molecules. cells in [[aos/aips]]. 10 aips.
+9 atoms (2 families). 24 molecules. 10 cells in [[aos]].
 system: layout algebra (14 theorems, Lean 4 proofs), emotion palette, fold protocol.
 
 ---
