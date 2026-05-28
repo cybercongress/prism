@@ -1,0 +1,16 @@
+[package]
+name = "prysm"
+version = "0.1.0"
+edition = "2024"
+description = "cyb's visual composition layer — atoms, molecules, palette. Self-contained particles with visual + behavior. Bevy plugin for the default desktop runtime."
+license = "Cyber"
+
+[dependencies]
+cyb-core = { path = "../cyb/core" }
+tape       = { path = "../tape/impl/rust" }
+bevy = "0.18.0"
+crossbeam-channel = "0.5"
+
+[[example]]
+name = "stream_demo"
+path = "examples/stream_demo.rs"
