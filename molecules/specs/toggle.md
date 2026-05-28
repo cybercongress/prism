@@ -25,15 +25,15 @@ glass [fix(5g) × fix(3g), corner-radius 3g/2] — track
   glass [fix(2g) × fix(2g), corner-radius g] — thumb (circle)
 ```
 
-on: thumb moves to right, track tints with [[emotion]] green. off: thumb at left, track gray
+on: thumb at cx=26 (right), track #00fe00 at 25% opacity. off: thumb at cx=14 (left), track #4b4b4d at 25% opacity. thumb is always white (#ffffff)
 
 ## variants
 
 | variant | visual | use |
 |---------|--------|-----|
-| on | thumb right, track #00fe00 | active state |
-| off | thumb left, track #4b4b4d | inactive state |
-| star | ion (star glyph) replaces toggle | bookmark/favorite in [[prysm/aip]] |
+| on | thumb cx=26, track #00fe00 25% opacity | active state |
+| off | thumb cx=14, track #4b4b4d 25% opacity | inactive state |
+| star | ion(star-filled, #fcf000) vs ion(star-hollow, #777777) | bookmark/favorite in [[prysm/aip]] |
 
 ## emotion
 
@@ -48,10 +48,11 @@ on: thumb moves to right, track tints with [[emotion]] green. off: thumb at left
 
 | state | visual change | trigger |
 |-------|-------------|---------|
-| on | thumb right, green track | — |
-| off | thumb left, gray track | — |
-| hover | track opacity +0.1 | pointer over |
-| disabled | all dims, no interaction | membrane disabled |
+| on | thumb cx=26, track #00fe00 25% | — |
+| off | thumb cx=14, track #4b4b4d 25% | — |
+| hover | track opacity 35%, stroke 1px | pointer over |
+| disabled on | track 10% opacity, thumb #4b4b4d | membrane disabled |
+| disabled off | track 15% opacity, thumb #333333 | membrane disabled |
 
 state transitions: thumb slides $150\text{ms}$ ease
 

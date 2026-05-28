@@ -38,14 +38,20 @@ glass [fix(width) × fix(g), corner-radius g/2] — track
 
 | variant | visual | use |
 |---------|--------|-----|
-| green | tint #00fe00 | positive: verified, staked |
-| red | tint #ff0000 | negative: spam, flagged |
-| blue | tint #00acff | neutral: category, topic |
-| white | tint #ffffff | informational: metadata |
-| gray | tint #4b4b4d | muted: archived, disabled |
-| avatar | icon = avatar image + neuron name | identity tag |
-| on/off | toggleable with fill indicator | filter option |
-| progress | two nested glass, fill level | replaces indicator |
+| green | tint #00fe00 at 20% | positive: verified, staked |
+| red | tint #ff0000 at 20% | negative: spam, flagged |
+| blue | tint #00acff at 20% | neutral: category, topic |
+| white | tint #ffffff at 20% | informational: metadata |
+| gray | tint #4b4b4d at 15% | muted: archived, disabled |
+| avatar | ion (avatar image, 2g) + neuron name text | identity tag |
+| bulb | ion (bulb glyph, 2g) + text | feature highlight |
+| on/off | toggleable, fill shows active state | filter option |
+| progress | fill level + emotion threshold color | replaces indicator |
+| linked | ion (link glyph, 2g) + text, tint #00acff | linked content |
+
+progress emotion thresholds: ≥70% green · ≥30% yellow · <30% red
+
+loading skeleton: opacity 0.3, widths cycle through 80px / 120px / 160px, animated pulse 1s
 
 ## emotion
 
@@ -56,7 +62,7 @@ pill background IS [[emotion]]. the pill color = the signal
 | state | visual change | trigger |
 |-------|-------------|---------|
 | default | background at emotion color | — |
-| hover | brightness +10% | pointer over |
+| hover | opacity +0.05 (to 0.25), 1px stroke appears | pointer over |
 | active | scale 0.95× | tap |
 | toggled on | full color | filter active |
 | toggled off | dim to #4b4b4d | filter inactive |

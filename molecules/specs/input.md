@@ -46,8 +46,9 @@ $\mathcal{F}$:
 | text R | text left, icon right | input with action trigger |
 | text LR | icons both sides | search with filter |
 | dropdown | text + chevron icon | select from list |
-| neuron | [[prysm/address]] format, bech32 validation | neuron selector |
+| neuron | [[prysm/address]] format + dropdown | neuron selector with account chooser |
 | token + amount | token icon + number | [[cyb/sigma]], [[teleport]] |
+| commander | fill width, saber underline uses spectrum (rainbow) cycling through all emotion colors | [[prysm/mind]] command bar |
 
 ### mobile variants
 

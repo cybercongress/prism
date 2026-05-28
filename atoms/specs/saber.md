@@ -23,6 +23,7 @@ all values in spatial quanta $g$
 | length | fix or fill | any $k \cdot g$, or fill (membrane's offered dimension) | fill |
 | glow-spread | fix | $0$, $3g/2$, $3g$ | $0$ |
 | glow-direction | — | inward, outward | inward |
+| glow-blur | fix | $0$, 6 (neutral), 8 (emotion) | 0 |
 | color | — | #ffffff | #ffffff |
 | glow-color | — | any [[emotion]] hex, none | #ffffff |
 

@@ -40,12 +40,12 @@ $s_w$, $s_h$ — glass's own occupied size. $padding$ — inner offset from edge
 
 glass carries a depth level that determines its visual properties:
 
-| depth | opacity | blur | $\mathcal{U}$ mapping | use |
-|-------|---------|------|-----------------------|-----|
-| foreground | 0.70 | $0$ | blocking, guiding (z 40-50) | modals, tooltips |
-| midground | 0.38 | $g/2$ | persistent, active (z 10-20) | cards, sections, panels |
-| background | 0.15 | $g$ | ambient (z 0) | space-level containers |
-| subtle | 0.07 | $3g/2$ | ambient (z 0) | ambient regions |
+| depth | fill hex | opacity | blur | $\mathcal{U}$ mapping | use |
+|-------|----------|---------|------|-----------------------|-----|
+| foreground | #1a1a1a | 0.70 | $0$ | blocking, guiding (z 40-50) | modals, tooltips |
+| midground | #111111 | 0.38 | $g/2$ | persistent, active (z 10-20) | cards, sections, panels |
+| background | #090909 | 0.15 | $g$ | ambient (z 0) | space-level containers |
+| subtle | #050505 | 0.07 | $3g/2$ | ambient (z 0) | ambient regions |
 
 depth maps to urgency $\mathcal{U}$ from [[prysm/layout]] §6.3: foreground glass holds blocking/guiding organelles, background glass holds ambient organelles
 
@@ -68,7 +68,7 @@ scroll is a property of glass as membrane, not of the organelles inside. ECS: `O
 
 ## emotion
 
-glass carries [[emotion]] as tint — color overlay at 15% opacity on the surface. emotion is computed by the [[tri-kernel]], not assigned manually
+glass carries [[emotion]] as tint — color overlay at 12% opacity on the surface. emotion is computed by the [[tri-kernel]], not assigned manually
 
 | grid zone | emotion source | example |
 |-----------|---------------|---------|

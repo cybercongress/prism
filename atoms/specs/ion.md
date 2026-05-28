@@ -24,13 +24,13 @@ all values in spatial quanta $g$
 
 ### size scale
 
-| size | $k \cdot g$ | where in [[prysm/grid]] |
-|------|-----------|------------------------|
-| $2g$ | inline with body text | commander: action icons. space: inline icons |
-| $5g/2$ | standalone small | tabs in bottom row (stars) |
-| $4g$ | medium | context, avatar: zone icons. S, Σ: widget icons |
-| $6g$ | large | space: onboarding, featured content |
-| $12g$ | hero | space: welcome screens |
+| size | px at $g=8$ | corner-radius | where in [[prysm/grid]] |
+|------|-------------|---------------|------------------------|
+| $2g$ | 16px | rx=2 | inline with body text — commander: action icons, space: inline icons |
+| $5g/2$ | 20px | rx=3 | standalone small — tabs in bottom row (stars) |
+| $4g$ | 32px | rx=3 | medium — context, avatar: zone icons. S, Σ: widget icons |
+| $6g$ | 48px | rx=4 | large — space: onboarding, featured content |
+| $12g$ | 96px | rx=6 | hero — space: welcome screens |
 
 ## occupy
 

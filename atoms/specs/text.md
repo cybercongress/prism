@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 typography atom in [[prysm]]
 
-the only way text appears in [[cyb]]. monospace foundation — a single font family across the entire interface. hierarchy comes from size and weight, never from decoration
+the only way text appears in [[cyb]]. Play (google fonts) — a single font family across the entire interface. hierarchy comes from size and weight, never from decoration
 
 ## protocol role
 

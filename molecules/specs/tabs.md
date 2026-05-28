@@ -44,9 +44,9 @@ active tab saber glow = [[emotion]] of the active section (default #00fe00 green
 
 | state | visual change | trigger |
 |-------|-------------|---------|
-| default | active tab has saber underline | — |
-| hover | hovered tab text brightens | pointer over tab |
-| active | saber slides to new tab | tap |
+| default | idle tabs #777777, active tab #ffffff + saber underline | — |
+| hover | hovered tab text #d7d7d7 | pointer over tab |
+| active | saber slides to new tab ($150\text{ms}$), tab text #ffffff | tap |
 
 state transitions: saber slide $150\text{ms}$ ease
 
