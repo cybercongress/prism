@@ -11,6 +11,9 @@ tape       = { path = "../tape/impl/rust" }
 bevy = "0.18.0"
 crossbeam-channel = "0.5"
 
+[lib]
+path = "rs/lib.rs"
+
 [[example]]
 name = "stream_demo"
 path = "examples/stream_demo.rs"

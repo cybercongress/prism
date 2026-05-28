@@ -1,19 +1,36 @@
 ---
-tags: prysm, cyb
+tags: prysm, cyb, chroma
+alias: answer, advisor, adviser
 crystal-type: pattern
 crystal-domain: cyber
 ---
 
-voice of [[cyb]] molecule in [[prysm]]
+advisor chrome — top-center
 
-the guidance system. adviser highlights dangerous zones, shows errors, gives suggestions, confirms successful actions. appears in two modes: as a grid zone bar (top center) and as a contextual popup near any organelle. carries [[emotion]] color — the adviser speaks in color
+**answer**: ambient dialogue from the app. hints, suggestions, responses — delivered without disrupting [[spacetime]]. the voice of the system, not the neuron. appears in two modes: as the top-center grid zone bar and as a contextual popup near any organelle
 
 ## protocol role
 
 adviser is a molecule in the element tree $\mathcal{T}$. two modes:
 
-- **bar mode**: membrane = adviser zone of [[prysm/grid]] (row 1, col 2). fill × fix($6g$). $\mathcal{U} = 40$ (guiding)
-- **popup mode**: overlay attached to any organelle. $\mathcal{U} = 40$ (guiding). not in grid — appended to root layer near anchor
+- **bar mode**: membrane = adviser zone of [[prysm/grid]] (row 1, col 2). fill × fix($6g$). $\mathcal{U} = 40$
+- **popup mode**: overlay attached to any organelle. $\mathcal{U} = 40$. not in grid — appended to root layer near anchor
+
+## core function
+
+the ad chrome receives messages from any chroma and renders them as contextual guidance. it never initiates — it only responds. when [[com]] receives partial input, ad may offer a completion hint. when [[spacetime]] switches world, ad may offer orientation text.
+
+## cyberlinks
+
+| receives from | token | meaning |
+|---------------|-------|---------|
+| com | submit (partial) | show completion suggestion |
+| spacetime | output | show contextual world hint |
+| any | notify | show ambient message in ad slot |
+
+| sends to | token | meaning |
+|----------|-------|---------|
+| com | hint | insert suggestion into commander placeholder |
 
 ## sizing
 
@@ -21,7 +38,7 @@ adviser is a molecule in the element tree $\mathcal{T}$. two modes:
 |------|--------|
 | bar (desktop) | fill × fix($6g$) |
 | bar (mobile) | fill × fix($4g$) |
-| popup | fix(auto, content-width) × fix(auto, content-height), max fill × fix($10g$) |
+| popup | fix(auto) × fix(auto), max fill × fix($10g$) |
 
 $s_{min}$: bar = $(10g, 4g)$. popup = $(8g, 4g)$
 
@@ -67,45 +84,35 @@ adviser IS emotion made visible. the entire glass tints with the message's [[emo
 
 | state | visual | trigger |
 |-------|--------|---------|
-| hidden | not rendered, $s_h = 0$ in bar mode | no message |
+| hidden | not rendered | no message |
 | visible | glass appears with emotion tint | message arrives |
 | dismissing | fade out over $150\text{ms}$ | user dismisses or timeout |
 
-bar mode: hidden by default, appears when there is something to say, auto-hides after timeout or user action
-popup mode: appears on hover/focus of anchor organelle, hides on leave
-
-state transitions: $150\text{ms}$ ease
+bar mode: hidden by default, appears when there is something to say, auto-hides after timeout or user action. popup: appears on hover/focus of anchor organelle, hides on leave
 
 ## interaction
 
 - tap dismiss button → hide adviser
 - tap action button → execute action (retry, navigate, etc.)
-- popup: hover on anchor organelle → show, leave → hide
-
-## where in [[prysm/grid]]
-
-| mode | grid zone | $\mathcal{U}$ |
-|------|-----------|------|
-| bar | adviser (row 1, col 2) | 40 |
-| popup | overlay, not in grid | 40 |
+- popup: hover on anchor → show, leave → hide
 
 ## 3D
 
-adviser renders closer to the neuron than frame zones — $\mathcal{U} = 40$ places it at lower $p_z$ (nearer). in 3D, adviser is a floating panel that follows the neuron's gaze. popup mode: attached near the anchor organelle's $p_z$
+renders closer to the neuron than frame zones — $\mathcal{U} = 40$ (lower $p_z$). popup mode: floating panel attached near the anchor organelle's $p_z$
 
 ## ECS
 
 - Entity: adviser organelle
 - Components:
-  - `Sizing { width, height }` — fill for bar, auto for popup
+  - `Sizing { width, height }`
   - `GridArea { name: "adviser" }` — bar mode only
   - `AdviserMode { bar | popup }`
-  - `AdviserMessage { text, emotion, action }` — current message
+  - `AdviserMessage { text, emotion, action }`
   - `Visibility { hidden | visible }`
-  - `Anchor { target_entity }` — popup mode: which organelle
+  - `Anchor { target_entity }` — popup mode
   - `FoldSet { conformations }`
-  - `Tint { emotion_color }` — glass emotion overlay
-  - `SaberGlow { color }` — accent line emotion
+  - `Tint { emotion_color }`
+  - `SaberGlow { color }`
 - Systems:
   - `AdviserMessageSystem` reads system events (errors, successes, guidance), writes `AdviserMessage`
   - `AdviserVisibilitySystem` manages show/hide timing

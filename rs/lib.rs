@@ -12,11 +12,11 @@
 //! - `layout::scrollback` — linear Emacs-style scrollback for the terminal
 //! - `layout::grid`       — proof-backed grid (formal spec in proofs/Algebra.ei)
 
-pub mod theme;
-pub mod particle;
-pub mod atoms;
-pub mod molecules;
-pub mod layout;
+#[path = "../system/rs/theme.rs"]    pub mod theme;
+#[path = "../system/rs/particle.rs"] pub mod particle;
+#[path = "../atoms/rs/mod.rs"]       pub mod atoms;
+#[path = "../molecules/rs/mod.rs"]   pub mod molecules;
+#[path = "../system/rs/mod.rs"]      pub mod layout;
 
 pub use cyb_core as core;
 pub use tape;
