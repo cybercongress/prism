@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 design principles of [[cyb]].
 
-**speed.energy.sex**
+**speed.energy.sex** — three principles. one move: subtract.
 
 ---
 
@@ -22,7 +22,7 @@ eye perception sets the budget. 120 fps. the comfort zone:
 1000 ms   — slow
 ```
 
-**speed is less code.** the fastest path between two states has the fewest instructions.
+**speed is less code.** the fastest path between two states has the fewest instructions. less code also costs less energy.
 
 ---
 
@@ -33,6 +33,8 @@ everything requires energy. optimize energy consumption.
 computer and agent both spend it — the device drains a battery, the neuron drains focus. battery and focus are the same resource.
 
 **energy is black.** #000000 draws zero power on OLED. black consumes x less energy.
+
+black is also nothing. nothing is where perfection begins.
 
 ---
 
