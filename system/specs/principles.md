@@ -4,9 +4,7 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-# gravity
-
-design book for [[cyb]]. three principles.
+design principles of [[cyb]].
 
 **speed.energy.sex**
 
