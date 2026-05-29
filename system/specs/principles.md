@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 # gravity
 
-design book for [[cyb]]. three principles and one mechanism.
+design book for [[cyb]]. three principles.
 
 **speed.energy.sex**
 
@@ -65,33 +65,6 @@ when you have enouth passion.
 dont know what to add? **add nothing!**
 
 dont know why to add? **add nothing!**
-
----
-
-## gravity
-
-agent focus is a problem.
-
-elements placement is a problem.
-
-placement oriented focus of elements is superproblem.
-
-design system with automagic element's placement is possible.
-
-**objects have a mass.**
-**mass define gravitation.**
-**gravitation define proximity.**
-
-[[cyberank]] can define mass.
-
----
-
-## spacing
-
-```
-8pt   16pt   24pt   32pt   40pt   48pt   56pt
-64pt  72pt   80pt   88pt   96pt   104pt  112pt
-```
 
 ---
 

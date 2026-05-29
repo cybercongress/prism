@@ -12,7 +12,7 @@ read in order:
 
 | spec | defines |
 |------|---------|
-| [[prysm/principles]] | **why** — three principles: **speed** · **energy** · **sex** (+ the gravity mechanism) |
+| [[prysm/principles]] | **why** — three principles: **speed** · **energy** · **sex** |
 | [[prysm/composition]] | **what** — the atom → molecule → cell model |
 | [[prysm/layout]] | **space** — Π/Φ/K algebra, quantum, fold, gravity (14 theorems, Lean 4 proofs) |
 | [[prysm/emotion]] | **color** — the emotion function and the full palette |
