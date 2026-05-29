@@ -8,80 +8,90 @@ crystal-domain: cyber
 
 design book for [[cyb]]. three principles and one mechanism.
 
+**speed.energy.sex**
+
 ---
 
 ## speed
 
 making fast is fundamental.
 
+solve fundamental problem.
+
+eye perception. 120 fps. comfort zone.
+
 ```
-10ms   — instantaneous. the interface is thought
-100ms  — fast. action and response feel connected
-1000ms — slow. the user is waiting
+10 ms
+100 ms
+1000 ms
 ```
 
-eye perception sets the budget. every frame beyond 16ms (60fps target, 8ms for 120fps) is a broken promise. speed is not a feature — it is the baseline condition for the interface to exist.
-
-**speed is less code.** the fastest path between two states is the one with the fewest instructions. complexity is latency. subtraction is optimization.
+**speed is less code.**
 
 ---
 
 ## energy
 
-everything requires energy — the computer's and the agent's.
+everything requires energy.
 
-**black consumes less energy.** #000000 is the only color that draws zero power on OLED. every pixel of white is a watt spent. the dark base of [[prysm]] is not an aesthetic choice — it is the energetically correct default.
+optimize energy consumption.
 
-**battery and focus are the same resource.** a draining interface drains the neuron. energy efficiency in rendering is cognitive efficiency for the human using it.
+computer and agent. battery and focus.
+
+**energy is black.**
+
+black consumes x less energy.
 
 ---
 
 ## sex
 
-*perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.* — Antoine de Saint-Exupéry
+*sex is for babies. cum.*
 
-make the interface cum. not by adding — by removing until what remains is irresistible.
+**make your interface cum.**
 
-**don't know what to add? add nothing.**
-**don't know why to add? add nothing.**
+black is nothing. **#000000**. nothing else matters.
+
+> perfection is achieved,
+> not when there is nothing more to add,
+> but when there is nothing left to take away.
+>
+> — Antoine de Saint-Exupery
+
+### add
+
+when you have enouth passion.
+
+dont know what to add? **add nothing!**
+
+dont know why to add? **add nothing!**
 
 ---
 
 ## gravity
 
-the mechanism that places elements without manual layout decisions.
+agent focus is a problem.
 
-**objects have mass. mass defines gravitation. gravitation defines proximity.**
+elements placement is a problem.
 
-in the [[cybergraph]], [[cyberank]] defines mass. highly ranked particles are heavy — they pull related elements toward them. low-ranked particles are light — they drift to the periphery. the layout is not designed; it emerges from the graph's own weight distribution.
+placement oriented focus of elements is superproblem.
 
-this solves three nested problems:
+design system with automagic element's placement is possible.
 
-| problem | description |
-|---------|-------------|
-| agent focus | where should the neuron's attention go? |
-| element placement | where should elements be positioned? |
-| placement-oriented focus | when placement drives attention, placement IS the interface |
+**objects have a mass.**
+**mass define gravitation.**
+**gravitation define proximity.**
 
-a design system with automatic element placement based on mass is not a grid — it is a physics. [[prysm/layout]] formalizes this through the constrain → occupy → place protocol, with [[prysm/emotion]] as the visible output of mass (cyberank → emotion color → element weight in the neuron's perception).
+[[cyberank]] can define mass.
 
 ---
 
 ## spacing
 
-all space in multiples of **8pt** — the quantum $g$. no fractional spacing. no arbitrary values.
-
 ```
-g    =  8pt
-2g   = 16pt
-3g   = 24pt
-4g   = 32pt
-5g   = 40pt
-6g   = 48pt
-...
+8pt   16pt   24pt   32pt   40pt   48pt   56pt
+64pt  72pt   80pt   88pt   96pt   104pt  112pt
 ```
-
-the 8pt grid is not a convention — it is derived from the pixel grid of standard displays (where 8px = 1 logical unit at 1× DPI) and from Fitts's law minimum target sizes. see [[prysm/grid]] for the formal derivation.
 
 ---
 
