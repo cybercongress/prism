@@ -42,15 +42,17 @@ change any axiom, the whole system reconfigures. nothing is layered on top. noth
 
 ## three modes of perception
 
-the same algebra handles three layouts because there are three modes of perceiving content. the protocol does not pick — the cell does
+the three container topologies of the K-axiom (`stack · grid · layer`) are also the three modes a cell can inhabit. one vocabulary works at both scales: a stack inside a molecule, a stack at the level of the whole cell. the algebra is fractal
 
-| mode | unit | flow | inhabitants |
-|------|------|------|-------------|
-| **grid** | particle | simultaneous — everything visible at once | cyb chrome, the [[chroma]] 3×3, all dashboards |
-| **scrollback** | line | sequential — time flows upward, latest at the bottom | terminal, sense chat, logs, oracle results |
-| **spatial** | mass | navigated — the neuron moves through 3D | [[cybergraph]] in [[mir]], particle gallery |
+| mode | K-axiom | unit | flow | inhabitants |
+|------|---------|------|------|-------------|
+| **stack** | 1D chain, append-at-end | line | sequential — time flows upward, latest at the bottom | terminal, sense chat, logs, oracle results |
+| **grid** | 2D lattice | particle | simultaneous — everything visible at once | cyb chrome, the [[chroma]] 3×3, all dashboards |
+| **layer** | depth | mass | navigated — discrete z-order in 2D, gravity-positioned in 3D | [[cybergraph]] in [[mir]], particle gallery, overlays |
 
-grid is a screen. scrollback is a stream. spatial is a world. one protocol speaks all three because the axioms describe **how parts arrange in space** — not what kind of space they're in
+stack is a stream. grid is a screen. layer is a world. one protocol speaks all three because the axioms describe **how parts arrange in space** — not what kind of space they're in
+
+`layer` covers both 2D depth (z-ordering of overlays) and full 3D positioning (the gravity phase of §11). same topology, continuous in one case, discrete in the other
 
 ---
 
@@ -144,7 +146,7 @@ six specs. each does one thing. read in order
 |------|------|
 | [[prysm/principles]] | **why** — speed · energy · sex |
 | [[prysm/composition]] | **what** — atom → molecule → cell |
-| [[prysm/layout]] | **space** — Π · Φ · K, quantum, fold, gravity, scrollback, 3D |
+| [[prysm/layout]] | **space** — Π · Φ · K, quantum, fold, gravity, stack/grid/layer modes |
 | [[prysm/emotion]] | **color** — emotion function + palette |
 | [[prysm/interaction]] | **response** — state machines per gesture |
 | [[prysm/proof]] | **truth** — how [[zheng]] proofs surface |
