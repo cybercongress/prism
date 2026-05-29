@@ -12,33 +12,27 @@ design principles of [[cyb]].
 
 ## speed
 
-making fast is fundamental.
+making fast is fundamental. solve the fundamental problem.
 
-solve fundamental problem.
-
-eye perception. 120 fps. comfort zone.
+eye perception sets the budget. 120 fps. the comfort zone:
 
 ```
-10 ms
-100 ms
-1000 ms
+10 ms     — instant
+100 ms    — fast
+1000 ms   — slow
 ```
 
-**speed is less code.**
+**speed is less code.** the fastest path between two states has the fewest instructions.
 
 ---
 
 ## energy
 
-everything requires energy.
+everything requires energy. optimize energy consumption.
 
-optimize energy consumption.
+computer and agent both spend it — the device drains a battery, the neuron drains focus. battery and focus are the same resource.
 
-computer and agent. battery and focus.
-
-**energy is black.**
-
-black consumes x less energy.
+**energy is black.** #000000 draws zero power on OLED. black consumes x less energy.
 
 ---
 
