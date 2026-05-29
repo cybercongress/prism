@@ -1,161 +1,80 @@
 # prysm
 
-the design system of [[cyb]] — a visual language for interfacing with [[superintelligence]]
+the design system of [[cyb]] — the visual protocol for [[superintelligence]]
 
-every screen in [[cyb]] is a composition of prysm components. the system defines how humans perceive, navigate, and interact with the [[cybergraph]]
-
-## first principles
-
-- the interface is a lens — [[cyb]] refracts the [[cybergraph]] into something a human can perceive and act on
-- emotion as signal — components carry [[emotion]], a color-coded signal layer computed from [[cyberank]], [[karma]], and context
-- everything is a [[particle]] — text, image, video, audio, pdf, 3d model. the renderer adapts, the interface stays consistent
-- the [[neuron]] is the user — every action traces to a neuron, every view is from a neuron's perspective
-- glass as medium — translucent panes that layer and compose, defining spatial hierarchy
+a small, formal, complete system. 13 atoms. 24 molecules. 6 foundation specs. every layout provably linear. every color encodes meaning. every value carries its proof
 
 ---
 
-## composition model
+## foundations
 
-three levels, each built from the previous:
+read in order:
 
-```
-atoms → molecules → cells
-```
+| spec | defines |
+|------|---------|
+| [[prysm/principles]] | **why** — speed, energy, perfection, gravity |
+| [[prysm/composition]] | **what** — the atom → molecule → cell model |
+| [[prysm/layout]] | **space** — Π/Φ/K algebra, quantum, fold, gravity (14 theorems, Lean 4 proofs) |
+| [[prysm/emotion]] | **color** — the emotion function and the full palette |
+| [[prysm/interaction]] | **response** — state machines for every gesture |
+| [[prysm/proof]] | **truth** — how [[zheng]] proofs surface in the interface |
+
+six specs. each does one thing. together they generate every pixel in cyb
 
 ---
 
-### atoms
+## atoms
 
-atoms are **modalities** — irreducible capability carriers. an atom has exactly one capability and no domain knowledge. it accepts data and emotion, renders a visual, and emits events.
+13 irreducible primitives across 4 families
 
-twelve atoms in four families:
+**substrate** — geometric presence by dimension
 
-**substrate** — define the visual substrate. three geometric primitives covering all dimensions:
+| atom | dim | role |
+|------|-----|------|
+| `glass` | 2D | translucent membrane — the surface every container is made of |
+| `saber` | 1D | line with glow — demarcation, accent, [[cyberlink]] edge |
+| `ion` | 0D | luminous point — charge emission, presence, energy |
 
-| atom | dimension | capability |
-|------|-----------|------------|
-| `glass` | 2D area | translucent surface — the membrane of the layout protocol |
-| `saber` | 1D line | demarcation, boundary, accent with glow |
-| `ion` | 0D point | luminous charge — energy emission, presence indicator |
+**particle** — content from the [[cybergraph]], each a distinct rendering pipeline
 
-**particle** — render content from the [[cybergraph]]. each type is a distinct rendering pipeline:
+| atom | content |
+|------|---------|
+| `text` | language — prose, markdown, inline |
+| `image` | raster — PNG, JPG, WebP, GIF (static or auto-animated) |
+| `vector` | 2D paths — SVG particles, glyphs (emotion-driven), sigils (brand-fixed) |
+| `mesh` | 3D geometry — glTF, scene graph, PBR, skeleton, animation |
+| `media` | temporal — video, audio, streams with controllable playhead |
+| `code` | formal notation — source code and math. math is code |
+| `field` | mathematical field — scalar/vector function over a domain |
 
-| atom | capability |
+**identity** — name-resolved primitives (not CID content)
+
+| atom | identifies |
 |------|------------|
-| `text` | language — prose, markdown, inline code |
-| `image` | raster visual — PNG, JPG, WebP, GIF (static or auto-animated) |
-| `vector` | 2D paths — SVG particles, glyphs (monochrome/emotion-driven), sigils (brand-fixed) |
-| `mesh` | 3D geometry — glTF, scene graph, PBR materials, skeleton, animation |
-| `media` | temporal — video, audio, streams. has a playhead the neuron controls |
-| `code` | formal notation — source code and math (LaTeX). math is code |
-| `field` | mathematical field — scalar/vector/complex function over a domain. renders as heatmap, contour, flow |
+| `neuron` | actor — any agent in the graph (bech32) |
+| `token` | asset — any tradeable value (symbol + chain) |
 
-**identity** — name-resolved primitives. not CID-addressed content but system-meaningful names:
+**input** — the only atom that accepts keystrokes
 
-| atom | capability |
-|------|------------|
-| `neuron` | actor identity — any agent in the graph (human, AI, sensor). renders as bech32 address |
-| `token` | asset identity — any tradeable asset. renders as sigil + symbol |
+| atom | role |
+|------|------|
+| `entry` | form field — buffer, insertion point, selection |
 
-**input** — the input primitive:
-
-| atom | capability |
-|------|------------|
-| `entry` | form field — editable buffer, insertion point, selection, keystrokes. the only atom that accepts keyboard input |
+see [[prysm/atoms]] for every spec
 
 ---
 
-### molecules
+## molecules
 
-a molecule is **a composition of atoms with intrinsic shape and behavior**. the shape is part of the type identity — that is why molecules are transferable. a `button` is always a horizontal saber-text-saber arrangement that emits a tap event. a `table` is always a grid arrangement of rows. the arrangement geometry is not a layout concern applied from outside — it is what makes a button a button and a table a table.
-
-molecules know their domain. they understand what a neuron is, what a particle looks like, what a cyberlink means. they accept typed data, emit typed actions, and carry fold conformations (see [[prysm/responsive]]).
-
-`neuron-card` wraps the `neuron` atom into a molecule with identity display behavior. `avatar` wraps `neuron` with chooser behavior. the atom carries identity; the molecule carries the composed shape and interaction.
-
-molecules by role:
-
-**actions** — how you interact:
-`button` · `toggle` · `slider`
-
-**navigation** — how you move:
-`tabs` · `mind` (commander)
-
-**identity** — how you read actors:
-`neuron-card` · `avatar` · `address` · `counter`
-
-**content display** — how you see data:
-`content` · `display` · `launcher` · `adviser`
-
-**input and refinement** — how you enter and filter:
-`input` · `filter`
-
-**data** — how you read structured information:
-`table` · `bar`
-
-**classification** — how you tag and sort:
-`pill`
-
-**ambient** — persistent contextual presence:
-`stars` · `widget` · `time-widget` · `graph` · `brain` · `menu`
+24 composed widgets with intrinsic shape and behavior. transferable between cells. each declares its fold conformations and emotion bindings. see [[prysm/molecules]]
 
 ---
 
-### cells
+## cells
 
-a cell is a full-screen application — the top-level unit of the ecosystem. it composes molecules into a coherent experience with its own routing, state management, and connection to the [[cybergraph]]. oracle arranges a search input, content feed, and cell launcher into a discovery flow. brain arranges a graph navigator with a particle viewer. each cell is a complete, standalone experience.
-
-cells live in [[aos]].
+10 full-screen applications composing molecules for a domain. cells live in [[aos]]
 
 [[cyb/oracle]] · [[cyb/brain]] · [[cyb/portal]] · [[cyberver]] · [[cyb/sense]] · [[cyb/sigma]] · [[teleport]] · [[sphere]] · [[warp]] · [[aos/hfr]]
-
----
-
-## system
-
-### layout
-
-the layout protocol is defined in [[prysm/layout]]. three axioms generate the entire system:
-
-- **Π** — constrain → occupy → place (the membrane-organelle protocol)
-- **Φ** — `fix | fill | scale` (the only three relations between part and whole)
-- **K** — `stack | grid | layer` (1D chain, 2D lattice, depth)
-
-all sizes are multiples of **g = 8px** — the spatial quantum.
-
-`glass` is the membrane. every container is glass. organelles occupy space within glass. the element tree is glass all the way down.
-
-arrangement geometry is inherent to molecule type, not applied from outside. `table` is a grid. `tabs` is a horizontal chain. `mind` is a bottom bar. the layout protocol resolves coordinates; molecule types declare their topology.
-
-### fold
-
-every molecule declares conformations — layouts it can collapse to based on the container's measured width:
-
-```
-l₁  w ≥ 40g   full
-l₂  w ≥ 20g   compact
-l₃  w ≥ 10g   minimal
-```
-
-fold conformations are renderer-side decisions — they are not part of molecule type identity. the type says what the molecule is; the active conformation says how it fits the space it has been given.
-
-### emotion
-
-emotion is an ambient computed signal — 9 values: 7 spectrum colors (anger→red, disgust→orange, surprise→yellow, joy→green, interest→blue, sadness→indigo, fear→violet) plus neutral and inactive. flows down the component tree from [[cyberank]], [[karma]], and context state. no component sets emotion manually. it drives glass tint, saber glow, and text color.
-
-see [[prysm/emotion]] and [[prysm/palette]].
-
----
-
-## interfaces
-
-every component exposes:
-
-- **inputs**: data, emotion, context
-- **outputs**: action, state change, [[cyberlink]]
-- **states**: default · hover · active · disabled (+ loading · error · empty · expanded for stateful components)
-
-emotion overlays any state with a color signal.
 
 ---
 
@@ -163,22 +82,26 @@ emotion overlays any state with a color signal.
 
 ```
 system/
-  specs/     layout, grid, palette, emotion, responsive, interaction
+  specs/     principles, composition, layout, emotion, interaction, proof
   rs/        grid, scrollback, theme, particle
-  proofs/    algebra, container, fold, gravity, multimodal, protocol, sizing
+  proofs/    Lean 4 proofs — algebra, container, fold, gravity, multimodal, protocol, sizing
 
 atoms/
-  specs/     glass, saber, ion, text, image, vector, mesh, media, code, field, neuron, token, entry
+  specs/     glass · saber · ion              (substrate, 3)
+             text · image · vector · mesh · media · code · field   (particle, 7)
+             neuron · token                   (identity, 2)
+             entry                            (input, 1)
   rs/        glass, text
 
 molecules/
   specs/     button, toggle, slider, tabs, mind, neuron-card, avatar, address,
              counter, content, display, launcher, adviser, input, filter, table,
              bar, pill, stars, widget, time-widget, graph, brain, menu
-  rs/        button, input, mind, table, neuron, progress, log, action, status
+  rs/        partial
 
 chroma/
-  specs/     chroma (3×3 grid), space, ad, ava, sense, sigma, brain, com, time, spacetime
+  specs/     grid, ad, ava, sense, sigma, brain, com, time, spacetime, space
+             (the concrete top-level cyb screen composition)
 
 rs/
   lib.rs     crate entry — #[path] references to system/rs, atoms/rs, molecules/rs
@@ -188,8 +111,10 @@ rs/
 
 ## status
 
-13 atoms (4 families: substrate · particle · identity · input). 24 molecules. 10 cells in [[aos]].
-system: layout algebra (14 theorems, Lean 4 proofs), emotion palette, fold protocol.
+13 atoms · 24 molecules · 10 cells · 6 system specs
+layout algebra: 14 theorems, Lean 4 proofs, no `sorry`
+emotion palette: 9 values, all sources defined
+proof layer: surfaced through the verified glyph and inspector
 
 ---
 

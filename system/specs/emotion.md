@@ -184,3 +184,78 @@ ECS: `EmotionSource` includes `freshness: Instant`. `EmotionSystem` checks fresh
 ## the binding
 
 the color-emotion mapping is innate — ancestral environments selected for wavelength-affect bindings. green = vegetation = life. red = blood = danger. this is the perceptual interface between a [[neuron]] and the [[cybergraph]]. see [[color-emotion spectrum]] for the evolutionary framework
+
+---
+
+## the full palette
+
+every color in [[cyb]] comes from this section. no hardcoded hex values outside this palette. renderers reference tokens by name
+
+### background
+
+| token | hex | use |
+|-------|-----|-----|
+| void | #000000 | screen background, the absence of signal |
+
+void is the energetically correct default — on OLED, #000000 draws zero power. every other color exists on void
+
+### text luminance
+
+four levels of white on void
+
+| token | hex | use |
+|-------|-----|-----|
+| primary | #ffffff | default text, active labels |
+| secondary | #d7d7d7 | supporting text, descriptions |
+| dim | #777777 | placeholders, metadata, timestamps |
+| muted | #4b4b4d | ghost text, disabled labels |
+
+text levels are pure white at varying opacity — no warm/cool tint
+
+### glass
+
+translucent surfaces over void. glass fill is white at varying opacity. emotion tint overlays at 12% when present
+
+| token | opacity | hex (effective on void) | use |
+|-------|---------|------------------------|-----|
+| foreground | 0.70 | ~#b3b3b3 | modals, tooltips |
+| midground | 0.38 | ~#616161 | cards, panels, commander |
+| background | 0.15 | ~#262626 | space-level containers |
+| subtle | 0.07 | ~#121212 | ambient regions |
+
+glass borders are white at lower opacity than fill
+
+| token | opacity |
+|-------|---------|
+| foreground-border | 0.15 |
+| midground-border | 0.10 |
+| background-border | 0.06 |
+| subtle-border | 0.03 |
+
+### saber
+
+| token | hex | use |
+|-------|-----|-----|
+| saber-default | #ffffff | neutral separator, structural lines |
+| saber-emotion | (from emotion) | glow carries action/state emotion |
+| saber-dim | rgba(255,255,255,0.12) | structural dividers, inactive separators |
+
+### sigil colors (token logos)
+
+token sigils carry their brand color — the only non-palette colors allowed in prysm. these are immutable (the emotion system does not override them)
+
+| sigil | color | hex |
+|-------|-------|-----|
+| BOOT | green | #00fe00 |
+| HYDROGEN | gray | #777777 |
+| ATOM | blue | #6f7390 |
+| OSMO | purple | #5e12a0 |
+
+## rules
+
+- void is always the base. every other color exists on void
+- emotion colors are max saturation / max brightness — acid, not pastel
+- text levels are pure white at varying opacity (no warm/cool tint)
+- glass fill is pure white at varying opacity (no color shift)
+- the only colored elements are emotion signals (driven by the emotion function) and sigil colors (immutable brand identity)
+- if a color is not in this palette, it does not belong in [[cyb]]
