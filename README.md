@@ -39,6 +39,4 @@ you write *what* to show. the protocol decides *where*. resize the window → fo
 
 read deeper: [[prysm/principles]] · [[prysm/composition]] · [[prysm/layout]] · [[prysm/emotion]] · [[prysm/interaction]] · [[prysm/proof]]
 
----
-
 *don't trust. don't fear. don't beg.*
