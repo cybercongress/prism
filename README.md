@@ -26,30 +26,41 @@ atoms → molecules → cells
 
 ### atoms
 
-atoms are **modalities** — irreducible capability carriers. an atom has exactly one capability and no domain knowledge. it knows nothing about neurons, particles, or cyberlinks. it accepts data and emotion, renders a visual, and emits events.
+atoms are **modalities** — irreducible capability carriers. an atom has exactly one capability and no domain knowledge. it accepts data and emotion, renders a visual, and emits events.
 
-atoms are organized in two families:
+twelve atoms in four families:
 
-**content modalities** — carry user data and enable expression:
+**substrate** — define the visual substrate. three geometric primitives covering all dimensions:
 
-| atom | capability |
-|------|------------|
-| `text` | language content |
-| `image` | visual content (a particle that is an image) |
-| `sound` | audio content |
-| `number` | magnitude and quantity |
-| `neuron` | identity and agency — the primitive for any actor in the graph |
-| `field` | input — the interaction primitive |
+| atom | dimension | capability |
+|------|-----------|------------|
+| `glass` | 2D area | translucent surface — the membrane of the layout protocol |
+| `saber` | 1D line | demarcation, boundary, accent with glow |
+| `ion` | 0D point | luminous charge — energy emission, presence indicator |
 
-**substrate modalities** — carry presence in cyberspace, define the visual substrate:
+**particle** — render content from the [[cybergraph]]. each type is a distinct rendering pipeline:
 
 | atom | capability |
 |------|------------|
-| `glass` | surface — translucent pane, the membrane of the layout protocol |
-| `saber` | line — demarcation, boundary, accent |
-| `ion` | glyph — icon-label pair, draws from the [[cyb]] icon library |
+| `text` | language — prose, markdown, inline code |
+| `image` | raster visual — PNG, JPG, WebP, GIF (static or auto-animated) |
+| `vector` | 2D paths — SVG particles, glyphs (monochrome/emotion-driven), sigils (brand-fixed) |
+| `mesh` | 3D geometry — glTF, scene graph, PBR materials, skeleton, animation |
+| `media` | temporal — video, audio, streams. has a playhead the neuron controls |
+| `code` | formal notation — source code and math (LaTeX). math is code |
 
-note: the old `images` entry conflated two things — *visual content* (the `image` atom in the content family) and the *icon library* (the asset set `ion` draws from). these are now separate. `image` is a content atom. the icon library is a resource, not an atom.
+**identity** — name-resolved primitives. not CID-addressed content but system-meaningful names:
+
+| atom | capability |
+|------|------------|
+| `neuron` | actor identity — any agent in the graph (human, AI, sensor). renders as bech32 address |
+| `token` | asset identity — any tradeable asset. renders as sigil + symbol |
+
+**interaction** — the input primitive:
+
+| atom | capability |
+|------|------------|
+| `field` | editable buffer — cursor, selection, keyboard. the only atom that accepts keystrokes |
 
 ---
 
@@ -156,7 +167,7 @@ system/
   proofs/    algebra, container, fold, gravity, multimodal, protocol, sizing
 
 atoms/
-  specs/     glass, text, ion, saber, image, sound, number, neuron, field
+  specs/     glass, saber, ion, text, image, vector, mesh, media, code, neuron, token, field
   rs/        glass, text
 
 molecules/
@@ -168,18 +179,15 @@ molecules/
 chroma/
   specs/     chroma (3×3 grid), space, ad, ava, sense, sigma, brain, com, time, spacetime
 
-svg/
-  atoms/     glass, ion, saber, text variants
-  icons/     full icon library (ion draws from here)
-
-components/  legacy Sketch PNG exports — source for spec migration
+rs/
+  lib.rs     crate entry — #[path] references to system/rs, atoms/rs, molecules/rs
 ```
 
 ---
 
 ## status
 
-9 atoms (2 families). 24 molecules. 10 cells in [[aos]].
+12 atoms (4 families: substrate, particle, identity, interaction). 24 molecules. 10 cells in [[aos]].
 system: layout algebra (14 theorems, Lean 4 proofs), emotion palette, fold protocol.
 
 ---

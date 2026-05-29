@@ -43,7 +43,7 @@ $s_{min} = (4g, 4g)$ — icon only
 
 ```
 glass [fix(25g) × fix(6g), depth midground]
-  ion [4g, cell icon]
+  vector [4g, cell icon]
   text [caption, cell name / particle title / world name]
 ```
 

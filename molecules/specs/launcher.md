@@ -25,7 +25,7 @@ $s_{min} = (4g, 4g)$ — icon only
 
 collapsed (default):
 ```
-ion [4g, active cell icon]
+vector [4g, active cell icon]
 ```
 
 expanded (on tap):
@@ -33,19 +33,19 @@ expanded (on tap):
 glass [fix(25g) × auto, depth foreground, max height square_h/2, overflow scroll]
   stack vertical [gap g/2]
     stack horizontal [gap g]
-      ion [2g, oracle icon]
+      vector [2g, oracle icon]
       text [body, "Oracle"]
     stack horizontal [gap g]
-      ion [2g, brain icon]
+      vector [2g, brain icon]
       text [body, "Brain"]
     stack horizontal [gap g]
-      ion [2g, portal icon]
+      vector [2g, portal icon]
       text [body, "Portal"]
     stack horizontal [gap g]
-      ion [2g, sense icon]
+      vector [2g, sense icon]
       text [body, "Sense"]
     stack horizontal [gap g]
-      ion [2g, sigma icon]
+      vector [2g, sigma icon]
       text [body, "Sigma"]
     ...
 ```

@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 pinned items molecule in [[prysm]]
 
-a circular ring of [[prysm/ion]] icons arranged around the [[prysm/graph]] minimap. each icon = a pinned [[cell]] or other item bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar
+a circular ring of [[prysm/vector]] icons arranged around the [[prysm/graph]] minimap. each icon = a pinned [[cell]] or other item bookmarked by the [[neuron]]. quick-access favorites. configurable by avatar
 
 ## protocol role
 
@@ -29,10 +29,10 @@ layer [fix(25g) × fix(25g)]
   --- graph minimap at center ---
   graph [fix(12g) × fix(12g), center]
   --- star icons arranged in circle around graph ---
-  ion [4g, cell 1, position: angle 0°, radius 10g from center]
-  ion [4g, cell 2, position: angle 30°, radius 10g]
-  ion [4g, cell 3, position: angle 60°, radius 10g]
-  ion [4g, cell 4, position: angle 90°, radius 10g]
+  vector [4g, cell 1, position: angle 0°, radius 10g from center]
+  vector [4g, cell 2, position: angle 30°, radius 10g]
+  vector [4g, cell 3, position: angle 60°, radius 10g]
+  vector [4g, cell 4, position: angle 90°, radius 10g]
   ...
 ```
 
@@ -41,10 +41,10 @@ icons are distributed evenly around the circle. radius = distance from graph cen
 mobile — horizontal row:
 ```
 stack horizontal [auto × fix(6g), gap g/2]
-  ion [4g, pinned 1]
-  ion [4g, pinned 2]
-  ion [4g, pinned 3]
-  ion [4g, pinned 4]
+  vector [4g, pinned 1]
+  vector [4g, pinned 2]
+  vector [4g, pinned 3]
+  vector [4g, pinned 4]
 ```
 
 ## fold

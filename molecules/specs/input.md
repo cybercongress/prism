@@ -26,9 +26,9 @@ $s_{min} = (10g, 4g)$ — minimum for placeholder text visible
 ```
 glass [fill × fix(6g), depth midground]
   stack horizontal [gap g/2]
-    ion [2g, left icon (optional)]
+    vector [2g, left icon (optional)]
     text [body, input text / placeholder]
-    ion [2g, right icon (optional)]
+    vector [2g, right icon (optional)]
   saber [horizontal, g/8, underline, emotion glow]
 ```
 

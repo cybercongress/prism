@@ -24,7 +24,7 @@ tag mode:
 ```
 glass [auto × fix(3g), corner-radius 3g/2, emotion tint]
   stack horizontal [gap g/2]
-    ion [2g, optional icon]
+    vector [2g, optional icon]
     text [micro, label]
 ```
 

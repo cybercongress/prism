@@ -490,7 +490,7 @@ terminal organelle. no sub-organelles. contains rendered data
 | type | data | prysm pattern | ECS |
 |------|------|---------------|-----|
 | text | string at font size | [[prysm/text]] | `TextLeaf { content, size }` |
-| vector | path, shape, line | [[prysm/saber]], [[prysm/ion]], [[prysm/images]] | `VectorLeaf { path }` |
+| vector | path, shape, line | [[prysm/saber]], [[prysm/vector]], [[prysm/vector]] | `VectorLeaf { path }` |
 | raster | bitmap, photo, video | image/video [[particle]] | `RasterLeaf { particle }` |
 
 ### coverage

@@ -88,8 +88,8 @@ $s_{min} = (20g, 6g)$
 ```
 glass [fill × fix(6g), depth midground]
   stack horizontal [gap g/2]
-    ion [2g, back arrow]
-    ion [2g, forward arrow]
+    vector [2g, back arrow]
+    vector [2g, forward arrow]
     input [fill × fix(4g), with saber underline]
     button [sign action, with saber frame]
 ```

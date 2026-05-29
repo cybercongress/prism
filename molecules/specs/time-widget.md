@@ -30,11 +30,11 @@ glass [fix(25g) × auto, depth midground, overflow scroll]
     --- events (oldest first) ---
     stack horizontal [gap g/2]
       text [micro, "Oracle"]
-      ion [2g, oracle icon]
+      vector [2g, oracle icon]
       text [micro, "now"]
     stack horizontal
       text [micro, "Teleport"]
-      ion [2g, teleport icon]
+      vector [2g, teleport icon]
       text [micro, "37 sec ago"]
     ...
     --- machine time (bottom) ---

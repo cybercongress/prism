@@ -29,7 +29,7 @@ $s_{min} = (4g, 6g)$ — widget does not fold. at minimum viewport it remains th
 ```
 glass [fix(4g) × fix(6g), corner-radius g, depth midground]
   saber [vertical, g/4 weight, fill height, glow]
-  ion [symbol, 2g]
+  vector [symbol, 2g]
   text [value, micro(3g/2)]
 ```
 

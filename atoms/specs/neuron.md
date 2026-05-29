@@ -43,7 +43,7 @@ $$s_h = 2g$$
 
 neuron is always single-line. it does not wrap. if $s_w > c_w$, neuron switches to the next shorter format (full → short → hash-only) until it fits within the constraint. if hash-only still exceeds $c_w$, neuron truncates with ellipsis
 
-verified = true appends ion(verified-glyph, $2g$) with $g/2$ gap after the address string, increasing $s_w$ by $2g + g/2$
+verified = true appends vector(verified, $2g$) with $g/2$ gap after the address string, increasing $s_w$ by $2g + g/2$
 
 ## color
 
@@ -52,7 +52,7 @@ verified = true appends ion(verified-glyph, $2g$) with $g/2$ gap after the addre
 | default | #d7d7d7 (secondary text) |
 | hover | #ffffff |
 | active | [[emotion]] |
-| verified | #ffffff with joy green ion |
+| verified | #ffffff with joy green vector |
 
 ## states
 

@@ -24,7 +24,7 @@ $s_{min} = (15g, 4g)$ — minimum 3 tabs visible
 glass [fill × fix(6g), depth midground]
   stack horizontal [gap 0]
     stack vertical [per tab]
-      ion [2g, tab icon]
+      vector [2g, tab icon]
       text [micro, tab label]
       saber [horizontal, g/4, glow] — active tab only
 ```

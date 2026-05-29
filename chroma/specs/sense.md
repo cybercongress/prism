@@ -43,7 +43,7 @@ the sense chrome slot shows an unread count and the emotional state of the lates
 ```
 glass [fix × fill(mid-left edge), depth overlay]
   stack vertical [align center]
-    ion [S icon]
+    vector [S icon]
     counter [micro, unread count, green]
     pill [emotion of latest signal]
 ```

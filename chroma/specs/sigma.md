@@ -31,7 +31,7 @@ sigma shows economic state. the Σ chrome slot shows total portfolio value and r
 ```
 glass [fix × fill(mid-right edge), depth overlay]
   stack vertical [align center]
-    ion [Σ icon]
+    vector [Σ icon]
     counter [micro, total value]
     pill [emotion — green rising, red falling]
 ```
@@ -45,7 +45,7 @@ glass [fill × fill, depth background, overflow scroll]
   stack vertical [gap 2g, padding 3g]
     --- header ---
     stack horizontal [gap 2g]
-      ion [6g, Σ sigma icon]
+      vector [6g, Σ sigma icon]
       text [h2, "Sigma"]
       counter [h2, total portfolio value, right-aligned]
     --- address row ---
@@ -58,7 +58,7 @@ glass [fill × fill, depth background, overflow scroll]
     stack vertical [gap 0]
       glass [fill × auto, depth midground] — per token
         stack horizontal [gap g]
-          ion [2g, token icon, colored]
+          vector [2g, token icon, colored]
           text [body, ticker "BOOT"]
           text [caption, ">"] — expandable
           pill [progress, green, proportion of portfolio]

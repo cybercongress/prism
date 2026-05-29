@@ -34,7 +34,7 @@ the full time cell in spacetime is a sortable transaction history: blocks confir
 ```
 glass [fix × fix(bottom-right), depth overlay]
   stack vertical [align center]
-    ion [clock icon]
+    vector [clock icon]
     text [micro, last event timestamp]
     counter [micro, unread events, green]
 ```

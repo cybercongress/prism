@@ -6,7 +6,7 @@ crystal-domain: cyber
 
 toolbar molecule in [[prysm]]
 
-[[prysm/saber]] + [[prysm/ion]] composite. the universal toolbar pattern — a saber line with ions attached, creating labeled action strips, input rows, and display headers
+[[prysm/saber]] + [[prysm/vector]] composite. the universal toolbar pattern — a saber line with ions attached, creating labeled action strips, input rows, and display headers
 
 ## protocol role
 
@@ -23,9 +23,9 @@ $s_{min} = (8g, 4g)$
 ```
 stack horizontal [gap g/2]
   saber [vertical, g/4]
-  ion [2g] + text [caption]
+  vector [2g] + text [caption]
   saber [vertical, g/4]
-  ion [2g] + text [caption]
+  vector [2g] + text [caption]
   saber [vertical, g/4]
 ```
 

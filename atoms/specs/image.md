@@ -4,13 +4,15 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-visual content atom in [[prysm]]
+raster visual atom in [[prysm]]
 
-renders a particle that is an image. a leaf in the element tree (leaf type: raster/vector). images are always fixed size in quanta — they do not stretch to fill a membrane
+renders a particle that is a raster image. a leaf in the element tree (leaf type: raster). covers static images (PNG, JPG, WebP) and auto-animated raster (GIF, APNG, animated WebP). images are always fixed size in quanta — they do not stretch to fill a membrane
+
+for path-based visuals (SVG, glyphs, sigils, illustrations) see [[prysm/vector]]. for 3D geometry see [[prysm/mesh]]
 
 ## protocol role
 
-image is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: raster/vector. it has no sub-organelles. its membrane constrains it, it occupies a fixed rectangle, membrane places it
+image is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: raster. it has no sub-organelles. its membrane constrains it, it occupies a fixed rectangle, membrane places it
 
 ## sizing
 
@@ -42,19 +44,23 @@ no wrapping, no fill, no scale. if the declared size exceeds the membrane constr
 | cover | image scaled to fill $(width, height)$, cropped to edges |
 | fill | image stretched to exactly $(width, height)$, may distort |
 
+## animated raster
+
+GIF, APNG, and animated WebP are image atoms with auto-playback. animation runs automatically and loops — there is no playhead, no user controls, no play/pause state. this distinguishes them from [[prysm/media]] (which has a controllable timeline). the image atom renders whatever frame is current; the animation system drives the frame clock externally
+
 ## states
 
 | state | visual change | trigger |
 |-------|-------------|---------|
 | default | rendered image at full opacity | src loaded |
 | loading | glass placeholder at depth subtle, animated opacity pulse $1\text{s}$ cycle | src not yet resolved |
-| error | ion(image-broken, $4g$, emotion anger) centered in $(width, height)$ | src failed to load |
+| error | vector [broken-image, $4g$, anger] centered in $(width, height)$ | src failed to load |
 
 state transitions: $150\text{ms}$ ease (loading → default cross-fade when src resolves)
 
 ## emotion
 
-image carries [[emotion]] as a glass tint overlay at 12% opacity, same as the glass atom. the tint is a color layer rendered on top of the image surface. emotion is computed by the [[tri-kernel]], not assigned manually — images signal state through their container overlay
+image carries [[emotion]] as a glass tint overlay at 12% opacity. the tint is a color layer rendered on top of the image surface. emotion is computed by the [[tri-kernel]], not assigned manually
 
 | emotion source | effect |
 |---------------|--------|
@@ -75,7 +81,7 @@ in the 3D extension (§11 of [[prysm/layout]]):
 - Entity: image organelle
 - Components:
   - `Sizing { width: Fix(width), height: Fix(height) }`
-  - `ImageSrc { cid }` — particle CID of the image content
+  - `ImageSrc { cid }` — particle CID
   - `ImageFit { contain | cover | fill }`
   - `CornerRadius { value }` — in $g$
   - `LoadState { loading | loaded | error }`

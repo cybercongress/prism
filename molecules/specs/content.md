@@ -31,10 +31,10 @@ depends on particle format:
 | number + change | counter molecule |
 | date | text [micro, machine time format: "56.03.29" or "2h ago"] |
 | value-change | text [number] + saber [change indicator] + pill [delta, emotion] |
-| star-indicator | ion [star] × fill level |
+| star-indicator | vector [star] × fill level |
 | picture | raster leaf [image, scale to fit] |
 | video | raster leaf [video frame] + button [play] |
-| audio | ion [waveform] + button [play] + slider [progress] |
+| audio | vector [waveform] + button [play] + slider [progress] |
 
 ## fold
 
