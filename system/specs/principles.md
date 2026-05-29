@@ -56,12 +56,9 @@ black is nothing. **#000000**. nothing else matters.
 >
 > — Antoine de Saint-Exupery
 
-### add
-
-when you have enouth passion.
+**add when you have enouth passion.**
 
 dont know what to add? **add nothing!**
-
 dont know why to add? **add nothing!**
 
 ---
