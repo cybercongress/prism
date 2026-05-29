@@ -40,7 +40,7 @@ everything requires energy — the computer's and the agent's.
 
 *perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.* — Antoine de Saint-Exupéry
 
-make the interface compelling. not by adding — by removing until what remains is irresistible.
+make the interface cum. not by adding — by removing until what remains is irresistible.
 
 **don't know what to add? add nothing.**
 **don't know why to add? add nothing.**
