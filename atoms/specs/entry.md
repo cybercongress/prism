@@ -4,13 +4,13 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-input primitive atom in [[prysm]]
+form field atom in [[prysm]]
 
-the bare editable text buffer — a cursor position and character sequence. a leaf in the element tree (leaf type: text-input). the only atom that accepts keystrokes. distinguished from the input molecule: cursor is only the editable area itself. the input molecule composes cursor with glass, saber underline, icons, and validation
+the bare editable text buffer — a cursor position and character sequence. a leaf in the element tree (leaf type: entry). the only atom that accepts keystrokes. distinguished from the input molecule: entry is only the editable area itself. the input molecule composes entry with glass, saber underline, icons, and validation
 
 ## protocol role
 
-cursor is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: text-input. it has no sub-organelles. its membrane constrains it, it occupies fill × $2g$ (single-line) or fill × auto (multi-line), membrane places it
+cursor is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: entry. it has no sub-organelles. its membrane constrains it, it occupies fill × $2g$ (single-line) or fill × auto (multi-line), membrane places it
 
 ## sizing
 
@@ -61,7 +61,7 @@ when the neuron drags across text to select a range:
 | state | visual change | trigger |
 |-------|-------------|---------|
 | idle | placeholder shown if value empty, color #4b4b4d | no focus |
-| focus | cursor visible and blinking, placeholder hidden | tap/click into cursor |
+| focus | cursor visible and blinking, placeholder hidden | tap/click into entry |
 | typing | content shown at #ffffff, cursor advances | keystrokes |
 | disabled | no cursor, no interaction, text at #4b4b4d | membrane disabled |
 
@@ -81,15 +81,15 @@ in the 3D extension (§11 of [[prysm/layout]]):
 
 ## ECS
 
-- Entity: cursor organelle
+- Entity: entry organelle
 - Components:
   - `Sizing { width: Fill, height }` — Fix($2g$) single-line, Auto multi-line
-  - `CursorValue { String }`
-  - `CursorPlaceholder { String }`
-  - `CursorMultiline { bool }`
-  - `CursorPassword { bool }`
-  - `CursorMaxChars { Option<usize> }`
+  - `EntryValue { String }`
+  - `EntryPlaceholder { String }`
+  - `EntryMultiline { bool }`
+  - `EntryPassword { bool }`
+  - `EntryMaxChars { Option<usize> }`
   - `FocusState { idle | focused }`
-  - `InsertionPoint { usize }` — index into value buffer
-  - `SelectionRange { Option<(usize, usize)> }`
+  - `EntryInsertionPoint { usize }` — index into value buffer
+  - `EntrySelectionRange { Option<(usize, usize)> }`
 - System: cursor participates in `OccupySystem` as a leaf — returns fill × Fix($2g$) or fill × auto

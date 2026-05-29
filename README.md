@@ -61,7 +61,7 @@ twelve atoms in four families:
 
 | atom | capability |
 |------|------------|
-| `cursor` | editable buffer — insertion point, selection, keystrokes. the only atom that accepts keyboard input |
+| `entry` | form field — editable buffer, insertion point, selection, keystrokes. the only atom that accepts keyboard input |
 
 ---
 
@@ -168,7 +168,7 @@ system/
   proofs/    algebra, container, fold, gravity, multimodal, protocol, sizing
 
 atoms/
-  specs/     glass, saber, ion, text, image, vector, mesh, media, code, field, neuron, token, cursor
+  specs/     glass, saber, ion, text, image, vector, mesh, media, code, field, neuron, token, entry
   rs/        glass, text
 
 molecules/
