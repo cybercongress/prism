@@ -12,7 +12,7 @@ drop a molecule into a cell. the protocol places it. resize the window — it fo
 
 prysm is biology, compressed. **atoms** are irreducible primitives — area, line, point, content, identity, input. **molecules** are shaped widgets composed of atoms. **cells** are full applications composed of molecules. three levels, closed. add a fourth and the system breaks
 
-every distance is a multiple of the quantum **g = 8pt**. say `fix(N·g)` to lock a size, `fill` to stretch, `scale(r)` to share proportionally. arrange in `stack`, `grid`, or `layer`. one syntax, fractal at every scale
+every distance is a multiple of the quantum **g = 8pt** (one logical pixel — what browsers, iOS, and Android already use; retina is the GPU's problem). say `fix(N·g)` to lock a size, `fill` to stretch, `scale(r)` to share. arrange in `stack`, `grid`, or `layer`
 
 ## example · oracle search
 
