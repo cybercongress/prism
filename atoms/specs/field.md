@@ -4,13 +4,15 @@ crystal-type: pattern
 crystal-domain: cyber
 ---
 
-input primitive atom in [[prysm]]
+mathematical field atom in [[prysm]]
 
-the bare editable text field — a cursor position and character buffer. a leaf in the element tree (leaf type: text-input). distinguished from the input molecule: field is only the editable area itself. the input molecule composes field with glass, saber underline, icons, and validation
+renders a particle that is a field — a function assigning values to every point in a domain. a leaf in the element tree (leaf type: field). distinct from all other particle atoms: field content is not stored pixel data but a continuous mathematical object evaluated at render time
+
+scalar field: one value per point (temperature, density, rank). vector field: one vector per point (flow, force, gradient). the domain may be 2D, 3D, or the [[cybergraph]] itself
 
 ## protocol role
 
-field is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: text-input. it has no sub-organelles. its membrane constrains it, it occupies fill × $2g$ or fill × auto, membrane places it
+field is a leaf in the element tree $\mathcal{T}$ (§7 of [[prysm/layout]]). leaf type: field. it has no sub-organelles. its membrane constrains the viewport into which the field is projected. the field itself is defined over an unbounded domain; the viewport clips it
 
 ## sizing
 
@@ -18,82 +20,71 @@ all values in spatial quanta $g$
 
 | parameter | sizing type | values | default |
 |-----------|-----------|--------|---------|
-| value | — | string | empty |
-| placeholder | — | string | empty |
-| multiline | — | bool | false |
-| max-chars | — | optional integer | — |
-| password | — | bool — masks with • | false |
+| src | — | particle CID or inline definition | required |
+| width | fix or fill | any $k \cdot g$ or fill | fill |
+| height | fix or fill | any $k \cdot g$ or fill | fill |
+| domain | — | 2d, 3d, graph | 2d |
+| resolution | — | low (g), medium (g/2), high (g/4) | medium |
 
-### mode sizing
+$s_{min} = (8g, 8g)$
 
-| mode | width | height |
-|------|-------|--------|
-| single-line | fill | fix $2g$ |
-| multi-line | fill | auto (grows with content) |
+## field types
 
-$s_{min} = (5g, 2g)$
+| type | values per point | examples |
+|------|-----------------|---------|
+| scalar | single float | [[cyberank]] density, token price gradient, network activity |
+| vector | direction + magnitude | link flow, force field, gradient descent |
+| complex | magnitude + phase | probability amplitude, wave interference |
+| tensor | matrix per point | stress field, curvature field |
 
-## occupy
+## render modes
 
-single-line: $s = (c_w, 2g)$ — fills offered width, fixed $2g$ height (one body line)
+| mode | field type | rendering |
+|------|-----------|-----------|
+| heatmap | scalar | continuous color gradient — min→max maps to emotion palette |
+| contour | scalar | isoline bands at equal value intervals |
+| flow | vector | streamlines following field direction |
+| arrows | vector | arrow glyphs sampled at grid points, length = magnitude |
+| magnitude | vector/complex | scalar heatmap of the magnitude only |
+| phase | complex | hue encodes phase angle, brightness encodes magnitude |
 
-multi-line: $s_w = c_w$, $s_h = \text{lines} \cdot 2g \cdot 1.4$ — height grows with content. membrane must handle overflow or scroll when $s_h$ exceeds $c_h$
+default mode: heatmap for scalar, flow for vector
 
-content rendering: if password = true, all characters are replaced with • before measuring width
+## emotion and color
 
-## cursor
+field color IS [[emotion]] applied to the value range. the field's minimum value maps to the low end of the active emotion color, maximum to full saturation. the [[tri-kernel]] drives the emotion signal; the field maps that signal continuously across its domain
 
-- $1\text{px}$ vertical bar at insertion point
-- blinks at $500\text{ms}$ interval (visible $500\text{ms}$, hidden $500\text{ms}$)
-- cursor is visible only in focus state
-- cursor color: #ffffff
-
-## selection
-
-when the neuron drags across text to select a range:
-
-- background highlight at 15% opacity of [[emotion]] (default: 15% white)
-- selected text retains its color
-- selection handles appear at range endpoints on touch
+a [[cyberank]] field: high-rank regions glow with joy green (#00fe00), low-rank regions dim to near-black
 
 ## states
 
 | state | visual change | trigger |
 |-------|-------------|---------|
-| idle | placeholder shown if value empty, color #4b4b4d | no focus |
-| focus | cursor visible and blinking, placeholder hidden | tap/click into field |
-| typing | content shown at #ffffff, cursor advances | keystrokes |
-| disabled | no cursor, no interaction, text at #4b4b4d | membrane disabled |
+| default | rendered at current resolution | src loaded |
+| loading | glass placeholder, pulse $1\text{s}$ | src resolving |
+| computing | overlay shimmer | field evaluation in progress |
+| error | vector [broken-field, $4g$, anger] | src failed |
 
-state transitions: $150\text{ms}$ ease (idle ↔ focus)
-
-## emotion
-
-field itself carries no color — the molecule that contains it (input) expresses emotion through the saber underline. field does inherit selection highlight from emotion when a selection is active (15% opacity)
-
-## adaptation
-
-field width is always fill — it stretches to its membrane's offered width. multi-line height grows unbounded unless the membrane applies overflow scroll. single-line height is fixed at $2g$ on both desktop and mobile
+state transitions: $150\text{ms}$ ease
 
 ## 3D
 
 in the 3D extension (§11 of [[prysm/layout]]):
 
-- field renders on a plane at the same $p_z$ as its membrane
-- field always faces the neuron (billboard)
-- cursor blink continues in 3D — it is a temporal property, not spatial
+- 2D field renders as a plane at the membrane's $p_z$
+- 3D field renders as a volumetric region; the neuron can enter and look around
+- vector fields in 3D render as particle streams (flow lines as animated ion trails)
 
 ## ECS
 
 - Entity: field organelle
 - Components:
-  - `Sizing { width: Fill, height }` — Fix($2g$) for single-line, Auto for multi-line
-  - `FieldValue { String }` — current character buffer
-  - `FieldPlaceholder { String }`
-  - `FieldMultiline { bool }`
-  - `FieldPassword { bool }`
-  - `FieldMaxChars { Option<usize> }`
-  - `FocusState { idle | focused }`
-  - `CursorPosition { usize }` — index into value buffer
-  - `SelectionRange { Option<(usize, usize)> }` — start and end indices
-- System: field participates in `OccupySystem` as a leaf — returns fill × Fix($2g$) or fill × auto from line count
+  - `Sizing { width, height }`
+  - `FieldSrc { Particle(cid) | Inline(FieldDef) }`
+  - `FieldDomain { D2 | D3 | Graph }`
+  - `FieldType { Scalar | Vector | Complex | Tensor }`
+  - `FieldRenderMode { heatmap | contour | flow | arrows | magnitude | phase }`
+  - `FieldResolution { low | medium | high }`
+  - `LoadState { loading | computing | loaded | error }`
+  - `Emotion { color }` — drives value-to-color mapping
+- System: `FieldSystem` evaluates field at render resolution, writes framebuffer region

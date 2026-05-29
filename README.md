@@ -48,6 +48,7 @@ twelve atoms in four families:
 | `mesh` | 3D geometry — glTF, scene graph, PBR materials, skeleton, animation |
 | `media` | temporal — video, audio, streams. has a playhead the neuron controls |
 | `code` | formal notation — source code and math (LaTeX). math is code |
+| `field` | mathematical field — scalar/vector/complex function over a domain. renders as heatmap, contour, flow |
 
 **identity** — name-resolved primitives. not CID-addressed content but system-meaningful names:
 
@@ -56,11 +57,11 @@ twelve atoms in four families:
 | `neuron` | actor identity — any agent in the graph (human, AI, sensor). renders as bech32 address |
 | `token` | asset identity — any tradeable asset. renders as sigil + symbol |
 
-**interaction** — the input primitive:
+**input** — the input primitive:
 
 | atom | capability |
 |------|------------|
-| `field` | editable buffer — cursor, selection, keyboard. the only atom that accepts keystrokes |
+| `cursor` | editable buffer — insertion point, selection, keystrokes. the only atom that accepts keyboard input |
 
 ---
 
@@ -167,7 +168,7 @@ system/
   proofs/    algebra, container, fold, gravity, multimodal, protocol, sizing
 
 atoms/
-  specs/     glass, saber, ion, text, image, vector, mesh, media, code, neuron, token, field
+  specs/     glass, saber, ion, text, image, vector, mesh, media, code, field, neuron, token, cursor
   rs/        glass, text
 
 molecules/
@@ -187,7 +188,7 @@ rs/
 
 ## status
 
-12 atoms (4 families: substrate, particle, identity, interaction). 24 molecules. 10 cells in [[aos]].
+13 atoms (4 families: substrate · particle · identity · input). 24 molecules. 10 cells in [[aos]].
 system: layout algebra (14 theorems, Lean 4 proofs), emotion palette, fold protocol.
 
 ---
