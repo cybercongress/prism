@@ -104,6 +104,24 @@ $g$ is derived from three physical constraints (§8): visual acuity at arm's len
 | 6 | $6g$ | commander, button, top bar |
 | 25 | $25g$ | side columns |
 
+#### named sections
+
+human work is not in raw quanta — it is in semantic chunks. these are the named sizes every prysm component snaps to. seven names cover most layouts; raw quanta remain available for the rest
+
+| name | size | role |
+|------|------|------|
+| `col` | $25g$ | one column. side panel, single card, mobile half-width |
+| `wide` | $50g$ | two columns. dialog, content + sidebar split, wide card |
+| `band` | $75g$ | three columns. article, hero, full modal |
+| `canvas` | fill | everything available. main work area, scrollable content |
+| `line` | $2g$ | one line of body text, baseline grid row |
+| `bar` | $6g$ | one row of action. commander, top bar, button, input |
+| `row` | $12g$ | one row of content. table row, neuron-card, list item |
+
+horizontal scale is derived from the cyb side-column ($25g$) by integer multiplication ($1 \cdot 25g$, $2 \cdot 25g$, $3 \cdot 25g$). vertical scale is derived from text metrics ($2g$ = body line) and Fitts's law touch target ($6g$ = comfortable interactive height)
+
+new sections are added only if a size repeats across three or more molecules without semantic match to an existing name. otherwise: raw quanta. the discipline of seven names is itself a kind of beauty
+
 ### 3.3 invariants
 
 testable constraints. the layout is not ready until all pass
