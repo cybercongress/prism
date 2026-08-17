@@ -389,12 +389,12 @@ checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "bbg"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
- "cyb-nebu",
+ "cyb-lens",
  "cyber-hemera",
- "cyber-lens",
- "nox",
+ "cyber-nox",
+ "strata-nebu",
  "zheng",
 ]
 
@@ -2267,119 +2267,15 @@ version = "0.1.0"
 dependencies = [
  "bbg",
  "cyber-hemera",
+ "cyber-tok",
+ "cyber-tru",
  "cybergraph",
  "foculus",
- "tok",
- "tru",
 ]
 
 [[package]]
-name = "cyb-genies"
-version = "0.1.0"
-dependencies = [
- "strata-core",
- "strata-ext",
- "strata-proof",
-]
-
-[[package]]
-name = "cyb-jali"
-version = "0.1.0"
-dependencies = [
- "cyb-nebu",
- "strata-core",
-]
-
-[[package]]
-name = "cyb-kuro"
-version = "0.1.0"
-dependencies = [
- "strata-core",
- "strata-ext",
- "strata-proof",
-]
-
-[[package]]
-name = "cyb-lens-assayer"
-version = "0.1.0"
-dependencies = [
- "cyb-lens-brakedown",
- "cyb-lens-core",
- "cyb-nebu",
- "cyb-trop",
-]
-
-[[package]]
-name = "cyb-lens-binius"
-version = "0.1.0"
-dependencies = [
- "cyb-kuro",
- "cyb-lens-core",
- "cyber-hemera",
-]
-
-[[package]]
-name = "cyb-lens-brakedown"
-version = "0.1.0"
-dependencies = [
- "cyb-lens-core",
- "cyb-nebu",
- "cyber-hemera",
-]
-
-[[package]]
-name = "cyb-lens-core"
-version = "0.1.0"
-dependencies = [
- "cyb-nebu",
- "cyber-hemera",
- "strata-core",
- "strata-proof",
-]
-
-[[package]]
-name = "cyb-lens-ikat"
-version = "0.1.0"
-dependencies = [
- "cyb-jali",
- "cyb-lens-brakedown",
- "cyb-lens-core",
- "cyb-nebu",
-]
-
-[[package]]
-name = "cyb-lens-porphyry"
-version = "0.1.0"
-dependencies = [
- "cyb-genies",
- "cyb-lens-core",
- "cyber-hemera",
-]
-
-[[package]]
-name = "cyb-nebu"
-version = "0.1.0"
-dependencies = [
- "strata-compute",
- "strata-core",
- "strata-ext",
- "strata-proof",
-]
-
-[[package]]
-name = "cyb-trop"
-version = "0.1.0"
-dependencies = [
- "strata-core",
-]
-
-[[package]]
-name = "cyber-hemera"
-version = "0.3.0"
-
-[[package]]
-name = "cyber-lens"
-version = "0.1.0"
+name = "cyb-lens"
+version = "0.1.1"
 dependencies = [
  "cyb-lens-assayer",
  "cyb-lens-binius",
@@ -2390,11 +2286,108 @@ dependencies = [
 ]
 
 [[package]]
-name = "cybergraph"
+name = "cyb-lens-assayer"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-brakedown",
+ "cyb-lens-core",
+ "strata-nebu",
+ "strata-trop",
+]
+
+[[package]]
+name = "cyb-lens-binius"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-core",
+ "cyber-hemera",
+ "strata-kuro",
+]
+
+[[package]]
+name = "cyb-lens-brakedown"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-core",
+ "cyber-hemera",
+ "strata-nebu",
+]
+
+[[package]]
+name = "cyb-lens-core"
+version = "0.1.1"
+dependencies = [
+ "cyber-hemera",
+ "strata-core",
+ "strata-nebu",
+ "strata-proof",
+]
+
+[[package]]
+name = "cyb-lens-ikat"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-brakedown",
+ "cyb-lens-core",
+ "strata-jali",
+ "strata-nebu",
+]
+
+[[package]]
+name = "cyb-lens-porphyry"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-core",
+ "cyber-hemera",
+ "strata-genies",
+]
+
+[[package]]
+name = "cyber-hemera"
+version = "0.3.0"
+
+[[package]]
+name = "cyber-nox"
+version = "0.1.1"
+dependencies = [
+ "cyb-lens-brakedown",
+ "cyb-lens-core",
+ "cyber-hemera",
+ "strata-nebu",
+]
+
+[[package]]
+name = "cyber-tape"
 version = "0.1.0"
 dependencies = [
+ "bytes",
+]
+
+[[package]]
+name = "cyber-tok"
+version = "0.1.1"
+dependencies = [
+ "cyber-hemera",
+ "cyber-tru",
+]
+
+[[package]]
+name = "cyber-tru"
+version = "0.1.1"
+dependencies = [
+ "cyber-hemera",
+ "memmap2",
+ "serde",
+ "strata-nebu",
+ "thiserror 2.0.18",
+ "toml",
+]
+
+[[package]]
+name = "cybergraph"
+version = "0.1.1"
+dependencies = [
  "bbg",
- "cyb-nebu",
  "cyber-hemera",
  "foculus",
  "inf-eval",
@@ -2402,6 +2395,7 @@ dependencies = [
  "inf-plan",
  "inf-source",
  "inf-value",
+ "strata-nebu",
  "zheng",
 ]
 
@@ -2639,20 +2633,20 @@ checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
 name = "foculus"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "bbg",
  "clap",
- "cyb-nebu",
+ "cyb-lens",
  "cyber-hemera",
- "cyber-lens",
+ "cyber-tape",
+ "cyber-tok",
+ "cyber-tru",
  "rand",
  "serde",
  "serde_json",
- "tape",
- "tok",
- "tru",
+ "strata-nebu",
  "zheng",
 ]
 
@@ -3714,16 +3708,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "610a5acd306ec67f907abe5567859a3c693fb9886eb1f012ab8f2a47bef3db51"
 
 [[package]]
-name = "nox"
-version = "0.1.0"
-dependencies = [
- "cyb-lens-brakedown",
- "cyb-lens-core",
- "cyb-nebu",
- "cyber-hemera",
-]
-
-[[package]]
 name = "ntapi"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4317,7 +4301,7 @@ dependencies = [
  "bevy",
  "crossbeam-channel",
  "cyb-core",
- "tape",
+ "cyber-tape",
 ]
 
 [[package]]
@@ -4874,7 +4858,50 @@ dependencies = [
 ]
 
 [[package]]
+name = "strata-genies"
+version = "0.1.0"
+dependencies = [
+ "strata-core",
+ "strata-ext",
+ "strata-proof",
+]
+
+[[package]]
+name = "strata-jali"
+version = "0.1.0"
+dependencies = [
+ "strata-core",
+ "strata-nebu",
+]
+
+[[package]]
+name = "strata-kuro"
+version = "0.1.0"
+dependencies = [
+ "strata-core",
+ "strata-ext",
+ "strata-proof",
+]
+
+[[package]]
+name = "strata-nebu"
+version = "0.1.0"
+dependencies = [
+ "strata-compute",
+ "strata-core",
+ "strata-ext",
+ "strata-proof",
+]
+
+[[package]]
 name = "strata-proof"
+version = "0.1.0"
+dependencies = [
+ "strata-core",
+]
+
+[[package]]
+name = "strata-trop"
 version = "0.1.0"
 dependencies = [
  "strata-core",
@@ -4964,13 +4991,6 @@ dependencies = [
  "grid",
  "serde",
  "slotmap",
-]
-
-[[package]]
-name = "tape"
-version = "0.1.0"
-dependencies = [
- "bytes",
 ]
 
 [[package]]
@@ -5070,14 +5090,6 @@ name = "tinyvec_macros"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
-
-[[package]]
-name = "tok"
-version = "0.1.0"
-dependencies = [
- "cyber-hemera",
- "tru",
-]
 
 [[package]]
 name = "toml"
@@ -5253,18 +5265,6 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "wasm-bindgen",
-]
-
-[[package]]
-name = "tru"
-version = "0.1.0"
-dependencies = [
- "cyb-nebu",
- "cyber-hemera",
- "memmap2",
- "serde",
- "thiserror 2.0.18",
- "toml",
 ]
 
 [[package]]
@@ -6519,12 +6519,12 @@ dependencies = [
 
 [[package]]
 name = "zheng"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
- "cyb-nebu",
+ "cyb-lens",
  "cyber-hemera",
- "cyber-lens",
- "nox",
+ "cyber-nox",
+ "strata-nebu",
 ]
 
 [[package]]
